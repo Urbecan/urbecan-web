@@ -42,7 +42,7 @@ Fuentes: Manrope (titulares) + DM Sans (texto). Colores: navy #08295d, ink #1422
    - ~~Crear el sitio en decapbridge.com~~ → hecho (sitio «Urbecan», auth PKCE, token GitHub sin caducidad solo con Contents de `urbecan-web`; bloque `backend` ya en `admin/config.yml`).
    - Invitar usuarios por email desde DecapBridge (plan gratuito: 3 sitios, 10 colaboradores) y probar login en urbecan.netlify.app/admin/.
    - Al lanzar: cambiar `site_url`/`display_url` de `admin/config.yml` y la «Decap CMS login URL» en DecapBridge a https://www.urbecan.com/admin/.
-2. Formulario de contacto real (Netlify Forms: `data-netlify="true"`, redirigir a `/gracias/`). Ahora es simulado.
+2. Formulario de contacto real con Netlify Forms (form `contacto` en `contacto/index.html`, honeypot, redirige a `/gracias/`). Hecho en el repo. Falta en Netlify: activar «Form detection» y añadir aviso por email a info@urbecan.com (Forms → Notifications).
 3. Sustituir fotos de ejemplo por las nuevas del norte y el histórico real de promociones vendidas.
 4. Textos legales definitivos y datos fiscales (pendientes del cliente).
 5. Lanzamiento: dominio urbecan.com (ahora en Inmovilla; no tocar DNS sin confirmar dónde está el correo), quitar noindex, enviar sitemap a Search Console.
