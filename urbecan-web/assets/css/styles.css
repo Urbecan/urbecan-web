@@ -174,7 +174,7 @@
 .home-paths{padding-bottom:0}
 .home-paths .path-item{position:relative;isolation:isolate;overflow:hidden;height:268px;display:grid;grid-template-columns:13% minmax(0,1fr) 21%;align-items:center;border-top:2px solid #ffffff85;padding:0 2px}
 .home-paths .path-item:last-child{border-bottom:0}
-.path-bg{position:absolute;inset:0;z-index:-1;opacity:0;pointer-events:none;transition:opacity .55s ease}
+.path-bg{position:absolute;inset:0;z-index:-1;overflow:hidden;opacity:0;pointer-events:none;transition:opacity .55s ease}
 .path-bg img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 55%;transform:scale(1.075) translateX(2%);transition:transform .85s ease}
 .path-bg:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,26,53,.89),rgba(5,26,53,.61) 58%,rgba(5,26,53,.75))}
 .path-item.open .path-bg,.path-item:hover .path-bg,.path-item:focus-within .path-bg{opacity:1}
