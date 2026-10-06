@@ -11,7 +11,16 @@ html body{background:var(--bg)!important;color:var(--ink)}
 /* ── Acceso */
 #nc-root section[class*="-StyledAuthenticationPage"],#nc-root [class*="AuthenticationPage"]{background:var(--paper)}
 #nc-root [class*="AuthenticationPage"] img{max-width:260px;height:auto}
-#nc-root [class*="-LoginButton"],#nc-root [class*="AuthenticationPage"] button{background:var(--navy)!important;color:#fff!important;border-radius:0!important;box-shadow:none!important;height:46px;padding:0 26px;font-weight:600;letter-spacing:.06em}
+#nc-root [class*="AuthenticationPage"] [class*="CustomIconWrapper"]{margin:0 0 40px}
+/* Solo el botón (ojo: [class*="-LoginButton"] también pillaría el icono «LoginButtonIcon») */
+#nc-root [class*="AuthenticationPage"] button{display:flex;align-items:center;justify-content:center;width:260px;height:48px;padding:0 26px;margin:0;background:var(--navy)!important;color:#fff!important;border:0;border-radius:0!important;box-shadow:none!important;font-weight:600;font-size:15px;letter-spacing:.06em;cursor:pointer;transition:background .2s}
+#nc-root [class*="AuthenticationPage"] button:hover{background:var(--ink)!important}
+#nc-root [class*="LoginButtonIcon"]{display:none!important}
+#nc-root [class*="GoBackButtonStyle"]{margin-top:28px;padding:6px 10px;align-items:center;gap:8px;color:var(--muted);text-decoration:none}
+#nc-root [class*="GoBackButtonStyle"]:hover{color:var(--navy)}
+#nc-root [class*="GoBackButtonStyle"] p{margin:0;font-size:14px;color:inherit}
+#nc-root [class*="GoBackButtonStyle"] svg path{fill:currentColor}
+#nc-root [class*="NetlifyCreditIcon"]{display:none}
 
 /* ── Cabecera */
 #nc-root [class*="-AppHeader-css"]{background:var(--paper);box-shadow:none;border-bottom:1px solid var(--line)}
