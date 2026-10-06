@@ -15,15 +15,17 @@ html body{background:var(--bg)!important;color:var(--ink)}
 
 /* ── Cabecera */
 #nc-root [class*="-AppHeader-css"]{background:var(--paper);box-shadow:none;border-bottom:1px solid var(--line)}
-#nc-root [class*="-AppHeaderLogo"]{display:flex;align-items:center;padding:0 18px 0 6px}
-#nc-root [class*="-AppHeaderLogo"] img{width:132px!important;height:auto!important;max-width:none!important;max-height:none!important}
+#nc-root [class*="-AppHeaderContent"]{max-width:1284px;margin:0 auto;padding:0;min-height:76px;align-items:center}
+#nc-root [class*="-AppHeaderLogo"]{display:flex;align-items:center;padding:0 22px 0 0}
+#nc-root [class*="-AppHeaderLogo"] img{width:168px!important;height:auto!important;max-width:none!important;max-height:none!important}
 #nc-root [class*="-AppHeaderNavLink"],#nc-root [class*="-AppHeaderButton"]{color:var(--muted);font-size:14px;border-radius:0}
 #nc-root [class*="-AppHeaderNavLink"].header-link-active,#nc-root [class*="-AppHeaderNavLink"]:hover{color:var(--navy)}
 #nc-root [class*="-AppHeaderNavLink"].header-link-active{box-shadow:inset 0 -2px 0 var(--navy)}
 /* Sin iconos en «Contenido» / «Medios» y sin el menú «Añadir rápido» (ya está el botón «＋ Nueva …» en cada sección) */
 #nc-root [class*="-AppHeaderNavList"] [class*="-IconWrapper"]{display:none}
-#nc-root [class*="-AppHeaderNavLink"],#nc-root [class*="-AppHeaderButton"]{font-size:15px;font-weight:500;padding:17px 4px;margin:0 14px}
-#nc-root [class*="-StyledWrapper"]:has(>[class*="-AppHeaderQuickNewButton"]),#nc-root [class*="-AppHeaderQuickNewButton"]{display:none}
+#nc-root [class*="-AppHeaderNavLink"],#nc-root [class*="-AppHeaderButton"]{font-size:15px;font-weight:500;padding:27px 4px;margin:0 14px}
+#nc-root [class*="-AppHeaderQuickNewButton"]{display:none!important}
+#nc-root [class*="-StyledWrapper"]:has(>[class*="-AppHeaderQuickNewButton"]){display:none}
 #nc-root [class*="-AppHeaderSiteLink"]{color:var(--muted)}
 
 /* ── Barra lateral */

@@ -45,5 +45,27 @@
     return base;
   }
   CMS.registerLocale('es', mezclar(CMS.getLocale('es') || {}, faltan));
+
+  // Fotos desde la web pública. Con DecapBridge, Decap intenta descargar las fotos de assets/img/uploads
+  // desde GitHub y, si falla, usa la ruta interna del repo (urbecan-web/…), que no existe en la web.
+  // Las miniaturas guardan la ruta pública en su atributo «src»; aquí se pinta esa ruta directamente.
+  function rutaPublica(src) {
+    if (!src || /^(blob:|data:|https?:)/.test(src)) return null;
+    if (src.indexOf('urbecan-web/') === 0) return '/' + src.slice('urbecan-web/'.length);
+    return src.charAt(0) === '/' ? src : null;
+  }
+  function arreglarFotos(raiz) {
+    raiz.querySelectorAll('[data-testid="entry-card-image"]').forEach(function (el) {
+      var url = rutaPublica(el.getAttribute('src'));
+      if (url && el.dataset.urbecanSrc !== url) { el.style.backgroundImage = 'url("' + url + '")'; el.dataset.urbecanSrc = url; }
+    });
+    raiz.querySelectorAll('img').forEach(function (img) {
+      var src = img.getAttribute('src') || '';
+      if (src.indexOf('urbecan-web/') === 0) img.setAttribute('src', rutaPublica(src));
+    });
+  }
+  new MutationObserver(function () { arreglarFotos(document); })
+    .observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['src'] });
+
   CMS.init();
 })();
