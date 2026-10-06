@@ -67,7 +67,7 @@ Fuentes: Manrope (titulares) + DM Sans (texto). Colores: navy #08295d, ink #1422
 - [ ] Analítica (decidir con el cliente: GA4 o una alternativa sin cookies)
 
 ### Detalles
-- [ ] Favicon y apple-touch-icon
+- [x] Favicon y apple-touch-icon (`favicon.ico`, `favicon.svg`, `apple-touch-icon.png` en la raíz de urbecan-web; enlazados en cada página)
 - [ ] Imagen para compartir (og:image 1200×630) en todas las páginas
 - [ ] Aviso de cookies ajustado a lo que se use de verdad
 - [ ] Textos legales y datos fiscales definitivos
