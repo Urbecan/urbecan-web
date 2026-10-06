@@ -7,10 +7,10 @@
   "estado": "Próximamente",
   "precio": "Desde 520.000 €",
   "descripcion": "6 villas independientes con jardín, piscina y garaje.",
-  "image": "/assets/img/foto-04.jpg",
+  "image": "/assets/img/uploads/foto-04.jpg",
   "galeria": [
-    "/assets/img/foto-01.jpg",
-    "/assets/img/foto-06.jpg"
+    "/assets/img/uploads/foto-01.jpg",
+    "/assets/img/uploads/foto-06.jpg"
   ],
   "enlace": "",
   "orden": 3

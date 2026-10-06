@@ -20,8 +20,10 @@ html body{background:var(--bg)!important;color:var(--ink)}
 #nc-root [class*="-AppHeaderNavLink"],#nc-root [class*="-AppHeaderButton"]{color:var(--muted);font-size:14px;border-radius:0}
 #nc-root [class*="-AppHeaderNavLink"].header-link-active,#nc-root [class*="-AppHeaderNavLink"]:hover{color:var(--navy)}
 #nc-root [class*="-AppHeaderNavLink"].header-link-active{box-shadow:inset 0 -2px 0 var(--navy)}
-#nc-root [class*="-AppHeaderNavLink"] svg,#nc-root [class*="-AppHeaderButton"] svg{color:currentColor}
-#nc-root [class*="-AppHeaderQuickNewButton"]{background:var(--navy);color:#fff;border-radius:0}
+/* Sin iconos en «Contenido» / «Medios» y sin el menú «Añadir rápido» (ya está el botón «＋ Nueva …» en cada sección) */
+#nc-root [class*="-AppHeaderNavList"] [class*="-IconWrapper"]{display:none}
+#nc-root [class*="-AppHeaderNavLink"],#nc-root [class*="-AppHeaderButton"]{font-size:15px;font-weight:500;padding:17px 4px;margin:0 14px}
+#nc-root [class*="-StyledWrapper"]:has(>[class*="-AppHeaderQuickNewButton"]),#nc-root [class*="-AppHeaderQuickNewButton"]{display:none}
 #nc-root [class*="-AppHeaderSiteLink"]{color:var(--muted)}
 
 /* ── Barra lateral */
@@ -96,3 +98,16 @@ html body{background:var(--bg)!important;color:var(--ink)}
 #nc-root [class*="-ListItem-listControlItem"] [class*="-FieldLabel"]{display:none}
 #nc-root [class*="-ListItem-listControlItem"] [class*="-ImageWrapper"]{width:220px!important}
 #nc-root [class*="-ListItem-listControlItem"] [class*="-ControlContainer"]{margin-top:4px}
+
+/* ── Medios (ventana de fotos). Se abre fuera de #nc-root, por eso el prefijo «html body» */
+html body [class*="-StyledModal"]{font-family:'DM Sans',Arial,sans-serif;background:var(--paper);border-radius:0;box-shadow:0 30px 80px #08295d40;padding:34px 34px 20px}
+html body [class*="-StyledModal"] [class*="-LibraryTitle"]{font:500 34px/1.1 Manrope,sans-serif;letter-spacing:-.04em;color:var(--ink)}
+html body [class*="-StyledModal"] [class*="-CloseButton"]{background:var(--navy);color:#fff;border-radius:0;box-shadow:none}
+html body [class*="-StyledModal"] [class*="-ActionButton"],html body [class*="-StyledModal"] [class*="-DeleteButton"]{background:transparent;color:var(--ink);border:1px solid var(--line);border-radius:0;font-weight:600}
+html body [class*="-StyledModal"] [class*="-DeleteButton"]:not([disabled]){color:#b3261e}
+html body [class*="-StyledModal"] [class*="-UploadButton"]{background:var(--navy);color:#fff;border:1px solid var(--navy);border-radius:0;font-weight:600}
+html body [class*="-StyledModal"] input{background:#fff;border:1px solid var(--line);border-radius:0;font-family:'DM Sans',sans-serif}
+html body [class*="-StyledModal"] [class*="-Card"]{border-radius:0;box-shadow:none;background:#fff}
+html body [class*="-StyledModal"] [class*="-CardImageWrapper"]{background:var(--bg)!important;border-radius:0}
+html body [class*="-StyledModal"] [class*="-CardImage"]{object-fit:cover}
+html body [class*="-StyledModal"] [class*="-CardText"]{font-size:13px;color:var(--muted)}
