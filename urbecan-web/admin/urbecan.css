@@ -102,7 +102,7 @@ html body{background:var(--bg)!important;color:var(--ink)}
 #nc-root [class*="-ListItem-listControlItem"] [class*="-ControlContainer"]{margin-top:4px}
 
 /* ── Medios (ventana de fotos). Se abre fuera de #nc-root, por eso el prefijo «html body» */
-html body [class*="-StyledModal"]{font-family:'DM Sans',Arial,sans-serif;background:var(--paper);border-radius:0;box-shadow:0 30px 80px #08295d40;padding:34px 34px 20px}
+html body [class*="-StyledModal"]{font-family:'DM Sans',Arial,sans-serif;background:var(--paper);border-radius:0;box-shadow:0 30px 80px #08295d40;padding:30px 24px 20px}
 html body [class*="-StyledModal"] [class*="-LibraryTitle"]{font:500 34px/1.1 Manrope,sans-serif;letter-spacing:-.04em;color:var(--ink)}
 html body [class*="-StyledModal"] [class*="-CloseButton"]{background:var(--navy);color:#fff;border-radius:0;box-shadow:none}
 html body [class*="-StyledModal"] [class*="-ActionButton"],html body [class*="-StyledModal"] [class*="-DeleteButton"]{background:transparent;color:var(--ink);border:1px solid var(--line);border-radius:0;font-weight:600}
@@ -114,3 +114,4 @@ html body [class*="-StyledModal"] [class*="-CardImageWrapper"]{background:var(--
 html body [class*="-StyledModal"] [class*="-CardImage"]{object-fit:cover}
 html body [class*="-StyledModal"] [class*="-CardText"]{font-size:13px;color:var(--muted)}
 html body [class*="-StyledModal"] [class*="-CardGridContainer"],html body [class*="-StyledModal"] [class*="-CardGridContainer"] *:not([class*="-Card"]){background:transparent!important}
+html body [class*="-StyledModal"] [class*="-CardGridContainer"] div[style*="overflow: auto"]{overflow-x:hidden!important}
