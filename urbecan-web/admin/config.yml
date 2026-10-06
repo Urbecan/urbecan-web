@@ -1,0 +1,146 @@
+# Panel de edición de Urbecan → /admin/ (Decap CMS + DecapBridge)
+# Al publicar, Decap hace commit en GitHub y Netlify regenera la web (node scripts/build.mjs).
+
+# Acceso con email y contraseña vía DecapBridge (sin cuenta de GitHub).
+# IMPORTANTE: sustituir este bloque por el que genera https://decapbridge.com
+# al dar de alta el sitio (contiene el identificador real del sitio).
+backend:
+  name: git-gateway
+  repo: Urbecan/urbecan-web
+  branch: main
+  identity_url: https://auth.decapbridge.com/sites/ID_DEL_SITIO
+  gateway_url: https://gateway.decapbridge.com
+  commit_messages:
+    create: "Panel: crear {{collection}} «{{slug}}» ({{author-name}})"
+    update: "Panel: actualizar {{collection}} «{{slug}}» ({{author-name}})"
+    delete: "Panel: borrar {{collection}} «{{slug}}» ({{author-name}})"
+    uploadMedia: "Panel: subir foto «{{path}}» ({{author-name}})"
+    deleteMedia: "Panel: borrar foto «{{path}}» ({{author-name}})"
+
+# En local (localhost) usa el proxy de «npx decap-server» en lugar de DecapBridge
+local_backend: true
+
+locale: es
+
+# Cambiar a https://www.urbecan.com al lanzar
+site_url: https://urbecan.netlify.app
+display_url: https://urbecan.netlify.app
+
+logo:
+  src: /assets/urbecan-logo-inmobiliaria.png
+  show_in_header: true
+
+media_folder: urbecan-web/assets/img/uploads
+public_folder: /assets/img/uploads
+
+collections:
+  - name: web
+    label: Contenido de la web
+    format: json
+    editor:
+      preview: false
+    files:
+      - name: promociones
+        label: Promociones
+        file: urbecan-web/data/promociones.json
+        fields:
+          - name: promociones
+            label: Promociones
+            label_singular: promoción
+            widget: list
+            collapsed: true
+            add_to_top: true
+            summary: "{{fields.nombre}} · {{fields.estado}}"
+            hint: Las marcadas como «Vendida» salen en «Promociones vendidas»; el resto, en las activas. El orden de la lista es el de la web.
+            fields:
+              - { name: nombre, label: Nombre, widget: string }
+              - { name: municipio, label: Municipio, widget: string }
+              - { name: anio, label: Año, widget: number, value_type: int, required: false, hint: "En las vendidas se muestra junto al municipio (p. ej. «La Orotava · 2019»)." }
+              - { name: viviendas, label: Nº de viviendas, widget: number, value_type: int, required: false }
+              - { name: tipo, label: Tipo, widget: select, options: [viviendas, apartamentos, villas, dúplex, áticos, locales], default: viviendas }
+              - { name: estado, label: Estado, widget: select, options: [En comercialización, Últimas unidades, Próximamente, Vendida], default: En comercialización }
+              - { name: precio, label: Precio desde (€), widget: number, value_type: int, required: false, hint: "Solo números, sin puntos ni €. Vacío = no se muestra precio." }
+              - { name: descripcion, label: Descripción corta, widget: text, required: false, hint: Una o dos frases. No se muestra en las vendidas. }
+              - { name: foto, label: Foto principal, widget: image, choose_url: false }
+              - name: galeria
+                label: Galería
+                label_singular: foto
+                widget: list
+                collapsed: false
+                required: false
+                hint: Fotos adicionales del carrusel (solo promociones activas).
+                field: { name: foto, label: Foto, widget: image, choose_url: false }
+              - { name: enlace, label: Enlace externo, widget: string, required: false, hint: "Opcional. Web o ficha de la promoción (https://…). Añade el botón «Ver proyecto ↗»." }
+
+      - name: equipo
+        label: Equipo
+        file: urbecan-web/data/equipo.json
+        fields:
+          - name: equipo
+            label: Equipo
+            label_singular: persona
+            widget: list
+            collapsed: true
+            summary: "{{fields.orden}}. {{fields.nombre}}"
+            fields:
+              - { name: nombre, label: Nombre, widget: string }
+              - { name: cargo, label: Cargo, widget: string, required: false }
+              - { name: foto, label: Foto, widget: image, choose_url: false, hint: "Formato vertical, mismo encuadre para todo el equipo." }
+              - { name: orden, label: Orden, widget: number, value_type: int, default: 99, hint: "1 = primero." }
+
+      - name: textos
+        label: Textos principales
+        file: urbecan-web/data/textos.json
+        fields:
+          - name: inicio
+            label: Inicio
+            widget: object
+            collapsed: true
+            fields:
+              - { name: hero_linea1, label: Titular · línea 1, widget: string }
+              - { name: hero_linea2, label: Titular · línea 2, widget: string, hint: "*texto* = cursiva" }
+              - { name: hero_texto, label: Texto junto al titular, widget: text }
+              - { name: intro_titulo, label: "01 · Titular", widget: text, hint: "[texto] = segundo tono (gris)" }
+              - { name: intro_texto, label: "01 · Texto", widget: text }
+              - { name: propiedades_texto, label: "02 · Propiedades · texto", widget: text }
+              - { name: trayectoria_titulo, label: "04 · Trayectoria · titular", widget: text, hint: "Cada salto de línea se respeta." }
+              - { name: trayectoria_texto, label: "04 · Trayectoria · texto", widget: text }
+              - { name: cierre_titulo, label: "07 · Cierre · titular", widget: string }
+          - name: nosotros
+            label: Nosotros
+            widget: object
+            collapsed: true
+            fields:
+              - { name: titulo, label: Titular, widget: text, hint: "Salto de línea = nueva línea · *texto* = cursiva" }
+              - { name: texto, label: Texto de entrada, widget: text }
+              - { name: mirada, label: Nuestra mirada, widget: text, hint: "[texto] = segundo tono (gris)" }
+              - { name: trayectoria_texto, label: Trayectoria · texto, widget: text }
+              - { name: trayectoria_detalle, label: Trayectoria · detalle, widget: text }
+              - { name: equipo_titulo, label: Equipo · titular, widget: string }
+              - { name: equipo_intro, label: Equipo · introducción, widget: text }
+          - name: particulares
+            label: Particulares
+            widget: object
+            collapsed: true
+            fields:
+              - { name: titulo, label: Titular, widget: text, hint: "Salto de línea = nueva línea · *texto* = cursiva" }
+              - { name: texto, label: Texto de entrada, widget: text }
+              - { name: comprar, label: Comprar, widget: text }
+              - { name: vender, label: Vender, widget: text }
+              - { name: invertir, label: Invertir, widget: text }
+              - { name: cita, label: Cita destacada, widget: text }
+          - name: profesionales
+            label: Profesionales / Promotores
+            widget: object
+            collapsed: true
+            fields:
+              - { name: titulo, label: Titular, widget: text, hint: "Salto de línea = nueva línea · *texto* = cursiva" }
+              - { name: texto, label: Texto de entrada, widget: text }
+              - { name: manifiesto_titulo, label: Manifiesto · titular, widget: string }
+              - { name: manifiesto_texto, label: Manifiesto · texto, widget: text }
+              - { name: promos_titulo, label: Promociones activas · titular, widget: string, hint: "*texto* = cursiva" }
+              - { name: promos_texto, label: Promociones activas · texto, widget: text }
+              - { name: promos_nota, label: Promociones activas · nota, widget: string, required: false, hint: Vacío = no se muestra. }
+              - { name: vendidas_titulo, label: Vendidas · titular, widget: string, hint: "*texto* = cursiva" }
+              - { name: vendidas_texto, label: Vendidas · texto, widget: text }
+              - { name: vendidas_nota, label: Vendidas · nota, widget: string, required: false, hint: Vacío = no se muestra. }

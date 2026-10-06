@@ -1,2 +1,12 @@
 [build]
   publish = "urbecan-web"
+  command = "node scripts/build.mjs"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# El panel nunca debe indexarse (también tras el lanzamiento)
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"

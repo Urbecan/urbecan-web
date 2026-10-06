@@ -1,0 +1,28 @@
+{
+  "equipo": [
+    {
+      "nombre": "Marta León",
+      "cargo": "Dirección y atención al cliente",
+      "foto": "/assets/img/equipo-01.jpg",
+      "orden": 1
+    },
+    {
+      "nombre": "Javier Morales",
+      "cargo": "Responsable comercial",
+      "foto": "/assets/img/equipo-02.jpg",
+      "orden": 2
+    },
+    {
+      "nombre": "Elena Suárez",
+      "cargo": "Asesora inmobiliaria",
+      "foto": "/assets/img/equipo-03.jpg",
+      "orden": 3
+    },
+    {
+      "nombre": "Pablo Herrera",
+      "cargo": "Asesor inmobiliario",
+      "foto": "/assets/img/equipo-04.jpg",
+      "orden": 4
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "inicio": {
+    "hero_linea1": "Cada lugar",
+    "hero_linea2": "tiene su *historia.*",
+    "hero_texto": "Te acompañamos a encontrar el espacio que encaja con la tuya.",
+    "intro_titulo": "Conocemos los lugares. [Escuchamos a las personas.] Y cuidamos todo lo que sucede entre ambos.",
+    "intro_texto": "Una relación cercana, criterio para elegir y tiempo para hacer bien las cosas. Desde 2003 acompañamos cada decisión inmobiliaria en Tenerife.",
+    "propiedades_texto": "Encuentra el lugar donde quieres vivir. Te ayudamos a mirar más allá de una dirección y a decidir con confianza.",
+    "trayectoria_titulo": "Experiencia que permanece.\nUna forma de trabajar\nque evoluciona.",
+    "trayectoria_texto": "Hemos acompañado a propietarios, compradores, inversores y promotores durante más de dos décadas. Hoy sumamos nuevas estrategias a ese conocimiento del mercado.",
+    "cierre_titulo": "Tu próximo capítulo puede empezar hoy."
+  },
+  "nosotros": {
+    "titulo": "Más que una\n*inmobiliaria.*",
+    "texto": "Inmobiliaria en Tenerife desde 2003. Personas, propiedades y nuevas historias: nuestra forma de trabajar empieza mucho antes de enseñar una vivienda.",
+    "mirada": "Detrás de cada propiedad hay alguien tomando una decisión importante. [Por eso escuchamos, analizamos y proponemos una estrategia adecuada a cada operación, con el conocimiento de quien lleva más de veinte años en Tenerife.]",
+    "trayectoria_texto": "Más de dos décadas formando parte del mercado inmobiliario de Tenerife.",
+    "trayectoria_detalle": "Conocemos los municipios, las zonas y las particularidades de cada mercado. Combinamos esa experiencia con herramientas y formas de comercialización actuales.",
+    "equipo_titulo": "Personas detrás de cada decisión.",
+    "equipo_intro": "El equipo de Urbecan combina conocimiento del mercado de Tenerife, criterio comercial y atención personal. Escuchamos, compartimos información clara y acompañamos cada paso."
+  },
+  "particulares": {
+    "titulo": "Una decisión importante.\n*Bien acompañada.*",
+    "texto": "Comprar, vender o invertir en Tenerife, acompañado de principio a fin. Empezamos por entender qué necesitas.",
+    "comprar": "Queremos entender qué buscas, qué necesitas y qué encaja contigo. Desde la definición de la vivienda hasta la negociación y la firma.",
+    "vender": "Analizamos la propiedad y el mercado, cuidamos su presentación y coordinamos la comercialización, los contactos y las visitas.",
+    "invertir": "Estudiamos contigo la ubicación, las características y el contexto de mercado de cada oportunidad para decidir con información.",
+    "cita": "Tomar una buena decisión empieza por tener buena información."
+  },
+  "profesionales": {
+    "titulo": "Del proyecto\n*a la venta.*",
+    "texto": "Comercialización de obra nueva en Tenerife: una estructura comercial para llevar tu promoción al mercado con estrategia, equipo y seguimiento.",
+    "manifiesto_titulo": "Una promoción necesita más que visibilidad.",
+    "manifiesto_texto": "Requiere planificación, conocimiento del mercado y capacidad para gestionar múltiples operaciones. Ponemos nuestra experiencia en obra nueva al servicio de cada proyecto.",
+    "promos_titulo": "Proyectos para descubrir *hoy.*",
+    "promos_texto": "Obra nueva en Tenerife comercializada por Urbecan. Te acompañamos para conocer cada proyecto, su ubicación y la disponibilidad actual.",
+    "promos_nota": "Promociones, imágenes y precios de ejemplo.",
+    "vendidas_titulo": "Proyectos que ya *encontraron dueño.*",
+    "vendidas_texto": "Una muestra de las promociones de obra nueva que hemos comercializado en Tenerife.",
+    "vendidas_nota": "Promociones, imágenes y datos de ejemplo. Se sustituirán por el histórico real."
+  }
+}

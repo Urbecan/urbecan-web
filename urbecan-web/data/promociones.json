@@ -1,0 +1,104 @@
+{
+  "promociones": [
+    {
+      "nombre": "Residencial Mirador del Valle",
+      "municipio": "La Orotava",
+      "anio": 2026,
+      "viviendas": 14,
+      "tipo": "viviendas",
+      "estado": "En comercialización",
+      "precio": 245000,
+      "descripcion": "14 viviendas de 2 y 3 dormitorios con terraza y vistas al valle.",
+      "foto": "/assets/img/foto-05.jpg",
+      "galeria": [
+        "/assets/img/foto-02.jpg",
+        "/assets/img/lugar-adecuado-dormitorio.jpg"
+      ],
+      "enlace": ""
+    },
+    {
+      "nombre": "Edificio Atlántico",
+      "municipio": "Puerto de la Cruz",
+      "anio": 2026,
+      "viviendas": 8,
+      "tipo": "apartamentos",
+      "estado": "Últimas unidades",
+      "precio": 198000,
+      "descripcion": "8 apartamentos de 1 y 2 dormitorios a cinco minutos del mar.",
+      "foto": "/assets/img/foto-03.jpg",
+      "galeria": [
+        "/assets/img/lugar-adecuado-patio-teide-color.jpg",
+        "/assets/img/foto-05.jpg"
+      ],
+      "enlace": ""
+    },
+    {
+      "nombre": "Villas Teide",
+      "municipio": "Los Realejos",
+      "anio": 2027,
+      "viviendas": 6,
+      "tipo": "villas",
+      "estado": "Próximamente",
+      "precio": 520000,
+      "descripcion": "6 villas independientes con jardín, piscina y garaje.",
+      "foto": "/assets/img/foto-04.jpg",
+      "galeria": [
+        "/assets/img/foto-01.jpg",
+        "/assets/img/foto-06.jpg"
+      ],
+      "enlace": ""
+    },
+    {
+      "nombre": "Residencial El Calvario",
+      "municipio": "La Orotava",
+      "anio": 2019,
+      "viviendas": 18,
+      "tipo": "viviendas",
+      "estado": "Vendida",
+      "precio": null,
+      "descripcion": "",
+      "foto": "/assets/img/foto-04.jpg",
+      "galeria": [],
+      "enlace": ""
+    },
+    {
+      "nombre": "Edificio La Paz",
+      "municipio": "Puerto de la Cruz",
+      "anio": 2017,
+      "viviendas": 12,
+      "tipo": "viviendas",
+      "estado": "Vendida",
+      "precio": null,
+      "descripcion": "",
+      "foto": "/assets/img/foto-02.jpg",
+      "galeria": [],
+      "enlace": ""
+    },
+    {
+      "nombre": "Residencial San Agustín",
+      "municipio": "Los Realejos",
+      "anio": 2015,
+      "viviendas": 24,
+      "tipo": "viviendas",
+      "estado": "Vendida",
+      "precio": null,
+      "descripcion": "",
+      "foto": "/assets/img/foto-03.jpg",
+      "galeria": [],
+      "enlace": ""
+    },
+    {
+      "nombre": "Villas La Quinta",
+      "municipio": "Santa Úrsula",
+      "anio": 2012,
+      "viviendas": 6,
+      "tipo": "villas",
+      "estado": "Vendida",
+      "precio": null,
+      "descripcion": "",
+      "foto": "/assets/img/lugar-adecuado-patio-teide-color.jpg",
+      "galeria": [],
+      "enlace": ""
+    }
+  ]
+}
