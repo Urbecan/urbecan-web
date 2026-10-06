@@ -1,21 +1,30 @@
 # Panel de edición de Urbecan → /admin/ (Decap CMS + DecapBridge)
 # Al publicar, Decap hace commit en GitHub y Netlify regenera la web (node scripts/build.mjs).
 
-# Acceso con email y contraseña vía DecapBridge (sin cuenta de GitHub).
-# IMPORTANTE: sustituir este bloque por el que genera https://decapbridge.com
-# al dar de alta el sitio (contiene el identificador real del sitio).
+# Acceso con email y contraseña (o Google/Microsoft) vía DecapBridge, sin cuenta de GitHub.
+# Bloque generado por https://decapbridge.com (sitio «Urbecan», auth PKCE).
+# Usuarios e invitaciones se gestionan en DecapBridge.
 backend:
   name: git-gateway
   repo: Urbecan/urbecan-web
   branch: main
-  identity_url: https://auth.decapbridge.com/sites/ID_DEL_SITIO
+  auth_type: pkce
+  base_url: https://auth.decapbridge.com
+  auth_endpoint: /sites/836547a6-307e-4b5d-be1a-66e313f208c9/pkce
+  auth_token_endpoint: /sites/836547a6-307e-4b5d-be1a-66e313f208c9/token
   gateway_url: https://gateway.decapbridge.com
   commit_messages:
-    create: "Panel: crear {{collection}} «{{slug}}» ({{author-name}})"
-    update: "Panel: actualizar {{collection}} «{{slug}}» ({{author-name}})"
-    delete: "Panel: borrar {{collection}} «{{slug}}» ({{author-name}})"
-    uploadMedia: "Panel: subir foto «{{path}}» ({{author-name}})"
-    deleteMedia: "Panel: borrar foto «{{path}}» ({{author-name}})"
+    create: "Panel: crear {{collection}} «{{slug}}» ({{author-name}} <{{author-login}}>)"
+    update: "Panel: actualizar {{collection}} «{{slug}}» ({{author-name}} <{{author-login}}>)"
+    delete: "Panel: borrar {{collection}} «{{slug}}» ({{author-name}} <{{author-login}}>)"
+    uploadMedia: "Panel: subir foto «{{path}}» ({{author-name}} <{{author-login}}>)"
+    deleteMedia: "Panel: borrar foto «{{path}}» ({{author-name}} <{{author-login}}>)"
+
+auth:
+  email_claim: email
+  first_name_claim: first_name
+  last_name_claim: last_name
+  avatar_url_claim: avatar_url
 
 # En local (localhost) usa el proxy de «npx decap-server» en lugar de DecapBridge
 local_backend: true

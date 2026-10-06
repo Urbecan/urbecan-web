@@ -12,7 +12,7 @@ Web estática (HTML + CSS + JS, sin framework) de Urbecan Inmobiliaria (URBECAN 
 
 ## Panel de edición (Decap CMS + DecapBridge)
 - Panel en `urbecan-web/admin/` → urbecan.com/admin. Decap CMS (CDN, versión fijada en `admin/index.html`) con logo de Urbecan e interfaz en español. Config: `admin/config.yml` (promociones, equipo y textos principales). Fotos subidas → `urbecan-web/assets/img/uploads/`.
-- Login del cliente con email y contraseña vía DecapBridge (decapbridge.com, backend `git-gateway`), sin cuenta de GitHub. Los usuarios se invitan desde el panel de DecapBridge.
+- Login del cliente con email y contraseña (o Google/Microsoft) vía DecapBridge (decapbridge.com, backend `git-gateway`, `auth_type: pkce`), sin cuenta de GitHub. Si el token de GitHub se revoca, crear otro (Contents read/write en `Urbecan/urbecan-web`) y pegarlo en el sitio de DecapBridge. Los usuarios se invitan desde el panel de DecapBridge.
 - Datos en `urbecan-web/data/*.json` (raíz siempre objeto: `{"promociones": [...]}`, `{"equipo": [...]}`; Decap no admite listas en la raíz). `node scripts/build.mjs` los vuelca al HTML entre marcadores `<!--cms:tipo:clave-->…<!--/cms-->` (no editar a mano ese contenido; editar el JSON). Idempotente; Netlify lo ejecuta en cada deploy.
 - Formato en textos: `*texto*` → `<em>`, `[texto]` → `<span>` (segundo tono), salto de línea → `<br>`.
 - Probar el panel en local sin login: `npx decap-server` (raíz del repo) + servir `urbecan-web` en localhost → /admin/ (`local_backend: true`). Ejecutar el build antes de probar la web si cambian los JSON.
@@ -31,9 +31,9 @@ Fuentes: Manrope (titulares) + DM Sans (texto). Colores: navy #08295d, ink #1422
 
 ## Pendiente (en orden)
 1. Panel de edición con Decap CMS en `/admin/` (login email + contraseña vía DecapBridge, sin GitHub). Hecho en el repo (ver «Panel de edición»). Falta:
-   - Crear el sitio en decapbridge.com (repo `Urbecan/urbecan-web`, rama `main`, token de GitHub con permiso de lectura/escritura en Contents) y pegar el bloque `backend` que genera en `admin/config.yml` (ahora tiene `ID_DEL_SITIO` de marcador).
-   - Invitar al cliente por email desde DecapBridge (plan gratuito: 3 sitios, 10 colaboradores).
-   - Al lanzar: cambiar `site_url`/`display_url` de `admin/config.yml` a https://www.urbecan.com.
+   - ~~Crear el sitio en decapbridge.com~~ → hecho (sitio «Urbecan», auth PKCE, token GitHub sin caducidad solo con Contents de `urbecan-web`; bloque `backend` ya en `admin/config.yml`).
+   - Invitar usuarios por email desde DecapBridge (plan gratuito: 3 sitios, 10 colaboradores) y probar login en urbecan.netlify.app/admin/.
+   - Al lanzar: cambiar `site_url`/`display_url` de `admin/config.yml` y la «Decap CMS login URL» en DecapBridge a https://www.urbecan.com/admin/.
 2. Formulario de contacto real (Netlify Forms: `data-netlify="true"`, redirigir a `/gracias/`). Ahora es simulado.
 3. Sustituir fotos de ejemplo por las nuevas del norte y el histórico real de promociones vendidas.
 4. Textos legales definitivos y datos fiscales (pendientes del cliente).
