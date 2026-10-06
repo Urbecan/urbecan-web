@@ -38,3 +38,33 @@ Fuentes: Manrope (titulares) + DM Sans (texto). Colores: navy #08295d, ink #1422
 3. Sustituir fotos de ejemplo por las nuevas del norte y el histórico real de promociones vendidas.
 4. Textos legales definitivos y datos fiscales (pendientes del cliente).
 5. Lanzamiento: dominio urbecan.com (ahora en Inmovilla; no tocar DNS sin confirmar dónde está el correo), quitar noindex, enviar sitemap a Search Console.
+
+## Checklist de lanzamiento
+
+### Funcionamiento
+- [ ] Formulario de contacto real con Netlify Forms: avisos a info@urbecan.com y redirección a /gracias/
+- [ ] Panel Decap CMS en /admin con login por email (DecapBridge) y usuarios del equipo creados
+- [ ] Pruebas en móvil, tablet y escritorio (Safari, Chrome, Firefox)
+
+### Correo y dominio (no tocar DNS sin confirmación)
+- [ ] Confirmar con Inmovilla dónde están el dominio urbecan.com y el correo
+- [ ] Migrar el correo antes de cambiar el dominio, si hace falta
+- [ ] Conectar urbecan.com a Netlify (www y sin www, HTTPS)
+- [ ] Redirecciones 301 de las URLs de la web antigua a las nuevas (archivo `_redirects`)
+
+### Google y visibilidad
+- [ ] Quitar el noindex (robots.txt y meta robots) y añadir `Sitemap:` a robots.txt
+- [ ] Alta en Google Search Console y envío de sitemap.xml
+- [ ] Actualizar la ficha de Google Business con la web nueva
+- [ ] Analítica (decidir con el cliente: GA4 o una alternativa sin cookies)
+
+### Detalles
+- [ ] Favicon y apple-touch-icon
+- [ ] Imagen para compartir (og:image 1200×630) en todas las páginas
+- [ ] Aviso de cookies ajustado a lo que se use de verdad
+- [ ] Textos legales y datos fiscales definitivos
+- [ ] Sustituir fotos de ejemplo e histórico real de promociones vendidas
+
+### Entrega
+- [ ] Transferir GitHub (organización Urbecan) y Netlify a info@urbecan.com
+- [ ] Guía corta de uso del panel para el cliente (PDF o página en /admin)

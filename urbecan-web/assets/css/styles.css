@@ -545,6 +545,7 @@ body .essay-copy h2,body .aside-quote blockquote,body .pro-manifesto h2,body .se
 .f-legal{display:flex;flex-wrap:wrap;gap:8px 26px}
 .f-legal a{transition:color .25s}
 .f-legal a:hover{color:var(--navy)}
+.footer{padding-bottom:96px}
 .page-lead.uni-lead.legal-lead{padding-bottom:80px}
 .legal{display:grid;grid-template-columns:22% minmax(0,1fr);gap:8%;padding:10px 5.2% 130px;background:#e9e6dc}
 .legal-nav{position:sticky;top:30px;align-self:start;display:flex;flex-direction:column;gap:12px;border-top:1px solid #1422354d;padding-top:18px}
