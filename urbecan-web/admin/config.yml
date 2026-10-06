@@ -69,8 +69,6 @@ collections:
     view_filters:
       - { label: En venta, field: estado, pattern: "^(?!Vendida$)" }
       - { label: Vendidas, field: estado, pattern: "^Vendida$" }
-    view_groups:
-      - { label: Estado, field: estado }
     editor:
       preview: false
     fields:

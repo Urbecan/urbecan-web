@@ -13,7 +13,7 @@ Web estática (HTML + CSS + JS, sin framework) de Urbecan Inmobiliaria (URBECAN 
 ## Panel de edición (Decap CMS + DecapBridge)
 - Panel en `urbecan-web/admin/` → urbecan.com/admin. Decap CMS por CDN (versión fijada en `admin/index.html`).
   - `admin/config.yml`: colecciones. `admin/urbecan.css`: estilo Urbecan (selecciona componentes por nombre, p. ej. `[class*="-GridCard-card"]`; revisar si se actualiza Decap). `admin/urbecan.js`: completa la traducción al español y arranca Decap (`CMS_MANUAL_INIT`).
-  - Vista en tarjetas por defecto. Las tarjetas muestran la foto del campo `image` (Decap solo la detecta con ese nombre) y el `summary` en dos líneas: la primera se pinta como etiqueta pequeña (`::first-line`).
+  - Las entradas se ven en filas (miniatura + etiqueta + nombre + flecha). Internamente es la vista «cuadrícula» de Decap, la única que muestra foto: `admin/index.html` la fuerza y `urbecan.css` la pinta como filas y oculta el selector lista/cuadrícula. La foto sale del campo `image` (Decap solo la detecta con ese nombre). El `summary` va en dos líneas y la primera se pinta como etiqueta pequeña (`::first-line`).
 - Login del cliente con email y contraseña (o Google/Microsoft) vía DecapBridge (decapbridge.com, backend `git-gateway`, `auth_type: pkce`), sin cuenta de GitHub. Si el token de GitHub se revoca, crear otro (Contents read/write en `Urbecan/urbecan-web`) y pegarlo en el sitio de DecapBridge.
 - Datos en `urbecan-web/data/`:
   - `promociones/*.json` y `equipo/*.json`: una entrada por archivo (folder collections), ordenadas por `orden`. Promociones: estado «Vendida» → bloque de vendidas; `precio` es texto libre («Desde 245.000 €» se pinta como etiqueta + cifra).
