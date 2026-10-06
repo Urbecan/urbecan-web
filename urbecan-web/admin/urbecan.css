@@ -40,8 +40,9 @@ html body{background:var(--bg)!important;color:var(--ink)}
 #nc-root [class*="-AppHeaderSiteLink"]{color:var(--muted)}
 
 /* ── Barra lateral */
+/* Sin título «Panel de gestión»: el buscador queda arriba con el mismo hueco (28px) que lo separa de las colecciones */
 #nc-root [class*="-SidebarContainer"]{background:var(--paper);box-shadow:none;border-radius:0;padding:28px 0 18px}
-#nc-root [class*="-SidebarHeading"]{font:600 11px 'DM Sans',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--sand-ink);padding:0 24px 18px;margin:0}
+#nc-root [class*="-SidebarHeading"]{display:none}
 #nc-root [class*="-SearchContainer"]{margin:0 18px 16px;border-radius:0;background:#fff;border:1px solid var(--line)}
 #nc-root [class*="-SidebarNavLink"]{font-size:16px;color:var(--ink);padding:15px 24px;border-left:0;margin:0}
 #nc-root [class*="-SidebarNavLink"] svg{display:none}
@@ -59,7 +60,7 @@ html body{background:var(--bg)!important;color:var(--ink)}
 /* Ordenar / Filtrar / Agrupar */
 #nc-root [class*="-CollectionControlsContainer"]{margin-bottom:6px}
 #nc-root [class*="-CollectionControlsContainer"] [class*="-StyledDropdownButton"]{color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:0;font-size:14px;padding:0 30px 0 14px;height:40px;line-height:38px}
-#nc-root [class*="-CollectionControlsContainer"] [class*="-StyledDropdownButton"]:after{color:var(--ink);border-top-color:var(--ink)}
+#nc-root [class*="-CollectionControlsContainer"] [class*="-StyledDropdownButton"]:after{color:var(--ink);border-top-color:var(--ink);top:calc(50% - 3px)}
 #nc-root [class*="-ViewControlsButton"]{color:#14223566}
 #nc-root [class*="-ViewControlsButton"][class*="isActive"],#nc-root [class*="-ViewControlsButton"]:hover{color:var(--navy)}
 

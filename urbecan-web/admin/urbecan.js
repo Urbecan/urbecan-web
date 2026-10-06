@@ -3,7 +3,7 @@
 (function () {
   var faltan = {
     collection: {
-      sidebar: { collections: 'Panel de gestión', allCollections: 'Todas las secciones', searchIn: 'Buscar en' },
+      sidebar: { collections: 'Panel de gestión', allCollections: 'Todas las secciones', searchAll: 'Buscar…', searchIn: 'Buscar en' },
       collectionTop: {
         newButton: '＋ Nueva %{collectionLabel}',
         filterBy: 'Filtrar',
