@@ -1,0 +1,17 @@
+{
+  "nombre": "Edificio Atlántico",
+  "municipio": "Puerto de la Cruz",
+  "anio": 2026,
+  "viviendas": 8,
+  "tipo": "apartamentos",
+  "estado": "Últimas unidades",
+  "precio": "Desde 198.000 €",
+  "descripcion": "8 apartamentos de 1 y 2 dormitorios a cinco minutos del mar.",
+  "image": "/assets/img/foto-03.jpg",
+  "galeria": [
+    "/assets/img/lugar-adecuado-patio-teide-color.jpg",
+    "/assets/img/foto-05.jpg"
+  ],
+  "enlace": "",
+  "orden": 2
+}

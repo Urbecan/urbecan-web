@@ -11,9 +11,14 @@ Web estática (HTML + CSS + JS, sin framework) de Urbecan Inmobiliaria (URBECAN 
 - Rutas absolutas (`/assets/...`, `/nosotros/`). Para probar en local: `npx serve urbecan-web`.
 
 ## Panel de edición (Decap CMS + DecapBridge)
-- Panel en `urbecan-web/admin/` → urbecan.com/admin. Decap CMS (CDN, versión fijada en `admin/index.html`) con logo de Urbecan e interfaz en español. Config: `admin/config.yml` (promociones, equipo y textos principales). Fotos subidas → `urbecan-web/assets/img/uploads/`.
-- Login del cliente con email y contraseña (o Google/Microsoft) vía DecapBridge (decapbridge.com, backend `git-gateway`, `auth_type: pkce`), sin cuenta de GitHub. Si el token de GitHub se revoca, crear otro (Contents read/write en `Urbecan/urbecan-web`) y pegarlo en el sitio de DecapBridge. Los usuarios se invitan desde el panel de DecapBridge.
-- Datos en `urbecan-web/data/*.json` (raíz siempre objeto: `{"promociones": [...]}`, `{"equipo": [...]}`; Decap no admite listas en la raíz). `node scripts/build.mjs` los vuelca al HTML entre marcadores `<!--cms:tipo:clave-->…<!--/cms-->` (no editar a mano ese contenido; editar el JSON). Idempotente; Netlify lo ejecuta en cada deploy.
+- Panel en `urbecan-web/admin/` → urbecan.com/admin. Decap CMS por CDN (versión fijada en `admin/index.html`).
+  - `admin/config.yml`: colecciones. `admin/urbecan.css`: estilo Urbecan (selecciona componentes por nombre, p. ej. `[class*="-GridCard-card"]`; revisar si se actualiza Decap). `admin/urbecan.js`: completa la traducción al español y arranca Decap (`CMS_MANUAL_INIT`).
+  - Vista en tarjetas por defecto. Las tarjetas muestran la foto del campo `image` (Decap solo la detecta con ese nombre) y el `summary` en dos líneas: la primera se pinta como etiqueta pequeña (`::first-line`).
+- Login del cliente con email y contraseña (o Google/Microsoft) vía DecapBridge (decapbridge.com, backend `git-gateway`, `auth_type: pkce`), sin cuenta de GitHub. Si el token de GitHub se revoca, crear otro (Contents read/write en `Urbecan/urbecan-web`) y pegarlo en el sitio de DecapBridge.
+- Datos en `urbecan-web/data/`:
+  - `promociones/*.json` y `equipo/*.json`: una entrada por archivo (folder collections), ordenadas por `orden`. Promociones: estado «Vendida» → bloque de vendidas; `precio` es texto libre («Desde 245.000 €» se pinta como etiqueta + cifra).
+  - `textos/<página>.json`: titulares y párrafos de inicio, nosotros, particulares y profesionales.
+- `node scripts/build.mjs` vuelca los datos al HTML entre marcadores `<!--cms:tipo:clave-->…<!--/cms-->` (no editar a mano ese contenido; editar el JSON). Idempotente; Netlify lo ejecuta en cada deploy.
 - Formato en textos: `*texto*` → `<em>`, `[texto]` → `<span>` (segundo tono), salto de línea → `<br>`.
 - Probar el panel en local sin login: `npx decap-server` (raíz del repo) + servir `urbecan-web` en localhost → /admin/ (`local_backend: true`). Ejecutar el build antes de probar la web si cambian los JSON.
 

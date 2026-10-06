@@ -1,0 +1,14 @@
+{
+  "nombre": "Residencial San Agustín",
+  "municipio": "Los Realejos",
+  "anio": 2015,
+  "viviendas": 24,
+  "tipo": "viviendas",
+  "estado": "Vendida",
+  "precio": "",
+  "descripcion": "",
+  "image": "/assets/img/foto-03.jpg",
+  "galeria": [],
+  "enlace": "",
+  "orden": 6
+}

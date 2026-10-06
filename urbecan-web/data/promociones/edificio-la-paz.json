@@ -1,0 +1,14 @@
+{
+  "nombre": "Edificio La Paz",
+  "municipio": "Puerto de la Cruz",
+  "anio": 2017,
+  "viviendas": 12,
+  "tipo": "viviendas",
+  "estado": "Vendida",
+  "precio": "",
+  "descripcion": "",
+  "image": "/assets/img/foto-02.jpg",
+  "galeria": [],
+  "enlace": "",
+  "orden": 5
+}
