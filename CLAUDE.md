@@ -6,7 +6,7 @@ Web estática (HTML + CSS + JS, sin framework) de Urbecan Inmobiliaria (URBECAN 
 - `urbecan-web/` → carpeta publicada (netlify.toml en la raíz: `publish = "urbecan-web"`)
   - `index.html` inicio · `nosotros/` · `particulares/` · `profesionales/` · `contacto/`
   - `aviso-legal/` `privacidad/` `cookies/` `gracias/` · `404.html`
-  - `en/` versión en inglés: `en/` · `en/about/` · `en/buyers/` · `en/professionals/` · `en/contact/` · `en/thanks/` (ver «Idiomas»)
+  - `en/` versión en inglés: `en/` · `en/about/` · `en/buyers/` · `en/professionals/` · `en/contact/` · `en/thanks/` · `en/404.html` (ver «Idiomas»)
   - `assets/css/styles.css` · `assets/js/main.js` · `assets/img/*.jpg` · logos en `assets/`
 - Cabecera y pie están repetidos en cada página: si cambias uno, cámbialo en todas (también en las de `en/`, con el texto en inglés).
 - Rutas absolutas (`/assets/...`, `/nosotros/`). Para probar en local: `npx serve urbecan-web`.
@@ -27,7 +27,7 @@ Web estática (HTML + CSS + JS, sin framework) de Urbecan Inmobiliaria (URBECAN 
 - Probar el panel en local sin login: `npx decap-server` (raíz del repo) + servir `urbecan-web` en localhost → /admin/ (`local_backend: true`). Ejecutar el build antes de probar la web si cambian los JSON.
 
 ## Idiomas (español + inglés)
-- Español es el idioma principal (URLs sin prefijo); inglés vive en `/en/` con slugs propios. Equivalencias en `RUTAS` de `scripts/build.mjs`: `/`↔`/en/`, `/nosotros/`↔`/en/about/`, `/particulares/`↔`/en/buyers/`, `/profesionales/`↔`/en/professionals/`, `/contacto/`↔`/en/contact/`, `/gracias/`↔`/en/thanks/`. Legales y 404 solo en español (desde las páginas en inglés se enlazan con `hreflang="es"`).
+- Español es el idioma principal (URLs sin prefijo); inglés vive en `/en/` con slugs propios. Equivalencias en `RUTAS` de `scripts/build.mjs`: `/`↔`/en/`, `/nosotros/`↔`/en/about/`, `/particulares/`↔`/en/buyers/`, `/profesionales/`↔`/en/professionals/`, `/contacto/`↔`/en/contact/`, `/gracias/`↔`/en/thanks/`. Legales solo en español (desde las páginas en inglés se enlazan con `hreflang="es"`). 404 en los dos idiomas: Netlify sirve `/en/404.html` para lo que no exista bajo `/en/` (regla en `netlify.toml`) y `/404.html` para el resto.
 - Las páginas `en/` son HTML propio (mismo diseño, textos traducidos a mano). `<html lang>` debe coincidir con la carpeta: el build falla si no.
 - El build genera según el idioma de la carpeta de cada página:
   - `<!--cms:idioma-->` → en la cabecera de escritorio, un solo enlace al otro idioma («EN» en español, «ES» en inglés; aria-label «English version» / «Versión en español»), justo antes del icono de Instagram y con su mismo tamaño y color (`.nav-lang-link`). Por encima de 1150px la línea separadora que iba delante del icono pasa delante del enlace; por debajo el icono se oculta (ya era así) y el enlace sigue visible.
@@ -35,6 +35,7 @@ Web estática (HTML + CSS + JS, sin framework) de Urbecan Inmobiliaria (URBECAN 
   - Ambos llevan a la página equivalente; si no la hay, al inicio de cada idioma.
   - `<!--cms:hreflang-->` → `<link rel="alternate" hreflang>` es/en/x-default (x-default = español).
   - `sitemap.xml` completo con alternativas `xhtml:link` (no editarlo a mano).
+  - Precios: en el panel se escriben en español («Desde 245.000 €»); el build los formatea según el idioma con `Intl.NumberFormat` (`formatoNumero` en `IDIOMAS`): «Desde 245.000 €» / «From €245,000». Si el precio no es una cifra («Consultar», «245.000 € + IGIC») sale tal cual (o con la traducción de `precios`).
   - Promociones y equipo: textos de la ficha en el idioma de la página; etiquetas fijas (estado, tipo, «Desde», botones) traducidas en `IDIOMAS` de `build.mjs`. Si falta la traducción de una ficha o un texto, se usa el español.
 - Formulario en inglés: mismo form `contacto` y mismos campos (Netlify los junta); los valores de «tipo» se envían en español, el asunto lleva «(versión en inglés)» y redirige a `/en/thanks/`. Textos de `main.js` sin idioma fijo (el botón usa `data-sending`).
 - Decap: `i18n` global `multiple_folders` (es, en; principal es). Promociones y Equipo con `i18n: true`; Textos con `structure: single_file` (Decap no admite otra estructura en colecciones de archivos). Campos `i18n: true` = se traducen (nombre de promoción, descripción, cargo, textos); `i18n: duplicate` = se copian del español al guardar (fotos, municipio, año, viviendas, tipo, estado, precio, enlace, orden, nombre de persona). «Más fotos» (lista) va sin `i18n` porque Decap no admite `duplicate` en listas: se edita solo en español y la web usa esas fotos en todos los idiomas.
@@ -56,6 +57,7 @@ WhatsApp 656 61 15 00 · Tel. 922 08 07 17 / 922 32 63 48 · info@urbecan.com ·
 Propiedades: enlaces a https://diverso.casafaricrm.com/ (Casafari). Diverso (centro de negocios): https://diversoempresas.com
 
 ## Diseño
+- Menú hamburguesa por debajo de 981px (`@media(max-width:980px)` en los bloques de `.nav`, `.mobile-toggle`, `.nav-close`, `.nav-extra`, `menu-open`): la cabecera en español no cabe con aire por debajo de ese ancho. El resto del diseño móvil sigue en 690px. En el menú las opciones largas parten en dos líneas.
 Fuentes: Manrope (titulares) + DM Sans (texto). Colores: navy #08295d, ink #142235, arena #c4b18a, papel #f5f3ec, fondo #e8e5dc. No cambiar el diseño sin pedirlo.
 
 ## Pendiente (en orden)

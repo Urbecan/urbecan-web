@@ -10,3 +10,9 @@
   for = "/admin/*"
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
+
+# Página 404 en inglés para todo lo que no exista bajo /en/ (las páginas que sí existen se sirven igual: sin force)
+[[redirects]]
+  from = "/en/*"
+  to = "/en/404.html"
+  status = 404

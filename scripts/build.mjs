@@ -15,7 +15,7 @@ const DOMINIO = 'https://www.urbecan.com';
 const IDIOMAS = {
   es: {
     etiqueta: 'ES', nombre: 'Español', aria: 'Idioma', version: 'Versión en español',
-    estados: {}, tipos: {}, desde: 'Desde', precios: {},
+    estados: {}, tipos: {}, desde: 'Desde', precios: {}, formatoNumero: 'es-ES',
     solicitar: 'Solicitar información', verProyecto: 'Ver proyecto', vendida: 'Vendida',
     fotoAnt: 'Foto anterior', fotoSig: 'Foto siguiente', foto: 'foto',
     meInteresa: (n) => `Me interesa ${n}.`,
@@ -25,7 +25,7 @@ const IDIOMAS = {
     // Los valores de estado y tipo se guardan en español (campos «duplicate» del panel); aquí su traducción
     estados: { 'En comercialización': 'On sale', 'Últimas unidades': 'Last units', 'Próximamente': 'Coming soon', 'Vendida': 'Sold' },
     tipos: { viviendas: 'homes', apartamentos: 'apartments', villas: 'villas', 'dúplex': 'duplexes', 'áticos': 'penthouses', locales: 'commercial units' },
-    desde: 'From', precios: { consultar: 'Price on request' },
+    desde: 'From', precios: { consultar: 'Price on request' }, formatoNumero: 'en-GB',
     solicitar: 'Request information', verProyecto: 'View project', vendida: 'Sold',
     fotoAnt: 'Previous photo', fotoSig: 'Next photo', foto: 'photo',
     meInteresa: (n) => `I am interested in ${n}.`,
@@ -78,11 +78,24 @@ const texto = (d, clave) => {
   return v;
 };
 
-// «Desde 245.000 €» → <span>Desde</span><strong>245.000 €</strong>; cualquier otro texto («Consultar») va entero en <strong>
+// Importe en euros según el idioma: es «245.000 €», en «€245,000». El panel guarda el precio como texto en español
+// («245.000 €», «245.000,50 €», «245000€»); si no es una cifra reconocible se deja tal cual.
+const euros = (t, ui) => {
+  const m = String(t).trim().match(/^(\d{1,3}(?:\.\d{3})+|\d+)(?:,(\d{1,2}))?\s*(?:€|eur(?:os)?)$/i);
+  if (!m) return null;
+  const n = Number(m[1].replace(/\./g, '') + (m[2] ? '.' + m[2] : ''));
+  return new Intl.NumberFormat(ui.formatoNumero, {
+    style: 'currency', currency: 'EUR', useGrouping: 'always',
+    minimumFractionDigits: m[2] ? 2 : 0, maximumFractionDigits: m[2] ? 2 : 0,
+  }).format(n).replace(/\u00a0/g, ' ');
+};
+// «Desde 245.000 €» → <span>Desde</span><strong>245.000 €</strong> (en inglés <span>From</span><strong>€245,000</strong>);
+// cualquier otro texto («Consultar») va entero en <strong>
 const precio = (t, ui) => {
   const s = String(t).trim();
   const m = s.match(/^(desde)\s+(.+)$/i);
-  return m ? `<span>${esc(ui.desde)}</span><strong>${esc(m[2])}</strong>` : `<strong>${esc(ui.precios[s.toLowerCase()] ?? s)}</strong>`;
+  if (m) return `<span>${esc(ui.desde)}</span><strong>${esc(euros(m[2], ui) ?? m[2])}</strong>`;
+  return `<strong>${esc(euros(s, ui) ?? ui.precios[s.toLowerCase()] ?? s)}</strong>`;
 };
 const fotos = (p) => [p.image, ...(p.galeria || [])].filter(Boolean);
 
