@@ -1,8 +1,18 @@
 {
-  "titulo": "Una decisión importante.\n*Bien acompañada.*",
-  "texto": "Comprar, vender o invertir en Tenerife, acompañado de principio a fin. Empezamos por entender qué necesitas.",
-  "comprar": "Queremos entender qué buscas, qué necesitas y qué encaja contigo. Desde la definición de la vivienda hasta la negociación y la firma.",
-  "vender": "Analizamos la propiedad y el mercado, cuidamos su presentación y coordinamos la comercialización, los contactos y las visitas.",
-  "invertir": "Estudiamos contigo la ubicación, las características y el contexto de mercado de cada oportunidad para decidir con información.",
-  "cita": "Tomar una buena decisión empieza por tener buena información."
+  "es": {
+    "titulo": "Una decisión importante.\n*Bien acompañada.*",
+    "texto": "Comprar, vender o invertir en Tenerife, acompañado de principio a fin. Empezamos por entender qué necesitas.",
+    "comprar": "Queremos entender qué buscas, qué necesitas y qué encaja contigo. Desde la definición de la vivienda hasta la negociación y la firma.",
+    "vender": "Analizamos la propiedad y el mercado, cuidamos su presentación y coordinamos la comercialización, los contactos y las visitas.",
+    "invertir": "Estudiamos contigo la ubicación, las características y el contexto de mercado de cada oportunidad para decidir con información.",
+    "cita": "Tomar una buena decisión empieza por tener buena información."
+  },
+  "en": {
+    "titulo": "An important decision.\n*In good hands.*",
+    "texto": "Buying, selling or investing in Tenerife, with support from start to finish. We begin by understanding what you need.",
+    "comprar": "We want to understand what you are looking for, what you need and what suits you. From defining the home to negotiation and signing.",
+    "vender": "We analyse the property and the market, take care of its presentation and coordinate the marketing, enquiries and viewings.",
+    "invertir": "Together we study the location, features and market context of each opportunity so you can decide with the right information.",
+    "cita": "A good decision starts with good information."
+  }
 }

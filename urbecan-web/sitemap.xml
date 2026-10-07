@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://www.urbecan.com/</loc></url>
-  <url><loc>https://www.urbecan.com/nosotros/</loc></url>
-  <url><loc>https://www.urbecan.com/particulares/</loc></url>
-  <url><loc>https://www.urbecan.com/profesionales/</loc></url>
-  <url><loc>https://www.urbecan.com/contacto/</loc></url>
+<!-- Generado por scripts/build.mjs (no editar a mano) -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://www.urbecan.com/</loc><xhtml:link rel="alternate" hreflang="es" href="https://www.urbecan.com/"/><xhtml:link rel="alternate" hreflang="en" href="https://www.urbecan.com/en/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://www.urbecan.com/"/></url>
+  <url><loc>https://www.urbecan.com/en/</loc><xhtml:link rel="alternate" hreflang="es" href="https://www.urbecan.com/"/><xhtml:link rel="alternate" hreflang="en" href="https://www.urbecan.com/en/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://www.urbecan.com/"/></url>
+  <url><loc>https://www.urbecan.com/nosotros/</loc><xhtml:link rel="alternate" hreflang="es" href="https://www.urbecan.com/nosotros/"/><xhtml:link rel="alternate" hreflang="en" href="https://www.urbecan.com/en/about/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://www.urbecan.com/nosotros/"/></url>
+  <url><loc>https://www.urbecan.com/en/about/</loc><xhtml:link rel="alternate" hreflang="es" href="https://www.urbecan.com/nosotros/"/><xhtml:link rel="alternate" hreflang="en" href="https://www.urbecan.com/en/about/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://www.urbecan.com/nosotros/"/></url>
+  <url><loc>https://www.urbecan.com/particulares/</loc><xhtml:link rel="alternate" hreflang="es" href="https://www.urbecan.com/particulares/"/><xhtml:link rel="alternate" hreflang="en" href="https://www.urbecan.com/en/buyers/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://www.urbecan.com/particulares/"/></url>
+  <url><loc>https://www.urbecan.com/en/buyers/</loc><xhtml:link rel="alternate" hreflang="es" href="https://www.urbecan.com/particulares/"/><xhtml:link rel="alternate" hreflang="en" href="https://www.urbecan.com/en/buyers/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://www.urbecan.com/particulares/"/></url>
+  <url><loc>https://www.urbecan.com/profesionales/</loc><xhtml:link rel="alternate" hreflang="es" href="https://www.urbecan.com/profesionales/"/><xhtml:link rel="alternate" hreflang="en" href="https://www.urbecan.com/en/professionals/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://www.urbecan.com/profesionales/"/></url>
+  <url><loc>https://www.urbecan.com/en/professionals/</loc><xhtml:link rel="alternate" hreflang="es" href="https://www.urbecan.com/profesionales/"/><xhtml:link rel="alternate" hreflang="en" href="https://www.urbecan.com/en/professionals/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://www.urbecan.com/profesionales/"/></url>
+  <url><loc>https://www.urbecan.com/contacto/</loc><xhtml:link rel="alternate" hreflang="es" href="https://www.urbecan.com/contacto/"/><xhtml:link rel="alternate" hreflang="en" href="https://www.urbecan.com/en/contact/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://www.urbecan.com/contacto/"/></url>
+  <url><loc>https://www.urbecan.com/en/contact/</loc><xhtml:link rel="alternate" hreflang="es" href="https://www.urbecan.com/contacto/"/><xhtml:link rel="alternate" hreflang="en" href="https://www.urbecan.com/en/contact/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://www.urbecan.com/contacto/"/></url>
 </urlset>

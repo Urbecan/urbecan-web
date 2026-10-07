@@ -1,9 +1,20 @@
 {
-  "titulo": "Más que una\n*inmobiliaria.*",
-  "texto": "Inmobiliaria en Tenerife desde 2003. Personas, propiedades y nuevas historias: nuestra forma de trabajar empieza mucho antes de enseñar una vivienda.",
-  "mirada": "Detrás de cada propiedad hay alguien tomando una decisión importante. [Por eso escuchamos, analizamos y proponemos una estrategia adecuada a cada operación, con el conocimiento de quien lleva más de veinte años en Tenerife.]",
-  "trayectoria_texto": "Más de dos décadas formando parte del mercado inmobiliario de Tenerife.",
-  "trayectoria_detalle": "Conocemos los municipios, las zonas y las particularidades de cada mercado. Combinamos esa experiencia con herramientas y formas de comercialización actuales.",
-  "equipo_titulo": "Personas detrás de cada decisión.",
-  "equipo_intro": "El equipo de Urbecan combina conocimiento del mercado de Tenerife, criterio comercial y atención personal. Escuchamos, compartimos información clara y acompañamos cada paso."
+  "es": {
+    "titulo": "Más que una\n*inmobiliaria.*",
+    "texto": "Inmobiliaria en Tenerife desde 2003. Personas, propiedades y nuevas historias: nuestra forma de trabajar empieza mucho antes de enseñar una vivienda.",
+    "mirada": "Detrás de cada propiedad hay alguien tomando una decisión importante. [Por eso escuchamos, analizamos y proponemos una estrategia adecuada a cada operación, con el conocimiento de quien lleva más de veinte años en Tenerife.]",
+    "trayectoria_texto": "Más de dos décadas formando parte del mercado inmobiliario de Tenerife.",
+    "trayectoria_detalle": "Conocemos los municipios, las zonas y las particularidades de cada mercado. Combinamos esa experiencia con herramientas y formas de comercialización actuales.",
+    "equipo_titulo": "Personas detrás de cada decisión.",
+    "equipo_intro": "El equipo de Urbecan combina conocimiento del mercado de Tenerife, criterio comercial y atención personal. Escuchamos, compartimos información clara y acompañamos cada paso."
+  },
+  "en": {
+    "titulo": "More than an\n*estate agency.*",
+    "texto": "An estate agency in Tenerife since 2003. People, properties and new stories: our way of working starts long before we show a home.",
+    "mirada": "Behind every property there is someone making an important decision. [That is why we listen, analyse and propose the right strategy for each deal, with the knowledge of a team that has worked in Tenerife for over twenty years.]",
+    "trayectoria_texto": "More than two decades as part of the Tenerife property market.",
+    "trayectoria_detalle": "We know the municipalities, the neighbourhoods and the particularities of each market. We combine that experience with up-to-date tools and ways of selling.",
+    "equipo_titulo": "The people behind every decision.",
+    "equipo_intro": "The Urbecan team combines knowledge of the Tenerife market, commercial judgement and personal attention. We listen, share clear information and stay with you every step of the way."
+  }
 }

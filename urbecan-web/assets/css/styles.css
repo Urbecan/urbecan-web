@@ -668,3 +668,18 @@ body .essay-copy h2,body .aside-quote blockquote,body .pro-manifesto h2,body .se
 .fd-switch button.on{border-color:var(--navy);background:var(--navy);color:#fff}
 body.menu-open .fd-switch{display:none}
 @media(max-width:690px){.fd-h{grid-template-columns:1fr;padding:22px}.fd-h.pos-b{margin:-30px 0 28px}.fd-switch{bottom:auto;top:84px}}
+/* Idioma. Escritorio: un solo enlace al otro idioma (.nav-lang-link) antes del icono de Instagram, con su tamaño, color y espaciado.
+   Menú móvil y pie: selector completo «ES · EN» (.nav-lang) */
+.top .nav a.nav-lang-link{height:auto;align-self:center;display:inline-flex;color:var(--navy);font-size:11px;font-weight:600;letter-spacing:.1em;line-height:17px;transition:color .25s}
+.top .nav a.nav-lang-link:hover{color:#a58e67;opacity:1}
+.top .nav a.nav-lang-link:after{display:none}
+.top .nav .nav-lang{display:none}
+/* El enlace va en el mismo grupo que Instagram: la línea que antes iba delante del icono pasa delante del enlace (solo donde se ve el icono) */
+@media(min-width:1151px){.top .nav a.nav-lang-link{padding-left:clamp(14px,1.4vw,24px);border-left:1px solid var(--line)}.top .nav a.nav-lang-link+a.nav-ig{padding-left:0;border-left:0}}
+.nav-lang{display:flex;align-items:center;gap:7px;font-size:11px;letter-spacing:.1em}
+.nav-lang a{color:inherit;opacity:.6}
+.nav-lang a[aria-current]{opacity:1;font-weight:600}
+.footer-brand .nav-lang{margin-top:22px;color:var(--navy);font-size:11px;font-weight:600;letter-spacing:.14em}
+@media(max-width:690px){.top .nav a.nav-lang-link{display:none!important}.top .nav .nav-lang{display:flex;margin-top:22px;gap:10px;font-size:13px;color:var(--navy)}.top .nav .nav-lang a{padding:6px 0;height:auto}}
+/* Entre móvil y escritorio la cabecera va justa: hueco algo menor para que el enlace de idioma no la alargue */
+@media(min-width:691px) and (max-width:900px){.top .nav{gap:10px}}

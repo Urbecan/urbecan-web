@@ -1,0 +1,13 @@
+{
+  "nombre": "Villas Teide",
+  "municipio": "Los Realejos",
+  "anio": 2027,
+  "viviendas": 6,
+  "tipo": "villas",
+  "estado": "Próximamente",
+  "precio": "Desde 520.000 €",
+  "descripcion": "6 detached villas with garden, pool and garage.",
+  "image": "/assets/img/uploads/foto-04.jpg",
+  "enlace": "",
+  "orden": 3
+}

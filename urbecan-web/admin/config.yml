@@ -31,6 +31,14 @@ local_backend: true
 
 locale: es
 
+# Idiomas de la web. Cada ficha se edita en español y en inglés (pestañas en el editor).
+# multiple_folders → data/<colección>/<idioma>/<ficha>.json. Añadir un idioma: ver «Idiomas» en CLAUDE.md.
+# i18n: true = se traduce · i18n: duplicate = mismo valor en todos los idiomas (se copia del español al guardar)
+i18n:
+  structure: multiple_folders
+  locales: [es, en]
+  default_locale: es
+
 # Cambiar a https://www.urbecan.com al lanzar
 site_url: https://urbecan.netlify.app
 display_url: https://urbecan.netlify.app
@@ -58,6 +66,7 @@ collections:
     format: json
     create: true
     delete: true
+    i18n: true
     slug: "{{nombre}}"
     identifier_field: nombre
     # Primera línea = etiqueta pequeña, segunda = nombre (estilos en admin/urbecan.css)
@@ -72,25 +81,26 @@ collections:
     editor:
       preview: false
     fields:
-      - { name: image, label: Foto principal, widget: image, choose_url: false, hint: "Formato horizontal. Es la foto de la tarjeta." }
-      - { name: nombre, label: Nombre, widget: string }
-      - { name: municipio, label: Municipio, widget: string }
-      - { name: anio, label: Año, widget: number, value_type: int, required: false, hint: "En las vendidas se muestra junto al municipio (p. ej. «La Orotava · 2019»)." }
-      - { name: viviendas, label: Nº de viviendas, widget: number, value_type: int, required: false }
-      - { name: tipo, label: Tipo, widget: select, options: [viviendas, apartamentos, villas, dúplex, áticos, locales], default: viviendas }
-      - { name: estado, label: Estado, widget: select, options: [En comercialización, Últimas unidades, Próximamente, Vendida], default: En comercialización }
-      - { name: precio, label: Precio, widget: string, required: false, hint: "Tal cual se verá: «Desde 245.000 €», «Consultar»… Vacío = no se muestra. No se muestra en las vendidas." }
-      - { name: descripcion, label: Descripción corta, widget: text, required: false, hint: "Una o dos frases (unos 120 caracteres). No se muestra en las vendidas." }
+      - { name: image, label: Foto principal, widget: image, choose_url: false, hint: "Formato horizontal. Es la foto de la tarjeta.", i18n: duplicate }
+      - { name: nombre, label: Nombre, widget: string, i18n: true }
+      - { name: municipio, label: Municipio, widget: string, i18n: duplicate }
+      - { name: anio, label: Año, widget: number, value_type: int, required: false, hint: "En las vendidas se muestra junto al municipio (p. ej. «La Orotava · 2019»).", i18n: duplicate }
+      - { name: viviendas, label: Nº de viviendas, widget: number, value_type: int, required: false, i18n: duplicate }
+      - { name: tipo, label: Tipo, widget: select, options: [viviendas, apartamentos, villas, dúplex, áticos, locales], default: viviendas, i18n: duplicate }
+      - { name: estado, label: Estado, widget: select, options: [En comercialización, Últimas unidades, Próximamente, Vendida], default: En comercialización, i18n: duplicate }
+      - { name: precio, label: Precio, widget: string, required: false, hint: "Tal cual se verá: «Desde 245.000 €», «Consultar»… Vacío = no se muestra. No se muestra en las vendidas.", i18n: duplicate }
+      - { name: descripcion, label: Descripción corta, widget: text, required: false, hint: "Una o dos frases (unos 120 caracteres). No se muestra en las vendidas.", i18n: true }
       - name: galeria
         label: Más fotos
+        # Sin i18n: Decap no admite «duplicate» en listas. Se edita solo en español y la web usa esas fotos en todos los idiomas.
         label_singular: foto
         widget: list
         collapsed: false
         required: false
         hint: Fotos adicionales del carrusel (solo promociones activas).
         field: { name: foto, label: Foto, widget: image, choose_url: false }
-      - { name: enlace, label: Enlace externo, widget: string, required: false, hint: "Opcional. Web o ficha de la promoción (https://…). Añade el botón «Ver proyecto ↗»." }
-      - { name: orden, label: Orden en la web, widget: number, value_type: int, default: 99, hint: "1 = primera. Las activas y las vendidas se ordenan cada una por este número." }
+      - { name: enlace, label: Enlace externo, widget: string, required: false, hint: "Opcional. Web o ficha de la promoción (https://…). Añade el botón «Ver proyecto ↗».", i18n: duplicate }
+      - { name: orden, label: Orden en la web, widget: number, value_type: int, default: 99, hint: "1 = primera. Las activas y las vendidas se ordenan cada una por este número.", i18n: duplicate }
 
   # ── Equipo: una persona por archivo (data/equipo/*.json)
   - name: equipo
@@ -104,6 +114,7 @@ collections:
     delete: true
     slug: "{{nombre}}"
     identifier_field: nombre
+    i18n: true
     summary: "{{cargo}}\n{{nombre}}"
     sortable_fields:
       - { field: orden, label: Orden en la web, default_sort: asc }
@@ -111,14 +122,17 @@ collections:
     editor:
       preview: false
     fields:
-      - { name: image, label: Foto, widget: image, choose_url: false, hint: "Formato vertical, mismo encuadre para todo el equipo." }
-      - { name: nombre, label: Nombre, widget: string }
-      - { name: cargo, label: Cargo, widget: string, required: false }
-      - { name: orden, label: Orden en la web, widget: number, value_type: int, default: 99, hint: "1 = primero." }
+      - { name: image, label: Foto, widget: image, choose_url: false, hint: "Formato vertical, mismo encuadre para todo el equipo.", i18n: duplicate }
+      - { name: nombre, label: Nombre, widget: string, i18n: duplicate }
+      - { name: cargo, label: Cargo, widget: string, required: false, i18n: true }
+      - { name: orden, label: Orden en la web, widget: number, value_type: int, default: 99, hint: "1 = primero.", i18n: duplicate }
 
   # ── Textos: un archivo por página (data/textos/<página>.json)
   - name: textos
     label: Textos
+    # Las colecciones de archivos solo admiten single_file: cada JSON guarda { "es": {…}, "en": {…} }
+    i18n:
+      structure: single_file
     description: "Titulares y párrafos principales. *texto* = cursiva · [texto] = segundo tono (gris) · salto de línea = nueva línea."
     format: json
     editor:
@@ -127,48 +141,52 @@ collections:
       - name: inicio
         label: Inicio
         file: urbecan-web/data/textos/inicio.json
+        i18n: true
         fields:
-          - { name: hero_linea1, label: Titular · línea 1, widget: string }
-          - { name: hero_linea2, label: Titular · línea 2, widget: string, hint: "\\*texto\\* = cursiva" }
-          - { name: hero_texto, label: Texto junto al titular, widget: text }
-          - { name: intro_titulo, label: "01 · Titular", widget: text, hint: "[texto] = segundo tono (gris)" }
-          - { name: intro_texto, label: "01 · Texto", widget: text }
-          - { name: propiedades_texto, label: "02 · Propiedades · texto", widget: text }
-          - { name: trayectoria_titulo, label: "04 · Trayectoria · titular", widget: text, hint: "Cada salto de línea se respeta." }
-          - { name: trayectoria_texto, label: "04 · Trayectoria · texto", widget: text }
-          - { name: cierre_titulo, label: "07 · Cierre · titular", widget: string }
+          - { name: hero_linea1, label: Titular · línea 1, widget: string, i18n: true }
+          - { name: hero_linea2, label: Titular · línea 2, widget: string, hint: "\\*texto\\* = cursiva", i18n: true }
+          - { name: hero_texto, label: Texto junto al titular, widget: text, i18n: true }
+          - { name: intro_titulo, label: "01 · Titular", widget: text, hint: "[texto] = segundo tono (gris)", i18n: true }
+          - { name: intro_texto, label: "01 · Texto", widget: text, i18n: true }
+          - { name: propiedades_texto, label: "02 · Propiedades · texto", widget: text, i18n: true }
+          - { name: trayectoria_titulo, label: "04 · Trayectoria · titular", widget: text, hint: "Cada salto de línea se respeta.", i18n: true }
+          - { name: trayectoria_texto, label: "04 · Trayectoria · texto", widget: text, i18n: true }
+          - { name: cierre_titulo, label: "07 · Cierre · titular", widget: string, i18n: true }
       - name: nosotros
         label: Nosotros
         file: urbecan-web/data/textos/nosotros.json
+        i18n: true
         fields:
-          - { name: titulo, label: Titular, widget: text, hint: "Salto de línea = nueva línea · \\*texto\\* = cursiva" }
-          - { name: texto, label: Texto de entrada, widget: text }
-          - { name: mirada, label: Nuestra mirada, widget: text, hint: "[texto] = segundo tono (gris)" }
-          - { name: trayectoria_texto, label: Trayectoria · texto, widget: text }
-          - { name: trayectoria_detalle, label: Trayectoria · detalle, widget: text }
-          - { name: equipo_titulo, label: Equipo · titular, widget: string }
-          - { name: equipo_intro, label: Equipo · introducción, widget: text }
+          - { name: titulo, label: Titular, widget: text, hint: "Salto de línea = nueva línea · \\*texto\\* = cursiva", i18n: true }
+          - { name: texto, label: Texto de entrada, widget: text, i18n: true }
+          - { name: mirada, label: Nuestra mirada, widget: text, hint: "[texto] = segundo tono (gris)", i18n: true }
+          - { name: trayectoria_texto, label: Trayectoria · texto, widget: text, i18n: true }
+          - { name: trayectoria_detalle, label: Trayectoria · detalle, widget: text, i18n: true }
+          - { name: equipo_titulo, label: Equipo · titular, widget: string, i18n: true }
+          - { name: equipo_intro, label: Equipo · introducción, widget: text, i18n: true }
       - name: particulares
         label: Particulares
         file: urbecan-web/data/textos/particulares.json
+        i18n: true
         fields:
-          - { name: titulo, label: Titular, widget: text, hint: "Salto de línea = nueva línea · \\*texto\\* = cursiva" }
-          - { name: texto, label: Texto de entrada, widget: text }
-          - { name: comprar, label: Comprar, widget: text }
-          - { name: vender, label: Vender, widget: text }
-          - { name: invertir, label: Invertir, widget: text }
-          - { name: cita, label: Cita destacada, widget: text }
+          - { name: titulo, label: Titular, widget: text, hint: "Salto de línea = nueva línea · \\*texto\\* = cursiva", i18n: true }
+          - { name: texto, label: Texto de entrada, widget: text, i18n: true }
+          - { name: comprar, label: Comprar, widget: text, i18n: true }
+          - { name: vender, label: Vender, widget: text, i18n: true }
+          - { name: invertir, label: Invertir, widget: text, i18n: true }
+          - { name: cita, label: Cita destacada, widget: text, i18n: true }
       - name: profesionales
         label: Profesionales / Promotores
         file: urbecan-web/data/textos/profesionales.json
+        i18n: true
         fields:
-          - { name: titulo, label: Titular, widget: text, hint: "Salto de línea = nueva línea · \\*texto\\* = cursiva" }
-          - { name: texto, label: Texto de entrada, widget: text }
-          - { name: manifiesto_titulo, label: Manifiesto · titular, widget: string }
-          - { name: manifiesto_texto, label: Manifiesto · texto, widget: text }
-          - { name: promos_titulo, label: Promociones activas · titular, widget: string, hint: "\\*texto\\* = cursiva" }
-          - { name: promos_texto, label: Promociones activas · texto, widget: text }
-          - { name: promos_nota, label: Promociones activas · nota, widget: string, required: false, hint: Vacío = no se muestra. }
-          - { name: vendidas_titulo, label: Vendidas · titular, widget: string, hint: "\\*texto\\* = cursiva" }
-          - { name: vendidas_texto, label: Vendidas · texto, widget: text }
-          - { name: vendidas_nota, label: Vendidas · nota, widget: string, required: false, hint: Vacío = no se muestra. }
+          - { name: titulo, label: Titular, widget: text, hint: "Salto de línea = nueva línea · \\*texto\\* = cursiva", i18n: true }
+          - { name: texto, label: Texto de entrada, widget: text, i18n: true }
+          - { name: manifiesto_titulo, label: Manifiesto · titular, widget: string, i18n: true }
+          - { name: manifiesto_texto, label: Manifiesto · texto, widget: text, i18n: true }
+          - { name: promos_titulo, label: Promociones activas · titular, widget: string, hint: "\\*texto\\* = cursiva", i18n: true }
+          - { name: promos_texto, label: Promociones activas · texto, widget: text, i18n: true }
+          - { name: promos_nota, label: Promociones activas · nota, widget: string, required: false, hint: Vacío = no se muestra., i18n: true }
+          - { name: vendidas_titulo, label: Vendidas · titular, widget: string, hint: "\\*texto\\* = cursiva", i18n: true }
+          - { name: vendidas_texto, label: Vendidas · texto, widget: text, i18n: true }
+          - { name: vendidas_nota, label: Vendidas · nota, widget: string, required: false, hint: Vacío = no se muestra., i18n: true }

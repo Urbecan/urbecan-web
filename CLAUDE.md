@@ -6,8 +6,9 @@ Web estática (HTML + CSS + JS, sin framework) de Urbecan Inmobiliaria (URBECAN 
 - `urbecan-web/` → carpeta publicada (netlify.toml en la raíz: `publish = "urbecan-web"`)
   - `index.html` inicio · `nosotros/` · `particulares/` · `profesionales/` · `contacto/`
   - `aviso-legal/` `privacidad/` `cookies/` `gracias/` · `404.html`
+  - `en/` versión en inglés: `en/` · `en/about/` · `en/buyers/` · `en/professionals/` · `en/contact/` · `en/thanks/` (ver «Idiomas»)
   - `assets/css/styles.css` · `assets/js/main.js` · `assets/img/*.jpg` · logos en `assets/`
-- Cabecera y pie están repetidos en cada página: si cambias uno, cámbialo en todas.
+- Cabecera y pie están repetidos en cada página: si cambias uno, cámbialo en todas (también en las de `en/`, con el texto en inglés).
 - Rutas absolutas (`/assets/...`, `/nosotros/`). Para probar en local: `npx serve urbecan-web`.
 
 ## Panel de edición (Decap CMS + DecapBridge)
@@ -16,14 +17,34 @@ Web estática (HTML + CSS + JS, sin framework) de Urbecan Inmobiliaria (URBECAN 
   - Las entradas se ven en filas (miniatura + etiqueta + nombre + flecha). Internamente es la vista «cuadrícula» de Decap, la única que muestra foto: `admin/index.html` la fuerza y `urbecan.css` la pinta como filas y oculta el selector lista/cuadrícula. La foto sale del campo `image` (Decap solo la detecta con ese nombre). El `summary` va en dos líneas y la primera se pinta como etiqueta pequeña (`::first-line`).
 - Login del cliente con email y contraseña (o Google/Microsoft) vía DecapBridge (decapbridge.com, backend `git-gateway`, `auth_type: pkce`), sin cuenta de GitHub. Si el token de GitHub se revoca, crear otro (Contents read/write en `Urbecan/urbecan-web`) y pegarlo en el sitio de DecapBridge.
 - Datos en `urbecan-web/data/`:
-  - `promociones/*.json` y `equipo/*.json`: una entrada por archivo (folder collections), ordenadas por `orden`. Promociones: estado «Vendida» → bloque de vendidas; `precio` es texto libre («Desde 245.000 €» se pinta como etiqueta + cifra).
-  - `textos/<página>.json`: titulares y párrafos de inicio, nosotros, particulares y profesionales.
+  - `promociones/<idioma>/*.json` y `equipo/<idioma>/*.json`: una entrada por archivo y por idioma (`es/`, `en/`; mismo nombre de archivo), ordenadas por `orden`. Promociones: estado «Vendida» → bloque de vendidas; `precio` es texto libre («Desde 245.000 €» se pinta como etiqueta + cifra).
+  - `textos/<página>.json`: titulares y párrafos de inicio, nosotros, particulares y profesionales, con un bloque por idioma: `{ "es": {…}, "en": {…} }`.
   - Fotos de promociones y equipo: `assets/img/uploads/` (lo que se ve en «Medios»). El resto de fotos de la web (portada, secciones) siguen en `assets/img/` y no se editan desde el panel.
 - Miniaturas: con DecapBridge, Decap no consigue la vista previa de las fotos de `uploads` y cae a la ruta interna del repo (`urbecan-web/…`), que sale en blanco. `admin/urbecan.js` repinta las miniaturas con la ruta pública (`/assets/img/uploads/…`). En local no pasa (usa `decap-server`).
 - Cabecera del panel sin iconos ni menú «Añadir rápido»; la ventana «Medios» también lleva estilo Urbecan (se abre fuera de `#nc-root`, prefijo `html body`).
 - `node scripts/build.mjs` vuelca los datos al HTML entre marcadores `<!--cms:tipo:clave-->…<!--/cms-->` (no editar a mano ese contenido; editar el JSON). Idempotente; Netlify lo ejecuta en cada deploy.
 - Formato en textos: `*texto*` → `<em>`, `[texto]` → `<span>` (segundo tono), salto de línea → `<br>`.
 - Probar el panel en local sin login: `npx decap-server` (raíz del repo) + servir `urbecan-web` en localhost → /admin/ (`local_backend: true`). Ejecutar el build antes de probar la web si cambian los JSON.
+
+## Idiomas (español + inglés)
+- Español es el idioma principal (URLs sin prefijo); inglés vive en `/en/` con slugs propios. Equivalencias en `RUTAS` de `scripts/build.mjs`: `/`↔`/en/`, `/nosotros/`↔`/en/about/`, `/particulares/`↔`/en/buyers/`, `/profesionales/`↔`/en/professionals/`, `/contacto/`↔`/en/contact/`, `/gracias/`↔`/en/thanks/`. Legales y 404 solo en español (desde las páginas en inglés se enlazan con `hreflang="es"`).
+- Las páginas `en/` son HTML propio (mismo diseño, textos traducidos a mano). `<html lang>` debe coincidir con la carpeta: el build falla si no.
+- El build genera según el idioma de la carpeta de cada página:
+  - `<!--cms:idioma-->` → en la cabecera de escritorio, un solo enlace al otro idioma («EN» en español, «ES» en inglés; aria-label «English version» / «Versión en español»), justo antes del icono de Instagram y con su mismo tamaño y color (`.nav-lang-link`). Por encima de 1150px la línea separadora que iba delante del icono pasa delante del enlace; por debajo el icono se oculta (ya era así) y el enlace sigue visible.
+  - `<!--cms:idiomas-->` → selector completo «ES · EN» (`.nav-lang`) en el menú móvil (oculto en escritorio) y en el pie, bajo las redes.
+  - Ambos llevan a la página equivalente; si no la hay, al inicio de cada idioma.
+  - `<!--cms:hreflang-->` → `<link rel="alternate" hreflang>` es/en/x-default (x-default = español).
+  - `sitemap.xml` completo con alternativas `xhtml:link` (no editarlo a mano).
+  - Promociones y equipo: textos de la ficha en el idioma de la página; etiquetas fijas (estado, tipo, «Desde», botones) traducidas en `IDIOMAS` de `build.mjs`. Si falta la traducción de una ficha o un texto, se usa el español.
+- Formulario en inglés: mismo form `contacto` y mismos campos (Netlify los junta); los valores de «tipo» se envían en español, el asunto lleva «(versión en inglés)» y redirige a `/en/thanks/`. Textos de `main.js` sin idioma fijo (el botón usa `data-sending`).
+- Decap: `i18n` global `multiple_folders` (es, en; principal es). Promociones y Equipo con `i18n: true`; Textos con `structure: single_file` (Decap no admite otra estructura en colecciones de archivos). Campos `i18n: true` = se traducen (nombre de promoción, descripción, cargo, textos); `i18n: duplicate` = se copian del español al guardar (fotos, municipio, año, viviendas, tipo, estado, precio, enlace, orden, nombre de persona). «Más fotos» (lista) va sin `i18n` porque Decap no admite `duplicate` en listas: se edita solo en español y la web usa esas fotos en todos los idiomas.
+
+### Añadir un idioma nuevo (ejemplo: alemán `de`)
+1. `scripts/build.mjs`: añadir `de` a `IDIOMAS` (copiar el bloque `en` y traducir etiquetas, estados y tipos) y una columna `de: '/de/…/'` en cada fila de `RUTAS`.
+2. Páginas: copiar `urbecan-web/en/` a `urbecan-web/de/` con las carpetas renombradas a los slugs de `RUTAS`; cambiar `<html lang="de">`, `og:locale`, title/description/canonical/og:url, textos de cabecera, pie, cookies y WhatsApp, enlaces internos (`/de/…`), `action` del formulario y `data-sending`. No tocar lo que hay entre marcadores `<!--cms:…-->`.
+3. Datos: crear `data/promociones/de/` y `data/equipo/de/` (copias de `en/` traducidas) y añadir un bloque `"de": {…}` a cada `data/textos/*.json`.
+4. `admin/config.yml`: añadir `de` a `i18n.locales`.
+5. `node scripts/build.mjs` (regenera selector, hreflang y sitemap en todas las páginas) y revisar en local (`npx serve urbecan-web`).
 
 ## Publicación
 - GitHub: `Urbecan/urbecan-web` (público, rama `main`).

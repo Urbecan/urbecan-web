@@ -1,11 +1,24 @@
 {
-  "hero_linea1": "Cada lugar",
-  "hero_linea2": "tiene su *historia.*",
-  "hero_texto": "Te acompañamos a encontrar el espacio que encaja con la tuya.",
-  "intro_titulo": "Conocemos los lugares. [Escuchamos a las personas.] Y cuidamos todo lo que sucede entre ambos.",
-  "intro_texto": "Una relación cercana, criterio para elegir y tiempo para hacer bien las cosas. Desde 2003 acompañamos cada decisión inmobiliaria en Tenerife.",
-  "propiedades_texto": "Encuentra el lugar donde quieres vivir. Te ayudamos a mirar más allá de una dirección y a decidir con confianza.",
-  "trayectoria_titulo": "Experiencia que permanece.\nUna forma de trabajar\nque evoluciona.",
-  "trayectoria_texto": "Hemos acompañado a propietarios, compradores, inversores y promotores durante más de dos décadas. Hoy sumamos nuevas estrategias a ese conocimiento del mercado.",
-  "cierre_titulo": "Tu próximo capítulo puede empezar hoy."
+  "es": {
+    "hero_linea1": "Cada lugar",
+    "hero_linea2": "tiene su *historia.*",
+    "hero_texto": "Te acompañamos a encontrar el espacio que encaja con la tuya.",
+    "intro_titulo": "Conocemos los lugares. [Escuchamos a las personas.] Y cuidamos todo lo que sucede entre ambos.",
+    "intro_texto": "Una relación cercana, criterio para elegir y tiempo para hacer bien las cosas. Desde 2003 acompañamos cada decisión inmobiliaria en Tenerife.",
+    "propiedades_texto": "Encuentra el lugar donde quieres vivir. Te ayudamos a mirar más allá de una dirección y a decidir con confianza.",
+    "trayectoria_titulo": "Experiencia que permanece.\nUna forma de trabajar\nque evoluciona.",
+    "trayectoria_texto": "Hemos acompañado a propietarios, compradores, inversores y promotores durante más de dos décadas. Hoy sumamos nuevas estrategias a ese conocimiento del mercado.",
+    "cierre_titulo": "Tu próximo capítulo puede empezar hoy."
+  },
+  "en": {
+    "hero_linea1": "Every place",
+    "hero_linea2": "has its *story.*",
+    "hero_texto": "We help you find the space that fits yours.",
+    "intro_titulo": "We know the places. [We listen to the people.] And we take care of everything in between.",
+    "intro_texto": "A close relationship, sound judgement and time to do things properly. Since 2003 we have been by our clients’ side in every property decision in Tenerife.",
+    "propiedades_texto": "Find the place where you want to live. We help you look beyond an address and decide with confidence.",
+    "trayectoria_titulo": "Experience that lasts.\nA way of working\nthat keeps evolving.",
+    "trayectoria_texto": "For more than two decades we have worked alongside owners, buyers, investors and developers. Today we add new strategies to that knowledge of the market.",
+    "cierre_titulo": "Your next chapter can start today."
+  }
 }

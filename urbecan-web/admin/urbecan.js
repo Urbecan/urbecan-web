@@ -17,7 +17,14 @@
       groups: { other: 'Otros', negateLabel: 'No %{label}' }
     },
     editor: {
-      editorControlPane: { widget: { invalidPath: '«%{path}» no es una ruta válida', pathExists: 'La ruta «%{path}» ya existe' } },
+      editorControlPane: {
+        widget: { invalidPath: '«%{path}» no es una ruta válida', pathExists: 'La ruta «%{path}» ya existe' },
+        i18n: {
+          writingInLocale: 'Idioma: %{locale}',
+          copyFromLocale: 'Copiar de otro idioma',
+          copyFromLocaleConfirm: '¿Copiar el contenido del idioma %{locale}?\nSe sustituirá todo lo que haya escrito en esta columna.'
+        }
+      },
       editorWidgets: {
         image: { chooseMultiple: 'Elegir fotos', chooseUrl: 'Insertar desde URL', replaceUrl: 'Reemplazar por URL', promptUrl: 'URL de la imagen', addMore: 'Añadir más fotos', removeAll: 'Quitar todas las fotos' },
         file: { chooseMultiple: 'Elegir archivos', chooseUrl: 'Insertar desde URL', replaceUrl: 'Reemplazar por URL', promptUrl: 'URL del archivo', addMore: 'Añadir más archivos', removeAll: 'Quitar todos los archivos' },

@@ -1,0 +1,13 @@
+{
+  "nombre": "Residencial El Calvario",
+  "municipio": "La Orotava",
+  "anio": 2019,
+  "viviendas": 18,
+  "tipo": "viviendas",
+  "estado": "Vendida",
+  "precio": "",
+  "descripcion": "",
+  "image": "/assets/img/uploads/foto-04.jpg",
+  "enlace": "",
+  "orden": 4
+}

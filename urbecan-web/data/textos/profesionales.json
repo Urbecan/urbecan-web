@@ -1,12 +1,26 @@
 {
-  "titulo": "Del proyecto\n*a la venta.*",
-  "texto": "Comercialización de obra nueva en Tenerife: una estructura comercial para llevar tu promoción al mercado con estrategia, equipo y seguimiento.",
-  "manifiesto_titulo": "Una promoción necesita más que visibilidad.",
-  "manifiesto_texto": "Requiere planificación, conocimiento del mercado y capacidad para gestionar múltiples operaciones. Ponemos nuestra experiencia en obra nueva al servicio de cada proyecto.",
-  "promos_titulo": "Proyectos para descubrir *hoy.*",
-  "promos_texto": "Obra nueva en Tenerife comercializada por Urbecan. Te acompañamos para conocer cada proyecto, su ubicación y la disponibilidad actual.",
-  "promos_nota": "Promociones, imágenes y precios de ejemplo.",
-  "vendidas_titulo": "Proyectos que ya *encontraron dueño.*",
-  "vendidas_texto": "Una muestra de las promociones de obra nueva que hemos comercializado en Tenerife.",
-  "vendidas_nota": "Promociones, imágenes y datos de ejemplo. Se sustituirán por el histórico real."
+  "es": {
+    "titulo": "Del proyecto\n*a la venta.*",
+    "texto": "Comercialización de obra nueva en Tenerife: una estructura comercial para llevar tu promoción al mercado con estrategia, equipo y seguimiento.",
+    "manifiesto_titulo": "Una promoción necesita más que visibilidad.",
+    "manifiesto_texto": "Requiere planificación, conocimiento del mercado y capacidad para gestionar múltiples operaciones. Ponemos nuestra experiencia en obra nueva al servicio de cada proyecto.",
+    "promos_titulo": "Proyectos para descubrir *hoy.*",
+    "promos_texto": "Obra nueva en Tenerife comercializada por Urbecan. Te acompañamos para conocer cada proyecto, su ubicación y la disponibilidad actual.",
+    "promos_nota": "Promociones, imágenes y precios de ejemplo.",
+    "vendidas_titulo": "Proyectos que ya *encontraron dueño.*",
+    "vendidas_texto": "Una muestra de las promociones de obra nueva que hemos comercializado en Tenerife.",
+    "vendidas_nota": "Promociones, imágenes y datos de ejemplo. Se sustituirán por el histórico real."
+  },
+  "en": {
+    "titulo": "From project\n*to sale.*",
+    "texto": "Marketing new developments in Tenerife: a sales structure to take your development to market with strategy, a dedicated team and close follow-up.",
+    "manifiesto_titulo": "A development needs more than visibility.",
+    "manifiesto_texto": "It takes planning, market knowledge and the capacity to manage many sales at once. We put our experience in new-build property at the service of every project.",
+    "promos_titulo": "Projects to discover *today.*",
+    "promos_texto": "New-build homes in Tenerife marketed by Urbecan. We help you get to know each project, its location and current availability.",
+    "promos_nota": "Sample developments, images and prices.",
+    "vendidas_titulo": "Projects that have already *found owners.*",
+    "vendidas_texto": "A selection of the new-build developments we have marketed in Tenerife.",
+    "vendidas_nota": "Sample developments, images and data. They will be replaced with our real track record."
+  }
 }
