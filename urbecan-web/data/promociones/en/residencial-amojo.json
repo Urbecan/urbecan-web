@@ -1,0 +1,13 @@
+{
+  "nombre": "Residencial Amojo",
+  "municipio": "Puerto de la Cruz",
+  "anio": 2006,
+  "viviendas": 24,
+  "tipo": "adosados",
+  "estado": "Vendida",
+  "precio": "",
+  "descripcion": "",
+  "image": "/assets/img/uploads/promo-residencial-amojo.jpg",
+  "enlace": "",
+  "orden": 11
+}

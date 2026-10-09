@@ -86,7 +86,7 @@ collections:
       - { name: municipio, label: Municipio, widget: string, i18n: duplicate }
       - { name: anio, label: Año, widget: number, value_type: int, required: false, hint: "En las vendidas se muestra junto al municipio (p. ej. «La Orotava · 2019»).", i18n: duplicate }
       - { name: viviendas, label: Nº de viviendas, widget: number, value_type: int, required: false, i18n: duplicate }
-      - { name: tipo, label: Tipo, widget: select, options: [viviendas, apartamentos, villas, dúplex, áticos, locales], default: viviendas, i18n: duplicate }
+      - { name: tipo, label: Tipo, widget: select, options: [viviendas, apartamentos, villas, dúplex, áticos, locales, adosados, pareados, pisos, chalets], default: viviendas, i18n: duplicate }
       - { name: estado, label: Estado, widget: select, options: [En comercialización, Últimas unidades, Próximamente, Vendida], default: En comercialización, i18n: duplicate }
       - { name: precio, label: Precio, widget: string, required: false, hint: "Tal cual se verá: «Desde 245.000 €», «Consultar»… Vacío = no se muestra. No se muestra en las vendidas.", i18n: duplicate }
       - { name: descripcion, label: Descripción corta, widget: text, required: false, hint: "Una o dos frases (unos 120 caracteres). No se muestra en las vendidas.", i18n: true }

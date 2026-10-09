@@ -24,7 +24,7 @@ const IDIOMAS = {
     etiqueta: 'EN', nombre: 'English', aria: 'Language', version: 'English version',
     // Los valores de estado y tipo se guardan en español (campos «duplicate» del panel); aquí su traducción
     estados: { 'En comercialización': 'On sale', 'Últimas unidades': 'Last units', 'Próximamente': 'Coming soon', 'Vendida': 'Sold' },
-    tipos: { viviendas: 'homes', apartamentos: 'apartments', villas: 'villas', 'dúplex': 'duplexes', 'áticos': 'penthouses', locales: 'commercial units' },
+    tipos: { viviendas: 'homes', apartamentos: 'apartments', villas: 'villas', 'dúplex': 'duplexes', 'áticos': 'penthouses', locales: 'commercial units', adosados: 'townhouses', pareados: 'semi-detached houses', pisos: 'flats', chalets: 'detached houses' },
     desde: 'From', precios: { consultar: 'Price on request' }, formatoNumero: 'en-GB',
     solicitar: 'Request information', verProyecto: 'View project', vendida: 'Sold',
     fotoAnt: 'Previous photo', fotoSig: 'Next photo', foto: 'photo',

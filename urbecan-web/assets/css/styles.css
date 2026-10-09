@@ -362,7 +362,7 @@ body .essay-copy h2,body .aside-quote blockquote,body .pro-manifesto h2,body .se
 .timeline-band>.label{align-self:start}
 .service-chapter.chapter-sell{background:var(--navy);color:#fff}
 .invest-visual{width:100%;height:380px}
-.team-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;margin:0 0 110px}
+.team-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin:0 0 110px}
 .team-grid figure{margin:0}
 .team-grid .tp{aspect-ratio:4/5;overflow:hidden;background:#dfd8cc}
 .team-grid img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s}
@@ -475,6 +475,7 @@ body .essay-copy h2,body .aside-quote blockquote,body .pro-manifesto h2,body .se
 .rv-card figcaption strong{font-size:15px;font-weight:600;color:var(--ink)}
 .rv-card figcaption span{font-size:13px;color:#56637e}
 .rv-foot{display:flex;justify-content:space-between;align-items:center;gap:20px 30px;flex-wrap:wrap;margin-top:40px}
+.rv-foot .textlink{margin-left:auto}
 .rv-note{font-size:12px;color:#69717a}
 .insta{padding:110px 5.2% 120px;background:#e9e6dc}
 .ig-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
@@ -686,3 +687,6 @@ body.menu-open .fd-switch{display:none}
 @media(max-width:980px){.top .nav a.nav-lang-link{display:none!important}.top .nav .nav-lang{display:flex;margin-top:22px;gap:10px;font-size:13px;color:var(--navy)}.top .nav .nav-lang a{padding:6px 0;height:auto}}
 /* Menú hamburguesa (≤980px): las opciones largas («Profesionales / Promotores») parten en dos líneas en vez de salirse de la pantalla */
 @media(max-width:980px){.top .nav>a{white-space:normal;text-wrap:balance;max-width:100%}}
+
+/* Sin promociones en venta: se oculta el bloque entero (vuelve solo al añadir una) */
+.promos:not(:has(.promo-card)){display:none}

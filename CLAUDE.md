@@ -17,7 +17,7 @@ Web estática (HTML + CSS + JS, sin framework) de Urbecan Inmobiliaria (URBECAN 
   - Las entradas se ven en filas (miniatura + etiqueta + nombre + flecha). Internamente es la vista «cuadrícula» de Decap, la única que muestra foto: `admin/index.html` la fuerza y `urbecan.css` la pinta como filas y oculta el selector lista/cuadrícula. La foto sale del campo `image` (Decap solo la detecta con ese nombre). El `summary` va en dos líneas y la primera se pinta como etiqueta pequeña (`::first-line`).
 - Login del cliente con email y contraseña (o Google/Microsoft) vía DecapBridge (decapbridge.com, backend `git-gateway`, `auth_type: pkce`), sin cuenta de GitHub. Si el token de GitHub se revoca, crear otro (Contents read/write en `Urbecan/urbecan-web`) y pegarlo en el sitio de DecapBridge.
 - Datos en `urbecan-web/data/`:
-  - `promociones/<idioma>/*.json` y `equipo/<idioma>/*.json`: una entrada por archivo y por idioma (`es/`, `en/`; mismo nombre de archivo), ordenadas por `orden`. Promociones: estado «Vendida» → bloque de vendidas; `precio` es texto libre («Desde 245.000 €» se pinta como etiqueta + cifra).
+  - `promociones/<idioma>/*.json` y `equipo/<idioma>/*.json`: una entrada por archivo y por idioma (`es/`, `en/`; mismo nombre de archivo), ordenadas por `orden`. Promociones: estado «Vendida» → bloque de vendidas; `precio` es texto libre («Desde 245.000 €» se pinta como etiqueta + cifra). Si no hay ninguna en venta, el bloque «Promociones activas» se oculta solo (CSS `:has`).
   - `textos/<página>.json`: titulares y párrafos de inicio, nosotros, particulares y profesionales, con un bloque por idioma: `{ "es": {…}, "en": {…} }`.
   - Fotos de promociones y equipo: `assets/img/uploads/` (lo que se ve en «Medios»). El resto de fotos de la web (portada, secciones) siguen en `assets/img/` y no se editan desde el panel.
 - Miniaturas: con DecapBridge, Decap no consigue la vista previa de las fotos de `uploads` y cae a la ruta interna del repo (`urbecan-web/…`), que sale en blanco. `admin/urbecan.js` repinta las miniaturas con la ruta pública (`/assets/img/uploads/…`). En local no pasa (usa `decap-server`).
@@ -66,7 +66,9 @@ Fuentes: Manrope (titulares) + DM Sans (texto). Colores: navy #08295d, ink #1422
    - Invitar usuarios por email desde DecapBridge (plan gratuito: 3 sitios, 10 colaboradores) y probar login en urbecan.netlify.app/admin/.
    - Al lanzar: cambiar `site_url`/`display_url` de `admin/config.yml` y la «Decap CMS login URL» en DecapBridge a https://www.urbecan.com/admin/.
 2. Formulario de contacto real con Netlify Forms (form `contacto` en `contacto/index.html`, honeypot, redirige a `/gracias/`). Hecho en el repo. Falta en Netlify: activar «Form detection» y añadir aviso por email a info@urbecan.com (Forms → Notifications).
-3. Sustituir fotos de ejemplo por las nuevas del norte y el histórico real de promociones vendidas.
+3. ~~Sustituir fotos de ejemplo por las nuevas del norte y el histórico real de promociones vendidas.~~ → hecho (equipo real de 6 personas, 1 promoción en venta y 12 vendidas). Pendientes de añadir desde el panel:
+   - Urbanización Los Trazos (La Orotava): falta año y nº de viviendas (la foto ya está en `uploads/promo-urbanizacion-los-trazos.jpg`).
+   - Apartamentos Hotel Radisson (Puerto de la Cruz, 2025, 32 apartamentos): falta foto.
 4. Textos legales definitivos y datos fiscales (pendientes del cliente).
 5. Lanzamiento: dominio urbecan.com (ahora en Inmovilla; no tocar DNS sin confirmar dónde está el correo), quitar noindex, enviar sitemap a Search Console.
 
@@ -94,7 +96,7 @@ Fuentes: Manrope (titulares) + DM Sans (texto). Colores: navy #08295d, ink #1422
 - [ ] Imagen para compartir (og:image 1200×630) en todas las páginas
 - [ ] Aviso de cookies ajustado a lo que se use de verdad
 - [ ] Textos legales y datos fiscales definitivos
-- [ ] Sustituir fotos de ejemplo e histórico real de promociones vendidas
+- [x] Sustituir fotos de ejemplo e histórico real de promociones vendidas
 
 ### Entrega
 - [ ] Transferir GitHub (organización Urbecan) y Netlify a info@urbecan.com

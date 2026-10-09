@@ -1,0 +1,13 @@
+{
+  "nombre": "Edificio Avenida",
+  "municipio": "Icod de los Vinos",
+  "anio": 2015,
+  "viviendas": 12,
+  "tipo": "viviendas",
+  "estado": "Vendida",
+  "precio": "",
+  "descripcion": "",
+  "image": "/assets/img/uploads/promo-edificio-avenida.jpg",
+  "enlace": "",
+  "orden": 7
+}

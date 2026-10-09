@@ -1,0 +1,14 @@
+{
+  "nombre": "Residencial La Perla",
+  "municipio": "Tacoronte",
+  "anio": 2018,
+  "viviendas": 16,
+  "tipo": "viviendas",
+  "estado": "Vendida",
+  "precio": "",
+  "descripcion": "",
+  "image": "/assets/img/uploads/promo-residencial-la-perla.jpg",
+  "galeria": [],
+  "enlace": "",
+  "orden": 3
+}

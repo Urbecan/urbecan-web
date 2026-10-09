@@ -1,0 +1,14 @@
+{
+  "nombre": "Edificio Isabel",
+  "municipio": "La Laguna",
+  "anio": 2014,
+  "viviendas": 41,
+  "tipo": "pisos",
+  "estado": "Vendida",
+  "precio": "",
+  "descripcion": "",
+  "image": "/assets/img/uploads/promo-edificio-isabel.jpg",
+  "galeria": [],
+  "enlace": "",
+  "orden": 8
+}

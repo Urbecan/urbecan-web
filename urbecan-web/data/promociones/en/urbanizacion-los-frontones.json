@@ -1,0 +1,13 @@
+{
+  "nombre": "Urbanización Los Frontones",
+  "municipio": "La Orotava",
+  "anio": 2015,
+  "viviendas": 20,
+  "tipo": "adosados",
+  "estado": "Vendida",
+  "precio": "",
+  "descripcion": "",
+  "image": "/assets/img/uploads/promo-urbanizacion-los-frontones.jpg",
+  "enlace": "",
+  "orden": 5
+}

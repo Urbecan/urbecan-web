@@ -1,0 +1,13 @@
+{
+  "nombre": "Residencial Antonia María",
+  "municipio": "Los Realejos",
+  "viviendas": 17,
+  "tipo": "adosados",
+  "estado": "En comercialización",
+  "precio": "",
+  "descripcion": "17 adosados de 3 y 4 dormitorios en Los Barros, Los Realejos.",
+  "image": "/assets/img/uploads/promo-adosados-los-barros.jpg",
+  "galeria": [],
+  "enlace": "",
+  "orden": 1
+}

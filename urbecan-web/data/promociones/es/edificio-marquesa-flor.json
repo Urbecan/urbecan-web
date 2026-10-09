@@ -1,0 +1,14 @@
+{
+  "nombre": "Edificio Marquesa Flor",
+  "municipio": "Los Realejos",
+  "anio": 2021,
+  "viviendas": 22,
+  "tipo": "pisos",
+  "estado": "Vendida",
+  "precio": "",
+  "descripcion": "",
+  "image": "/assets/img/uploads/promo-edificio-marquesa-flor.jpg",
+  "galeria": [],
+  "enlace": "",
+  "orden": 2
+}

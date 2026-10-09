@@ -6,10 +6,10 @@
     "manifiesto_texto": "Requiere planificación, conocimiento del mercado y capacidad para gestionar múltiples operaciones. Ponemos nuestra experiencia en obra nueva al servicio de cada proyecto.",
     "promos_titulo": "Proyectos para descubrir *hoy.*",
     "promos_texto": "Obra nueva en Tenerife comercializada por Urbecan. Te acompañamos para conocer cada proyecto, su ubicación y la disponibilidad actual.",
-    "promos_nota": "Promociones, imágenes y precios de ejemplo.",
+    "promos_nota": "",
     "vendidas_titulo": "Proyectos que ya *encontraron dueño.*",
     "vendidas_texto": "Una muestra de las promociones de obra nueva que hemos comercializado en Tenerife.",
-    "vendidas_nota": "Promociones, imágenes y datos de ejemplo. Se sustituirán por el histórico real."
+    "vendidas_nota": ""
   },
   "en": {
     "titulo": "From project\n*to sale.*",
@@ -18,9 +18,9 @@
     "manifiesto_texto": "It takes planning, market knowledge and the capacity to manage many sales at once. We put our experience in new-build property at the service of every project.",
     "promos_titulo": "Projects to discover *today.*",
     "promos_texto": "New-build homes in Tenerife marketed by Urbecan. We help you get to know each project, its location and current availability.",
-    "promos_nota": "Sample developments, images and prices.",
+    "promos_nota": "",
     "vendidas_titulo": "Projects that have already *found owners.*",
     "vendidas_texto": "A selection of the new-build developments we have marketed in Tenerife.",
-    "vendidas_nota": "Sample developments, images and data. They will be replaced with our real track record."
+    "vendidas_nota": ""
   }
 }

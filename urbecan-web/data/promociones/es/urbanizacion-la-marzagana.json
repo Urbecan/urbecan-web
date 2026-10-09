@@ -1,0 +1,14 @@
+{
+  "nombre": "Urbanización La Marzagana",
+  "municipio": "Los Realejos",
+  "anio": 2006,
+  "viviendas": 42,
+  "tipo": "adosados",
+  "estado": "Vendida",
+  "precio": "",
+  "descripcion": "",
+  "image": "/assets/img/uploads/promo-urbanizacion-la-marzagana.jpg",
+  "galeria": [],
+  "enlace": "",
+  "orden": 12
+}

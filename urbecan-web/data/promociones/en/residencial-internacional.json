@@ -1,0 +1,13 @@
+{
+  "nombre": "Residencial Internacional",
+  "municipio": "Puerto de la Cruz",
+  "anio": 2023,
+  "viviendas": 77,
+  "tipo": "pisos",
+  "estado": "Vendida",
+  "precio": "",
+  "descripcion": "",
+  "image": "/assets/img/uploads/promo-residencial-internacional.jpg",
+  "enlace": "",
+  "orden": 1
+}
