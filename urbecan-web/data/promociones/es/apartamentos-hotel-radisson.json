@@ -1,0 +1,14 @@
+{
+  "nombre": "Apartamentos Hotel Radisson",
+  "municipio": "Puerto de la Cruz",
+  "anio": 2025,
+  "viviendas": 32,
+  "tipo": "apartamentos",
+  "estado": "En comercialización",
+  "precio": "",
+  "descripcion": "32 apartamentos en Puerto de la Cruz.",
+  "image": "/assets/img/uploads/promo-apartamentos-hotel-radisson.jpg",
+  "galeria": [],
+  "enlace": "",
+  "orden": 2
+}

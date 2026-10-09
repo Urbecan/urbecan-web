@@ -68,7 +68,7 @@ Fuentes: Manrope (titulares) + DM Sans (texto). Colores: navy #08295d, ink #1422
 2. Formulario de contacto real con Netlify Forms (form `contacto` en `contacto/index.html`, honeypot, redirige a `/gracias/`). Hecho en el repo. Falta en Netlify: activar «Form detection» y añadir aviso por email a info@urbecan.com (Forms → Notifications).
 3. ~~Sustituir fotos de ejemplo por las nuevas del norte y el histórico real de promociones vendidas.~~ → hecho (equipo real de 6 personas, 1 promoción en venta y 12 vendidas). Pendientes de añadir desde el panel:
    - Urbanización Los Trazos (La Orotava): falta año y nº de viviendas (la foto ya está en `uploads/promo-urbanizacion-los-trazos.jpg`).
-   - Apartamentos Hotel Radisson (Puerto de la Cruz, 2025, 32 apartamentos): falta foto.
+   - ~~Apartamentos Hotel Radisson~~ → añadido como promoción en venta (Puerto de la Cruz, 2025, 32 apartamentos).
 4. Textos legales definitivos y datos fiscales (pendientes del cliente).
 5. Lanzamiento: dominio urbecan.com (ahora en Inmovilla; no tocar DNS sin confirmar dónde está el correo), quitar noindex, enviar sitemap a Search Console.
 
