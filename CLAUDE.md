@@ -96,6 +96,10 @@ Fuentes: Manrope (titulares) + DM Sans (texto). Colores: navy #08295d, ink #1422
 - **Cookies:** el aviso dice que hay cookies de terceros (analítica, reseñas, redes) y la web no usa ninguna. Ajustar el aviso y `cookies/` a lo real; decidir con el cliente si quiere analítica.
 - **Otros:** og:image 1200×630 (ahora no hay), redirecciones 301 de las URLs de la web antigua de Inmovilla, guía corta del panel, pruebas en móvil, tablet y escritorio, textos legales en cuanto lleguen los datos.
 - **Formulario PHP (rama `webempresa`):** probado en local solo con Apache (sin PHP en el Mac). Probar en Webempresa un envío en cada idioma.
+- **Tras fusionar el PR #1: borrar un dato privado del historial de GitHub.** El 12/10/2026 se subió a `main` en `CLAUDE.md` (commit `4f9a191`) el móvil del cliente para la verificación de Google Business, y el repo es público. La versión actual ya no lo tiene, pero sigue en el historial. No volver a escribir el número en este archivo.
+  - Reescribir el historial de todas las ramas con `git filter-repo --replace-text` y subir con «Force push» desde GitHub Desktop (la terminal no tiene permiso de escritura).
+  - Avisar antes: cambian los identificadores de los commits y cualquier otro clon tendrá que volver a clonarse.
+  - Para que GitHub borre también sus copias en caché, pedirlo a GitHub Support.
 
 ### Fotos
 - Hechas el 12/10/2026, en español e inglés:
