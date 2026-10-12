@@ -1,0 +1,4 @@
+# El panel nunca debe indexarse (también tras el lanzamiento)
+<IfModule mod_headers.c>
+  Header set X-Robots-Tag "noindex, nofollow"
+</IfModule>

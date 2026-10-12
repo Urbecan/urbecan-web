@@ -2,7 +2,7 @@
 // promociones/<idioma>/*.json y equipo/<idioma>/*.json (una entrada por archivo) y textos/<página>.json ({ es: {…}, en: {…} }).
 // Sustituye el contenido entre <!--cms:tipo:clave--> y <!--/cms--> en cada página, según el idioma de la página
 // (carpeta /en/… → inglés; el resto → español). También genera el selector de idioma, las etiquetas hreflang y sitemap.xml.
-// Es idempotente: se puede ejecutar en local (node scripts/build.mjs) y en Netlify.
+// Es idempotente: se puede ejecutar en local (node scripts/build.mjs) y en GitHub Actions antes de subir la web a Webempresa.
 import { readFileSync, writeFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join, relative } from 'node:path';
 

@@ -3,13 +3,14 @@
 Web estática (HTML + CSS + JS, sin framework) de Urbecan Inmobiliaria (URBECAN INVEST S.L.U., La Orotava, Tenerife).
 
 ## Estructura
-- `urbecan-web/` → carpeta publicada (netlify.toml en la raíz: `publish = "urbecan-web"`)
+- `urbecan-web/` → carpeta publicada (se sube tal cual a Webempresa; ver «Publicación»)
   - `index.html` inicio · `nosotros/` · `particulares/` · `profesionales/` · `contacto/`
   - `aviso-legal/` `privacidad/` `cookies/` `gracias/` · `404.html`
   - `en/` versión en inglés: `en/` · `en/about/` · `en/buyers/` · `en/professionals/` · `en/contact/` · `en/thanks/` · `en/404.html` (ver «Idiomas»)
   - `assets/css/styles.css` · `assets/js/main.js` · `assets/img/*.jpg` · logos en `assets/`
+  - `.htaccess` (más `en/.htaccess` y `admin/.htaccess`) · `contacto/enviar.php` (formulario). Ver «Publicación».
 - Cabecera y pie están repetidos en cada página: si cambias uno, cámbialo en todas (también en las de `en/`, con el texto en inglés).
-- Rutas absolutas (`/assets/...`, `/nosotros/`). Para probar en local: `npx serve urbecan-web`.
+- Rutas absolutas (`/assets/...`, `/nosotros/`). Para probar en local: `npx serve urbecan-web` (sin `.htaccess` ni formulario, que necesitan Apache y PHP).
 
 ## Panel de edición (Decap CMS + DecapBridge)
 - Panel en `urbecan-web/admin/` → urbecan.com/admin. Decap CMS por CDN (versión fijada en `admin/index.html`).
@@ -22,12 +23,12 @@ Web estática (HTML + CSS + JS, sin framework) de Urbecan Inmobiliaria (URBECAN 
   - Fotos de promociones y equipo: `assets/img/uploads/` (lo que se ve en «Medios»). El resto de fotos de la web (portada, secciones) siguen en `assets/img/` y no se editan desde el panel.
 - Miniaturas: con DecapBridge, Decap no consigue la vista previa de las fotos de `uploads` y cae a la ruta interna del repo (`urbecan-web/…`), que sale en blanco. `admin/urbecan.js` repinta las miniaturas con la ruta pública (`/assets/img/uploads/…`). En local no pasa (usa `decap-server`).
 - Cabecera del panel sin iconos ni menú «Añadir rápido»; la ventana «Medios» también lleva estilo Urbecan (se abre fuera de `#nc-root`, prefijo `html body`).
-- `node scripts/build.mjs` vuelca los datos al HTML entre marcadores `<!--cms:tipo:clave-->…<!--/cms-->` (no editar a mano ese contenido; editar el JSON). Idempotente; Netlify lo ejecuta en cada deploy.
+- `node scripts/build.mjs` vuelca los datos al HTML entre marcadores `<!--cms:tipo:clave-->…<!--/cms-->` (no editar a mano ese contenido; editar el JSON). Idempotente; GitHub Actions lo ejecuta antes de cada publicación.
 - Formato en textos: `*texto*` → `<em>`, `[texto]` → `<span>` (segundo tono), salto de línea → `<br>`.
 - Probar el panel en local sin login: `npx decap-server` (raíz del repo) + servir `urbecan-web` en localhost → /admin/ (`local_backend: true`). Ejecutar el build antes de probar la web si cambian los JSON.
 
 ## Idiomas (español + inglés)
-- Español es el idioma principal (URLs sin prefijo); inglés vive en `/en/` con slugs propios. Equivalencias en `RUTAS` de `scripts/build.mjs`: `/`↔`/en/`, `/nosotros/`↔`/en/about/`, `/particulares/`↔`/en/buyers/`, `/profesionales/`↔`/en/professionals/`, `/contacto/`↔`/en/contact/`, `/gracias/`↔`/en/thanks/`. Legales solo en español (desde las páginas en inglés se enlazan con `hreflang="es"`). 404 en los dos idiomas: Netlify sirve `/en/404.html` para lo que no exista bajo `/en/` (regla en `netlify.toml`) y `/404.html` para el resto.
+- Español es el idioma principal (URLs sin prefijo); inglés vive en `/en/` con slugs propios. Equivalencias en `RUTAS` de `scripts/build.mjs`: `/`↔`/en/`, `/nosotros/`↔`/en/about/`, `/particulares/`↔`/en/buyers/`, `/profesionales/`↔`/en/professionals/`, `/contacto/`↔`/en/contact/`, `/gracias/`↔`/en/thanks/`. Legales solo en español (desde las páginas en inglés se enlazan con `hreflang="es"`). 404 en los dos idiomas: `/en/404.html` para lo que no exista bajo `/en/` (`en/.htaccess`) y `/404.html` para el resto (`.htaccess`).
 - Las páginas `en/` son HTML propio (mismo diseño, textos traducidos a mano). `<html lang>` debe coincidir con la carpeta: el build falla si no.
 - El build genera según el idioma de la carpeta de cada página:
   - `<!--cms:idioma-->` → en la cabecera de escritorio, un solo enlace al otro idioma («EN» en español, «ES» en inglés; aria-label «English version» / «Versión en español»), justo antes del icono de Instagram y con su mismo tamaño y color (`.nav-lang-link`). Por encima de 1150px la línea separadora que iba delante del icono pasa delante del enlace; por debajo el icono se oculta (ya era así) y el enlace sigue visible.
@@ -37,7 +38,7 @@ Web estática (HTML + CSS + JS, sin framework) de Urbecan Inmobiliaria (URBECAN 
   - `sitemap.xml` completo con alternativas `xhtml:link` (no editarlo a mano).
   - Precios: en el panel se escriben en español («Desde 245.000 €»); el build los formatea según el idioma con `Intl.NumberFormat` (`formatoNumero` en `IDIOMAS`): «Desde 245.000 €» / «From €245,000». Si el precio no es una cifra («Consultar», «245.000 € + IGIC») sale tal cual (o con la traducción de `precios`).
   - Promociones y equipo: textos de la ficha en el idioma de la página; etiquetas fijas (estado, tipo, «Desde», botones) traducidas en `IDIOMAS` de `build.mjs`. Si falta la traducción de una ficha o un texto, se usa el español.
-- Formulario en inglés: mismo form `contacto` y mismos campos (Netlify los junta); los valores de «tipo» se envían en español, el asunto lleva «(versión en inglés)» y redirige a `/en/thanks/`. Textos de `main.js` sin idioma fijo (el botón usa `data-sending`).
+- Formulario en inglés: mismos campos y mismo script (`/contacto/enviar.php`, campo oculto `idioma` = `en`); los valores de «tipo» se envían en español, el asunto lleva «(versión en inglés)» y redirige a `/en/thanks/`. Textos de `main.js` sin idioma fijo (el botón usa `data-sending`).
 - Decap: `i18n` global `multiple_folders` (es, en; principal es). Promociones y Equipo con `i18n: true`; Textos con `structure: single_file` (Decap no admite otra estructura en colecciones de archivos). Campos `i18n: true` = se traducen (nombre de promoción, descripción, cargo, textos); `i18n: duplicate` = se copian del español al guardar (fotos, municipio, año, viviendas, tipo, estado, precio, enlace, orden, nombre de persona). «Más fotos» (lista) va sin `i18n` porque Decap no admite `duplicate` en listas: se edita solo en español y la web usa esas fotos en todos los idiomas.
 
 ### Añadir un idioma nuevo (ejemplo: alemán `de`)
@@ -48,8 +49,13 @@ Web estática (HTML + CSS + JS, sin framework) de Urbecan Inmobiliaria (URBECAN 
 5. `node scripts/build.mjs` (regenera selector, hreflang y sitemap en todas las páginas) y revisar en local (`npx serve urbecan-web`).
 
 ## Publicación
-- GitHub: `Urbecan/urbecan-web` (público, rama `main`).
-- Netlify despliega solo en cada push → https://urbecan.netlify.app
+- GitHub: `Urbecan/urbecan-web` (público, rama `main`). Es donde vive la web: código, textos, fotos y todo lo que se guarda desde el panel. El hosting solo recibe una copia.
+- Hosting: Webempresa (web, dominio y correo). `.github/workflows/publicar.yml` (GitHub Actions) se ejecuta en cada push a `main`, también los del panel: `node scripts/build.mjs` y sube `urbecan-web/` por FTPS. Solo sube lo cambiado y guarda la lista en `.ftp-deploy-sync-state.json` en el servidor (bloqueado en `.htaccess`). Tarda ~1 min.
+  - Secretos en GitHub (Settings → Secrets and variables → Actions): `FTP_SERVIDOR`, `FTP_USUARIO`, `FTP_CONTRASENA` y, si la cuenta FTP no entra directamente en la carpeta de la web, `FTP_CARPETA` (terminada en `/`, p. ej. `public_html/`).
+  - Republicar sin cambios: Actions → «Publicar en Webempresa» → Run workflow. No subir archivos a mano por cPanel: la publicación no los conoce.
+- `.htaccess`: urbecan.com y http → https://www.urbecan.com (solo con ese dominio: en una dirección temporal no redirige), HTML con `Cache-Control: no-cache` (lo guardado en el panel se ve en cuanto se publica), sin listados de carpetas.
+- Formulario: `contacto/enviar.php` (PHP 7.4+, `mail()` del hosting) → aviso a info@urbecan.com con Reply-To del visitante. Honeypot `bot-field` y descarte de mensajes con más de 3 enlaces (a los bots se les manda a «gracias» sin enviar). Redirige a `/gracias/` o `/en/thanks/`. El remitente es info@urbecan.com y su buzón debe estar en Webempresa (si no, los avisos pueden ir a spam). Mientras el DNS no apunte a Webempresa, los avisos llegan al buzón de Webempresa (webmail), no al correo actual.
+- Hasta octubre de 2026 se publicaba en Netlify (https://urbecan.netlify.app). Se cambió porque el plan gratuito (300 créditos/mes, 15 por publicación, el tráfico también gasta) pausó los despliegues y no da para que el cliente edite a diario. Tras el lanzamiento, borrar el sitio de Netlify.
 - Provisional: oculta a Google (`robots.txt` Disallow + `<meta name="robots" content="noindex,nofollow">` en cada página). Quitar al lanzar en urbecan.com y añadir `Sitemap:` a robots.txt.
 
 ## Contacto real
@@ -63,27 +69,41 @@ Fuentes: Manrope (titulares) + DM Sans (texto). Colores: navy #08295d, ink #1422
 ## Pendiente (en orden)
 1. Panel de edición con Decap CMS en `/admin/` (login email + contraseña vía DecapBridge, sin GitHub). Hecho en el repo (ver «Panel de edición»). Falta:
    - ~~Crear el sitio en decapbridge.com~~ → hecho (sitio «Urbecan», auth PKCE, token GitHub sin caducidad solo con Contents de `urbecan-web`; bloque `backend` ya en `admin/config.yml`).
-   - Invitar usuarios por email desde DecapBridge (plan gratuito: 3 sitios, 10 colaboradores) y probar login en urbecan.netlify.app/admin/.
-   - Al lanzar: cambiar `site_url`/`display_url` de `admin/config.yml` y la «Decap CMS login URL» en DecapBridge a https://www.urbecan.com/admin/.
-2. Formulario de contacto real con Netlify Forms (form `contacto` en `contacto/index.html`, honeypot, redirige a `/gracias/`). Hecho en el repo. Falta en Netlify: activar «Form detection» y añadir aviso por email a info@urbecan.com (Forms → Notifications).
+   - Invitar usuarios por email desde DecapBridge (plan gratuito: 3 sitios, 10 colaboradores) y probar login en www.urbecan.com/admin/.
+   - Al lanzar: cambiar la «Decap CMS login URL» en DecapBridge a https://www.urbecan.com/admin/ (`site_url`/`display_url` de `admin/config.yml` ya apuntan ahí).
+2. Formulario de contacto en PHP para Webempresa (`contacto/enviar.php`, ver «Publicación»). Hecho en el repo. Falta probarlo en el hosting: un envío en cada idioma.
 3. ~~Sustituir fotos de ejemplo por las nuevas del norte y el histórico real de promociones vendidas.~~ → hecho (equipo real de 6 personas, 1 promoción en venta y 12 vendidas). Pendientes de añadir desde el panel:
    - Urbanización Los Trazos (La Orotava): falta año y nº de viviendas (la foto ya está en `uploads/promo-urbanizacion-los-trazos.jpg`).
    - ~~Apartamentos Hotel Radisson~~ → añadido como promoción en venta (Puerto de la Cruz, 2025, 32 apartamentos).
 4. Textos legales definitivos y datos fiscales (pendientes del cliente).
-5. Lanzamiento: dominio urbecan.com (ahora en Inmovilla; no tocar DNS sin confirmar dónde está el correo), quitar noindex, enviar sitemap a Search Console.
+5. Lanzamiento en Webempresa el viernes 16/10/2026: ver «Plan de lanzamiento en Webempresa».
+6. Fotos decorativas: solo hay 7 para ~20 huecos y casi todas parecen del sur (villas modernas, laderas secas). `foto-01` y `foto-05` son casi la misma imagen. Huecos a sustituir por fotos del norte (formato): portada de inicio `.hero-photo` (16:9), cabecera de Nosotros `.lead-photo` (panorámica), «Nuestra mirada» grande `.who-big` (3:2) y pequeña `.who-small` (4:5), Particulares «Invertir» `.invest-visual` (panorámica baja), cabecera de Contacto `.int-photo` (16:9), cuadrícula de Instagram del inicio (6 × 1:1; mejor fotos reales de @urbecan). «Promocionar» del inicio puede llevar una foto real de promoción de `uploads/`. Cambiar siempre también en `en/`.
+
+## Plan de lanzamiento en Webempresa
+1. Contratar Webempresa con urbecan.com como dominio principal, sin tocar todavía el DNS.
+2. En cPanel: crear los mismos buzones que hay hoy (al menos info@urbecan.com) y una cuenta FTP limitada a la carpeta de la web.
+3. En GitHub, poner los secretos de FTP (ver «Publicación»).
+4. Fusionar la rama `webempresa` en `main` y hacer push. Comprobar en Actions que la publicación termina en verde.
+5. Probar en la dirección temporal de Webempresa (o con el archivo hosts): páginas y fotos, 404 en los dos idiomas, formulario en los dos idiomas (el aviso llega al buzón de Webempresa) y una edición desde el panel que salga publicada ~1 min después.
+6. Copiar el correo antiguo a los buzones nuevos (IMAP) y cambiar el DNS de urbecan.com a Webempresa: web y correo pasan a la vez. Comprobar envío y recepción de correo.
+7. Certificado SSL (Let's Encrypt) para urbecan.com y www; comprobar que todo redirige a https://www.urbecan.com.
+8. Quitar el noindex (`robots.txt` y la meta robots de todas las páginas, también `en/`), añadir `Sitemap: https://www.urbecan.com/sitemap.xml` a robots.txt y push.
+9. DecapBridge: «Decap CMS login URL» → https://www.urbecan.com/admin/ y probar el login.
+10. Search Console (enviar sitemap), Google Business, borrar el sitio de Netlify. Más adelante: trasladar el registro del dominio a Webempresa (código de autorización del proveedor actual).
 
 ## Checklist de lanzamiento
 
 ### Funcionamiento
-- [ ] Formulario de contacto real con Netlify Forms: avisos a info@urbecan.com y redirección a /gracias/
+- [ ] Formulario de contacto (PHP en Webempresa): avisos a info@urbecan.com y redirección a /gracias/ y /en/thanks/
+- [ ] Publicación automática desde GitHub a Webempresa (Actions en verde tras un cambio desde el panel)
 - [ ] Panel Decap CMS en /admin con login por email (DecapBridge) y usuarios del equipo creados
 - [ ] Pruebas en móvil, tablet y escritorio (Safari, Chrome, Firefox)
 
 ### Correo y dominio (no tocar DNS sin confirmación)
 - [ ] Confirmar con Inmovilla dónde están el dominio urbecan.com y el correo
-- [ ] Migrar el correo antes de cambiar el dominio, si hace falta
-- [ ] Conectar urbecan.com a Netlify (www y sin www, HTTPS)
-- [ ] Redirecciones 301 de las URLs de la web antigua a las nuevas (archivo `_redirects`)
+- [ ] Crear los buzones en Webempresa y copiar el correo antiguo antes de cambiar el DNS
+- [ ] Apuntar urbecan.com a Webempresa (www y sin www, HTTPS)
+- [ ] Redirecciones 301 de las URLs de la web antigua a las nuevas (en `.htaccess`)
 
 ### Google y visibilidad
 - [ ] Quitar el noindex (robots.txt y meta robots) y añadir `Sitemap:` a robots.txt
@@ -99,5 +119,5 @@ Fuentes: Manrope (titulares) + DM Sans (texto). Colores: navy #08295d, ink #1422
 - [x] Sustituir fotos de ejemplo e histórico real de promociones vendidas
 
 ### Entrega
-- [ ] Transferir GitHub (organización Urbecan) y Netlify a info@urbecan.com
+- [ ] Transferir GitHub (organización Urbecan) a info@urbecan.com y dejar Webempresa a nombre del cliente
 - [ ] Guía corta de uso del panel para el cliente (PDF o página en /admin)

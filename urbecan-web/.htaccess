@@ -1,0 +1,35 @@
+# Webempresa (Apache/LiteSpeed). Hay otros dos en en/ (404 en inglés) y admin/ (noindex del panel).
+
+# Sin listados de carpetas; index.html como página de cada carpeta
+Options -Indexes
+DirectoryIndex index.html index.php
+
+# Página 404 (la de /en/ está en en/.htaccess)
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Solo en el dominio real (así la web también se puede probar en una dirección temporal sin certificado):
+  # urbecan.com → https://www.urbecan.com (dominio canónico, el del sitemap y los canonical)
+  RewriteCond %{HTTP_HOST} ^urbecan\.com$ [NC]
+  RewriteRule ^ https://www.urbecan.com%{REQUEST_URI} [L,R=301]
+
+  # http://www.urbecan.com → https
+  RewriteCond %{HTTP_HOST} ^www\.urbecan\.com$ [NC]
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+  RewriteRule ^ https://www.urbecan.com%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+<IfModule mod_headers.c>
+  # HTML siempre revalidado: lo que se guarda en el panel se ve en cuanto termina la publicación
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
+
+# Archivo interno de la publicación por FTP (lista de lo subido): no se sirve
+<Files ".ftp-deploy-sync-state.json">
+  Require all denied
+</Files>
