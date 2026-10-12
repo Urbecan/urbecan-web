@@ -77,7 +77,7 @@ Fuentes: Manrope (titulares) + DM Sans (texto). Colores: navy #08295d, ink #1422
    - ~~Apartamentos Hotel Radisson~~ → añadido como promoción en venta (Puerto de la Cruz, 2025, 32 apartamentos).
 4. Textos legales definitivos y datos fiscales (pendientes del cliente).
 5. Lanzamiento en Webempresa el viernes 16/10/2026: ver «Plan de lanzamiento en Webempresa».
-6. Fotos decorativas: solo hay 7 para ~20 huecos y casi todas parecen del sur (villas modernas, laderas secas). `foto-01` y `foto-05` son casi la misma imagen. Huecos a sustituir por fotos del norte (formato): portada de inicio `.hero-photo` (16:9), cabecera de Nosotros `.lead-photo` (panorámica), «Nuestra mirada» grande `.who-big` (3:2) y pequeña `.who-small` (4:5), Particulares «Invertir» `.invest-visual` (panorámica baja), cabecera de Contacto `.int-photo` (16:9), cuadrícula de Instagram del inicio (6 × 1:1; mejor fotos reales de @urbecan). «Promocionar» del inicio puede llevar una foto real de promoción de `uploads/`. Cambiar siempre también en `en/`.
+6. Fotos decorativas: solo hay 7 para ~20 huecos y casi todas parecen del sur (villas modernas, laderas secas). `foto-01` y `foto-05` son casi la misma imagen. Huecos a sustituir por fotos del norte (formato): portada de inicio `.hero-photo` (16:9), cabecera de Nosotros `.lead-photo` (panorámica), «Nuestra mirada» grande `.who-big` (3:2) y pequeña `.who-small` (4:5), cabecera de Contacto `.int-photo` (16:9), cuadrícula de Instagram del inicio (6 × 1:1; mejor fotos reales de @urbecan). «Promocionar» del inicio puede llevar una foto real de promoción de `uploads/`. Cambiar siempre también en `en/`.
 
 ## Plan de lanzamiento en Webempresa
 1. Contratar Webempresa con urbecan.com como dominio principal, sin tocar todavía el DNS.
