@@ -79,7 +79,7 @@ Fuentes: Manrope (titulares) + DM Sans (texto). Colores: navy #08295d, ink #1422
 ### Pedido al cliente (12/10/2026), esperando respuesta
 1. Contratar el hosting en Webempresa y pasarnos el acceso.
 2. Datos legales de URBECAN INVEST S.L.U.: CIF, domicilio social y Registro Mercantil (tomo, folio, hoja, inscripción). Van en `aviso-legal/` y `privacidad/`, que ahora dicen «datos pendientes».
-3. Código de verificación de Google Business (llega al 690 80 95 34). Ya hay acceso a la cuenta.
+3. Código de verificación de Google Business (llega al móvil del cliente). Ya hay acceso a la cuenta.
 4. Instagram: @urbecan como cuenta profesional, cuenta gratuita en Behold (behold.so) conectada y la URL del feed JSON (o acceso a Behold).
 5. Reseñas en Google de clientes reales: mínimo 3.
 6. Emails de quienes van a usar el panel.
@@ -89,7 +89,7 @@ Fuentes: Manrope (titulares) + DM Sans (texto). Colores: navy #08295d, ink #1422
 ### Pendiente nuestro
 - **Reseñas de la portada (`.rv-track` en `index.html` y `en/index.html`, fijas en el HTML, no en el panel):** las 5 actuales (Carmen R., Daniel y Sara, Miguel Á. H., Promociones del Norte, Laura P.) son de ejemplo y no se pueden publicar. No poner reseñas inventadas.
   - Decidido: 3 reseñas reales de 4–5★, fijas, con la fecha como mes y año, y «Ver todas en Google» con el enlace «Compartir perfil» de la ficha (ahora apunta a una búsqueda genérica de Maps).
-  - La ficha tiene ahora solo 3 reseñas, malas: no enlazarla todavía. Propuesto ocultar la sección hasta tener las reales; falta que el usuario lo confirme.
+  - La ficha aún tiene pocas reseñas: no enlazarla todavía. Propuesto ocultar la sección hasta tener las reales; falta que el usuario lo confirme.
   - Descartados: Trustindex (gratis solo con su plugin de WordPress; en webs normales el widget gratis dura 7 días; plan Single 65 $/año) y Places API de Google (pide Google Cloud con facturación; máx. 5 reseñas por consulta; no se pueden guardar).
 - **Instagram (`.ig-grid` de la portada, 6 casillas fijas que enlazan a @urbecan):** con la URL de Behold, leer el feed una vez al día en la publicación automática (cron en GitHub Actions) y pintar las 6 últimas publicaciones con el diseño actual. Plan gratis de Behold: 6 publicaciones, se actualiza una vez al día, 1.200 vistas al mes. No pedir el feed en cada visita, porque agotaría las vistas. Depende de la migración a Webempresa.
 - **Panel:** con DecapBridge gratis solo invita el dueño de la cuenta (nosotros), hasta 10 personas por web. El rol de administrador para que invite el cliente es de pago (9 $/mes o 199 $ en pago único). Falta decidir entre: invitar nosotros, pasar la cuenta al cliente en la entrega o plan de pago. El sitio de DecapBridge ya está creado (sitio «Urbecan», auth PKCE, token GitHub sin caducidad solo con Contents de `urbecan-web`).
