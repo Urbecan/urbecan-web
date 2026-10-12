@@ -690,3 +690,11 @@ body.menu-open .fd-switch{display:none}
 
 /* Sin promociones en venta: se oculta el bloque entero (vuelve solo al añadir una) */
 .promos:not(:has(.promo-card)){display:none}
+
+/* Particulares: sin franja clara ni línea junto a la foto de cabecera. El fondo de «Comprar» sube por detrás
+   de la foto y el de la cabecera baja hasta su mitad (mitad de la altura de .lead-photo menos lo que se monta) */
+#particulares{background:#eeeae0}
+#particulares .page-lead{box-shadow:0 calc(clamp(190px,21vw,310px) - 120px) 0 #e9e6dc}
+#particulares .chapter-buy{border-top:0}
+@media(max-width:900px){#particulares .page-lead{box-shadow:0 90px 0 #e9e6dc}}
+@media(max-width:690px){#particulares .page-lead{box-shadow:0 80px 0 #e9e6dc}}
