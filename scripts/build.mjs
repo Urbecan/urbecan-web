@@ -17,7 +17,7 @@ const IDIOMAS = {
     etiqueta: 'ES', nombre: 'Español', aria: 'Idioma', version: 'Versión en español',
     estados: {}, tipos: {}, desde: 'Desde', precios: {}, formatoNumero: 'es-ES',
     solicitar: 'Solicitar información', verProyecto: 'Ver proyecto', vendida: 'Vendida',
-    fotoAnt: 'Foto anterior', fotoSig: 'Foto siguiente', foto: 'foto',
+    fotoAnt: 'Foto anterior', fotoSig: 'Foto siguiente', foto: 'foto', igPost: 'Publicación',
     meInteresa: (n) => `Me interesa ${n}.`,
   },
   en: {
@@ -27,7 +27,7 @@ const IDIOMAS = {
     tipos: { viviendas: 'homes', apartamentos: 'apartments', villas: 'villas', 'dúplex': 'duplexes', 'áticos': 'penthouses', locales: 'commercial units', adosados: 'townhouses', pareados: 'semi-detached houses', pisos: 'flats', chalets: 'detached houses' },
     desde: 'From', precios: { consultar: 'Price on request' }, formatoNumero: 'en-GB',
     solicitar: 'Request information', verProyecto: 'View project', vendida: 'Sold',
-    fotoAnt: 'Previous photo', fotoSig: 'Next photo', foto: 'photo',
+    fotoAnt: 'Previous photo', fotoSig: 'Next photo', foto: 'photo', igPost: 'Post',
     meInteresa: (n) => `I am interested in ${n}.`,
   },
 };
@@ -122,6 +122,39 @@ const promoVendida = (p, ui) => {
     + `<span class="label">${esc(lugar)}</span><h3>${esc(p.nombre)}</h3>${unidades}</article>`;
 };
 
+// ── Instagram de la portada: las últimas publicaciones, leídas del feed JSON de Behold (behold.so) una vez en cada build,
+// no en cada visita (el plan gratis da 6 publicaciones, se actualiza una vez al día y tiene 1.200 vistas al mes).
+// Las fotos se sirven desde behold.pictures (URLs fijas; las de Instagram caducan). Si el feed no responde, se deja lo que había.
+const BEHOLD = 'https://feeds.behold.so/JqGRM7KmABKZcjXVf3uE';
+const instagram = await fetch(BEHOLD, { signal: AbortSignal.timeout(15000) })
+  .then((r) => (r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))))
+  .then((f) => (f.posts || []).filter((p) => p.visibility !== 'hidden' && p.sizes?.medium).slice(0, 6))
+  .catch((e) => { console.warn(`Instagram: no se pudo leer el feed de Behold (${e.message}); se deja el que había.`); return []; });
+
+// Pie corto para la casilla: primera línea con texto del pie de Instagram, sin emojis ni «!!»; si viene en mayúsculas,
+// se pasa a minúsculas (salvo los lugares de LUGARES) y se corta a unos 80 caracteres.
+const LUGARES = ['La Orotava', 'Los Realejos', 'Puerto de la Cruz', 'Santa Úrsula', 'La Laguna', 'Tacoronte', 'Icod de los Vinos',
+  'La Matanza', 'La Victoria', 'El Sauzal', 'Los Silos', 'Garachico', 'San Juan de la Rambla', 'Santa Cruz', 'Tenerife', 'Canarias', 'Teide', 'Urbecan'];
+const pieIg = (caption) => {
+  let t = String(caption ?? '').split('\n')
+    .map((s) => s.replace(/[\p{Extended_Pictographic}\p{Regional_Indicator}\u{FE0F}\u{200D}\u{20E3}]/gu, '')
+      .replace(/([¡!¿?])\1+/g, '$1').replace(/\s+/g, ' ').trim())
+    .find((s) => /\p{L}/u.test(s)) ?? '';
+  const letras = t.match(/\p{L}/gu) || [];
+  if (letras.filter((c) => c === c.toUpperCase() && c !== c.toLowerCase()).length > letras.length * 0.6) {
+    t = t.toLowerCase().replace(/(^|[.!?]\s+)([¡¿"«]*)(\p{L})/gu, (_, a, b, c) => a + b + c.toUpperCase());
+    for (const l of LUGARES) t = t.replace(new RegExp(`(?<!\\p{L})${l}(?!\\p{L})`, 'giu'), l);
+  }
+  return t.length > 80 ? t.slice(0, 80).replace(/\s+\S*$/, '').replace(/[\s,;:.]+$/, '') + '…' : t;
+};
+const casillaIg = (p, ui) => {
+  const pie = pieIg(p.caption);
+  const s = p.sizes;
+  return `<a class="ig-tile" href="${esc(p.permalink)}" target="_blank" rel="noopener" aria-label="${esc(pie || ui.igPost)} · Instagram">`
+    + `<img src="${esc(s.medium.mediaUrl)}" srcset="${esc(s.small.mediaUrl)} ${s.small.width}w, ${esc(s.medium.mediaUrl)} ${s.medium.width}w" sizes="(max-width:1050px) 30vw, 15vw" alt="" loading="lazy">`
+    + (pie ? `<span class="ig-cap">${esc(pie)}</span>` : '') + '</a>';
+};
+
 const persona = (m) => `<figure><div class="tp"><img src="${esc(m.image)}" alt="${esc(m.nombre)}" loading="lazy"></div><figcaption><strong>${esc(m.nombre)}</strong><span>${esc(m.cargo)}</span></figcaption></figure>`;
 
 // ── Idioma de cada página: /en/… → en; el resto → idioma principal
@@ -160,6 +193,7 @@ const bloques = {
   idiomas: (d, ui, l, clave, url) => selector(url, l),
   idioma: (d, ui, l, clave, url) => otroIdioma(url, l),
   hreflang: (d, ui, l, clave, url) => hreflang(url),
+  instagram: (d, ui) => (instagram.length ? instagram.map((p) => casillaIg(p, ui)).join('') : null),
 };
 
 const MARCA = /<!--cms:([\w-]+)(?::([\w.]+))?-->[\s\S]*?<!--\/cms-->/g;
@@ -184,9 +218,11 @@ for (const file of paginas(SITE)) {
   const html = readFileSync(file, 'utf8');
   const lang = html.match(/<html lang="([\w-]+)"/)?.[1];
   if (lang !== l) throw new Error(`${relative(SITE, file)}: <html lang="${lang}"> no coincide con el idioma de la carpeta (${l})`);
-  const nuevo = html.replace(MARCA, (_, tipo, clave) => {
+  const nuevo = html.replace(MARCA, (actual, tipo, clave) => {
     if (!bloques[tipo]) throw new Error(`Bloque desconocido "${tipo}" en ${relative(SITE, file)}`);
-    return `<!--cms:${tipo}${clave ? ':' + clave : ''}-->${bloques[tipo](datos[l], IDIOMAS[l], l, clave, url)}<!--/cms-->`;
+    const v = bloques[tipo](datos[l], IDIOMAS[l], l, clave, url);
+    // null = sin datos nuevos (p. ej. el feed de Instagram no respondió): se deja el bloque como estaba
+    return v == null ? actual : `<!--cms:${tipo}${clave ? ':' + clave : ''}-->${v}<!--/cms-->`;
   });
   cambios += escribir(file, nuevo);
 }
