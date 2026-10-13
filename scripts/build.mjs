@@ -125,11 +125,18 @@ const promoVendida = (p, ui) => {
 // ── Instagram de la portada: las últimas publicaciones, leídas del feed JSON de Behold (behold.so) una vez en cada build,
 // no en cada visita (el plan gratis da 6 publicaciones, se actualiza una vez al día y tiene 1.200 vistas al mes).
 // Las fotos se sirven desde behold.pictures (URLs fijas; las de Instagram caducan). Si el feed no responde, se deja lo que había.
+// Número de publicaciones y de columnas: los que se pongan en Behold (numPosts y numColumns del widget), para que lo que
+// se ajuste allí se vea igual en la web. Por debajo de 1050px, 6 columnas pasan a 3; en móvil, 4 o más pasan a la mitad.
 const BEHOLD = 'https://feeds.behold.so/JqGRM7KmABKZcjXVf3uE';
 const instagram = await fetch(BEHOLD, { signal: AbortSignal.timeout(15000) })
   .then((r) => (r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))))
-  .then((f) => (f.posts || []).filter((p) => p.visibility !== 'hidden' && p.sizes?.medium).slice(0, 6))
-  .catch((e) => { console.warn(`Instagram: no se pudo leer el feed de Behold (${e.message}); se deja el que había.`); return []; });
+  .then((f) => {
+    const col = Math.min(Math.max(Number(f.widgetSettings?.breakpoints?.default?.numColumns) || 6, 1), 6);
+    const tablet = col > 4 ? Math.ceil(col / 2) : col;
+    const movil = col >= 4 ? Math.ceil(col / 2) : col;
+    return { posts: (f.posts || []).filter((p) => p.visibility !== 'hidden' && p.sizes?.medium).slice(0, 6), col, tablet, movil };
+  })
+  .catch((e) => { console.warn(`Instagram: no se pudo leer el feed de Behold (${e.message}); se deja el que había.`); return { posts: [] }; });
 
 // Pie corto para la casilla: primera línea con texto del pie de Instagram, sin emojis ni «!!»; si viene en mayúsculas,
 // se pasa a minúsculas (salvo los lugares de LUGARES) y se corta a unos 80 caracteres.
@@ -147,11 +154,11 @@ const pieIg = (caption) => {
   }
   return t.length > 80 ? t.slice(0, 80).replace(/\s+\S*$/, '').replace(/[\s,;:.]+$/, '') + '…' : t;
 };
-const casillaIg = (p, ui) => {
+const casillaIg = (p, ui, c) => {
   const pie = pieIg(p.caption);
   const s = p.sizes;
   return `<a class="ig-tile" href="${esc(p.permalink)}" target="_blank" rel="noopener" aria-label="${esc(pie || ui.igPost)} · Instagram">`
-    + `<img src="${esc(s.medium.mediaUrl)}" srcset="${esc(s.small.mediaUrl)} ${s.small.width}w, ${esc(s.medium.mediaUrl)} ${s.medium.width}w" sizes="(max-width:1050px) 30vw, 15vw" alt="" loading="lazy">`
+    + `<img src="${esc(s.medium.mediaUrl)}" srcset="${esc(s.small.mediaUrl)} ${s.small.width}w, ${esc(s.medium.mediaUrl)} ${s.medium.width}w" sizes="(max-width:690px) ${Math.round(90 / c.movil)}vw, (max-width:1050px) ${Math.round(90 / c.tablet)}vw, ${Math.round(90 / c.col)}vw" alt="" loading="lazy">`
     + (pie ? `<span class="ig-cap">${esc(pie)}</span>` : '') + '</a>';
 };
 
@@ -193,7 +200,9 @@ const bloques = {
   idiomas: (d, ui, l, clave, url) => selector(url, l),
   idioma: (d, ui, l, clave, url) => otroIdioma(url, l),
   hreflang: (d, ui, l, clave, url) => hreflang(url),
-  instagram: (d, ui) => (instagram.length ? instagram.map((p) => casillaIg(p, ui)).join('') : null),
+  instagram: (d, ui) => (instagram.posts.length
+    ? `<div class="ig-grid" style="--ig-col:${instagram.col};--ig-col-t:${instagram.tablet};--ig-col-m:${instagram.movil}">${instagram.posts.map((p) => casillaIg(p, ui, instagram)).join('')}</div>`
+    : null),
 };
 
 const MARCA = /<!--cms:([\w-]+)(?::([\w.]+))?-->[\s\S]*?<!--\/cms-->/g;
