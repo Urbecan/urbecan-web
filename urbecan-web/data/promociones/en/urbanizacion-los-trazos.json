@@ -1,0 +1,13 @@
+{
+  "nombre": "Urbanización Los Trazos",
+  "municipio": "La Orotava",
+  "anio": 2016,
+  "viviendas": 6,
+  "tipo": "adosados",
+  "estado": "Vendida",
+  "precio": "",
+  "descripcion": "",
+  "image": "/assets/img/uploads/promo-urbanizacion-los-trazos.jpg",
+  "enlace": "",
+  "orden": 5
+}

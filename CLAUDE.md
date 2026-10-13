@@ -27,6 +27,12 @@ Web estática (HTML + CSS + JS, sin framework) de Urbecan Inmobiliaria (URBECAN 
 - Formato en textos: `*texto*` → `<em>`, `[texto]` → `<span>` (segundo tono), salto de línea → `<br>`.
 - Probar el panel en local sin login: `npx decap-server` (raíz del repo) + servir `urbecan-web` en localhost → /admin/ (`local_backend: true`). Ejecutar el build antes de probar la web si cambian los JSON.
 
+## Instagram (portada)
+- Cuenta: @inmobiliaria_urbecan (instagram.com/urbecan/ no es la suya). Feed de Behold (behold.so, plan gratis) con ID `JqGRM7KmABKZcjXVf3uE` (constante `BEHOLD` en `scripts/build.mjs`); el mismo ID sirve como widget y como JSON (`https://feeds.behold.so/<ID>`).
+- El build lee el JSON una vez y pinta las 6 últimas publicaciones en `.ig-grid` (`index.html` y `en/index.html`, marcador `<!--cms:instagram-->`) con el diseño de la web: enlace a cada publicación, foto de behold.pictures (`sizes.small`/`medium`; las URL de Instagram caducan) y, al pasar el ratón, la primera línea del pie sin emojis (si va en mayúsculas, en minúsculas salvo los lugares de `LUGARES`). Si el feed no responde, se deja lo que había.
+- No usar el widget de Behold (`<behold-widget>` + script): cada visita gasta una de las 1.200 vistas al mes del plan gratis y trae su propio diseño. Plan gratis: 6 publicaciones, Behold actualiza el feed una vez al día.
+- Para que la web se actualice sola hace falta volver a publicar a diario: en la rama `webempresa`, `publicar.yml` lleva un `schedule` diario (GitHub solo ejecuta los `schedule` de la rama principal, así que empieza al fusionar el PR #1). En Netlify no hay publicación diaria: se actualiza con cada push.
+
 ## Idiomas (español + inglés)
 - Español es el idioma principal (URLs sin prefijo); inglés vive en `/en/` con slugs propios. Equivalencias en `RUTAS` de `scripts/build.mjs`: `/`↔`/en/`, `/nosotros/`↔`/en/about/`, `/particulares/`↔`/en/buyers/`, `/profesionales/`↔`/en/professionals/`, `/contacto/`↔`/en/contact/`, `/gracias/`↔`/en/thanks/`. Legales solo en español (desde las páginas en inglés se enlazan con `hreflang="es"`). 404 en los dos idiomas: `/en/404.html` para lo que no exista bajo `/en/` (`en/.htaccess`) y `/404.html` para el resto (`.htaccess`).
 - Las páginas `en/` son HTML propio (mismo diseño, textos traducidos a mano). `<html lang>` debe coincidir con la carpeta: el build falla si no.
@@ -34,6 +40,7 @@ Web estática (HTML + CSS + JS, sin framework) de Urbecan Inmobiliaria (URBECAN 
   - `<!--cms:idioma-->` → en la cabecera de escritorio, un solo enlace al otro idioma («EN» en español, «ES» en inglés; aria-label «English version» / «Versión en español»), justo antes del icono de Instagram y con su mismo tamaño y color (`.nav-lang-link`). Por encima de 1150px la línea separadora que iba delante del icono pasa delante del enlace; por debajo el icono se oculta (ya era así) y el enlace sigue visible.
   - `<!--cms:idiomas-->` → selector completo «ES · EN» (`.nav-lang`) en el menú móvil (oculto en escritorio) y en el pie, bajo las redes.
   - Ambos llevan a la página equivalente; si no la hay, al inicio de cada idioma.
+  - `<!--cms:instagram-->` → las casillas de `.ig-grid` en la portada (ver «Instagram»).
   - `<!--cms:hreflang-->` → `<link rel="alternate" hreflang>` es/en/x-default (x-default = español).
   - `sitemap.xml` completo con alternativas `xhtml:link` (no editarlo a mano).
   - Precios: en el panel se escriben en español («Desde 245.000 €»); el build los formatea según el idioma con `Intl.NumberFormat` (`formatoNumero` en `IDIOMAS`): «Desde 245.000 €» / «From €245,000». Si el precio no es una cifra («Consultar», «245.000 € + IGIC») sale tal cual (o con la traducción de `precios`).
@@ -59,14 +66,14 @@ Web estática (HTML + CSS + JS, sin framework) de Urbecan Inmobiliaria (URBECAN 
 - Provisional: oculta a Google (`robots.txt` Disallow + `<meta name="robots" content="noindex,nofollow">` en cada página). Quitar al lanzar en urbecan.com y añadir `Sitemap:` a robots.txt.
 
 ## Contacto real
-WhatsApp 656 61 15 00 · Tel. 922 08 07 17 / 922 32 63 48 · info@urbecan.com · Avda. Mayorazgo de Franchy 11, Local 4, 38300 La Orotava · L–V 9:00–14:00 y 16:30–19:30 · Instagram @urbecan
+WhatsApp 656 61 15 00 · Tel. 922 08 07 17 / 922 32 63 48 · info@urbecan.com · Avda. Mayorazgo de Franchy 11, Local 4, 38300 La Orotava · L–V 9:00–14:00 y 16:30–19:30 · Instagram @inmobiliaria_urbecan
 Propiedades: enlaces a https://diverso.casafaricrm.com/ (Casafari). Diverso (centro de negocios): https://diversoempresas.com
 
 ## Diseño
 - Menú hamburguesa por debajo de 981px (`@media(max-width:980px)` en los bloques de `.nav`, `.mobile-toggle`, `.nav-close`, `.nav-extra`, `menu-open`): la cabecera en español no cabe con aire por debajo de ese ancho. El resto del diseño móvil sigue en 690px. En el menú las opciones largas parten en dos líneas.
 Fuentes: Manrope (titulares) + DM Sans (texto). Colores: navy #08295d, ink #142235, arena #c4b18a, papel #f5f3ec, fondo #e8e5dc. No cambiar el diseño sin pedirlo.
 
-## Estado y pendiente (actualizado 12/10/2026)
+## Estado y pendiente (actualizado 13/10/2026)
 
 ### Situación
 - **Lanzamiento en urbecan.com el viernes 16/10/2026**, con web, dominio y correo en **Webempresa**.
@@ -76,25 +83,25 @@ Fuentes: Manrope (titulares) + DM Sans (texto). Colores: navy #08295d, ink #1422
 - Subir cambios: desde la terminal, `git push` da 403 (la cuenta V-Figueroa no tiene permiso en el repo); se sube con «Push origin» en GitHub Desktop.
 - Dominio: ya está el código para trasladar urbecan.com desde Inmovilla. El traslado se pide al contratar Webempresa y puede tardar días; si no ha terminado el viernes, apuntar el DNS desde el proveedor actual.
 
-### Pedido al cliente (12/10/2026), esperando respuesta
-1. Contratar el hosting en Webempresa y pasarnos el acceso.
-2. Datos legales de URBECAN INVEST S.L.U.: CIF, domicilio social y Registro Mercantil (tomo, folio, hoja, inscripción). Van en `aviso-legal/` y `privacidad/`, que ahora dicen «datos pendientes».
-3. Código de verificación de Google Business (llega al móvil del cliente). Ya hay acceso a la cuenta.
-4. Instagram: @urbecan como cuenta profesional, cuenta gratuita en Behold (behold.so) conectada y la URL del feed JSON (o acceso a Behold).
-5. Reseñas en Google de clientes reales: mínimo 3.
-6. Emails de quienes van a usar el panel.
-7. Fotos de la oficina (fachada o interior) o del equipo junto.
-8. Año y nº de viviendas de Urbanización Los Trazos (la foto ya está en `uploads/promo-urbanizacion-los-trazos.jpg`) y precio de Residencial Antonia María.
+### Pedido al cliente (12/10/2026) y respuestas (13/10/2026)
+1. Contratar el hosting en Webempresa y pasarnos el acceso. **Pendiente.**
+2. Datos legales de URBECAN INVEST S.L.U. **Hecho:** CIF, domicilio y Registro Mercantil ya están en `aviso-legal/` y `privacidad/`.
+3. Código de verificación de Google Business (llega al móvil del cliente). **Pendiente:** el cliente no reconoce el número al que Google manda el código; hay que aclarárselo. No escribir el número aquí.
+4. Instagram. **Hecho:** feed de Behold conectado (ver «Instagram»). La cuenta es @inmobiliaria_urbecan. El cliente nos pasó por WhatsApp la contraseña de Instagram: no guardarla en ningún sitio y recomendarle cambiarla.
+5. Reseñas en Google de clientes reales. **Pospuesto:** el cliente prefiere ocultar la sección por ahora (ya oculta, ver «Pendiente nuestro»).
+6. Emails de quienes van a usar el panel. **Pendiente:** el cliente propone un único Gmail nuevo de Urbecan, con la contraseña compartida entre las dos personas que editarán la web. Falta que nos pase la dirección.
+7. Fotos de la oficina o del equipo. **Sin fecha:** no hay fachada que fotografiar (Urbecan está dentro de Diverso, con un cartel pequeño) ni foto del equipo junto; el cliente quiere organizar una sesión más adelante.
+8. Los Trazos y Antonia María. **Hecho:** Urbanización Los Trazos (La Orotava, 2016, 6 adosados, vendida) y Residencial Antonia María a 305.000 €.
 
 ### Pendiente nuestro
 - **Reseñas de la portada (`.rv-track` en `index.html` y `en/index.html`, fijas en el HTML, no en el panel):** las 5 actuales (Carmen R., Daniel y Sara, Miguel Á. H., Promociones del Norte, Laura P.) son de ejemplo y no se pueden publicar. No poner reseñas inventadas.
+  - **Oculta desde el 13/10/2026** (`<div class="reviews" hidden>`), de acuerdo con el cliente. Las secciones siguientes se renumeraron: «05 / Actualidad» y «06 / Empecemos» (en inglés «05 / News», «06 / Let’s begin»). Para volver a mostrarla: quitar `hidden` y devolverlas a 06 y 07.
   - Decidido: 3 reseñas reales de 4–5★, fijas, con la fecha como mes y año, y «Ver todas en Google» con el enlace «Compartir perfil» de la ficha (ahora apunta a una búsqueda genérica de Maps).
-  - La ficha aún tiene pocas reseñas: no enlazarla todavía. Propuesto ocultar la sección hasta tener las reales; falta que el usuario lo confirme.
+  - La ficha aún tiene pocas reseñas: no enlazarla todavía.
   - Descartados: Trustindex (gratis solo con su plugin de WordPress; en webs normales el widget gratis dura 7 días; plan Single 65 $/año) y Places API de Google (pide Google Cloud con facturación; máx. 5 reseñas por consulta; no se pueden guardar).
-- **Instagram (`.ig-grid` de la portada, 6 casillas fijas que enlazan a @urbecan):** con la URL de Behold, leer el feed una vez al día en la publicación automática (cron en GitHub Actions) y pintar las 6 últimas publicaciones con el diseño actual. Plan gratis de Behold: 6 publicaciones, se actualiza una vez al día, 1.200 vistas al mes. No pedir el feed en cada visita, porque agotaría las vistas. Depende de la migración a Webempresa.
-- **Panel:** con DecapBridge gratis solo invita el dueño de la cuenta (nosotros), hasta 10 personas por web. El rol de administrador para que invite el cliente es de pago (9 $/mes o 199 $ en pago único). Falta decidir entre: invitar nosotros, pasar la cuenta al cliente en la entrega o plan de pago. El sitio de DecapBridge ya está creado (sitio «Urbecan», auth PKCE, token GitHub sin caducidad solo con Contents de `urbecan-web`).
+- **Panel:** con DecapBridge gratis solo invita el dueño de la cuenta (nosotros), hasta 10 personas por web. El rol de administrador para que invite el cliente es de pago (9 $/mes o 199 $ en pago único). Falta decidir entre: invitar nosotros, pasar la cuenta al cliente en la entrega o plan de pago. Con el Gmail único que propone el cliente (punto 6) basta invitar esa dirección; lo recomendable sería una invitación por persona (gratis hasta 10), así nadie comparte contraseña. El sitio de DecapBridge ya está creado (sitio «Urbecan», auth PKCE, token GitHub sin caducidad solo con Contents de `urbecan-web`).
 - **Cookies:** el aviso dice que hay cookies de terceros (analítica, reseñas, redes) y la web no usa ninguna. Ajustar el aviso y `cookies/` a lo real; decidir con el cliente si quiere analítica.
-- **Otros:** og:image 1200×630 (ahora no hay), redirecciones 301 de las URLs de la web antigua de Inmovilla, guía corta del panel, pruebas en móvil, tablet y escritorio, textos legales en cuanto lleguen los datos.
+- **Otros:** og:image 1200×630 (ahora no hay), redirecciones 301 de las URLs de la web antigua de Inmovilla, guía corta del panel, pruebas en móvil, tablet y escritorio. En `aviso-legal/`, `privacidad/` y `cookies/` sigue la nota «Texto de ejemplo para la maqueta…»: quitarla cuando el asesor del cliente revise los textos.
 - **Formulario PHP (rama `webempresa`):** probado en local solo con Apache (sin PHP en el Mac). Probar en Webempresa un envío en cada idioma.
 - **Tras fusionar el PR #1: borrar un dato privado del historial de GitHub.** El 12/10/2026 se subió a `main` en `CLAUDE.md` (commit `4f9a191`) el móvil del cliente para la verificación de Google Business, y el repo es público. La versión actual ya no lo tiene, pero sigue en el historial. No volver a escribir el número en este archivo.
   - Reescribir el historial de todas las ramas con `git filter-repo --replace-text` y subir con «Force push» desde GitHub Desktop (la terminal no tiene permiso de escritura).
@@ -113,13 +120,12 @@ Fuentes: Manrope (titulares) + DM Sans (texto). Colores: navy #08295d, ink #1422
   - Portada del inicio `.hero-photo` (`foto-01`, 16:9).
   - Cabecera de Nosotros `.lead-photo` (`foto-04`, panorámica).
   - «Nuestra mirada» grande `.who-big` (`foto-05`, 3:2) y pequeña `.who-small` (`foto-03`, 4:5).
-  - La cuadrícula de Instagram, que irá con Behold.
   - `foto-01` y `foto-05` son casi la misma imagen. «Encontrar» y «Promocionar» del inicio siguen con `foto-02` y `foto-04`.
 - No subir a Google Business las fotos decorativas (son imágenes generadas, no fotos reales del negocio).
 
 ### Google Business
-- Descripción preparada (704 de 750 caracteres). Antes de usar la frase de las 300 viviendas, confirmar con el cliente que esas 12 promociones las comercializó Urbecan:
-  > Urbecan es una inmobiliaria en La Orotava que acompaña desde 2003 a quienes quieren comprar, vender o invertir en una vivienda en el norte de Tenerife: La Orotava, Puerto de la Cruz, Los Realejos, La Laguna, Tacoronte, Icod de los Vinos y alrededores. Para particulares: búsqueda de vivienda, valoración y venta de tu propiedad, visitas, financiación y acompañamiento hasta la firma en notaría. Para promotores: comercialización de obra nueva con estrategia, marketing y seguimiento de cada promoción. Hemos comercializado más de 300 viviendas en 12 promociones del norte de la isla. Trato cercano y un equipo propio de asesoría inmobiliaria, procesos notariales, administración y gestión patrimonial.
+- Descripción preparada (704 de 750 caracteres). Antes de usar la frase de las 300 viviendas, confirmar con el cliente que esas 13 promociones las comercializó Urbecan (las vendidas de la web suman 328 viviendas):
+  > Urbecan es una inmobiliaria en La Orotava que acompaña desde 2003 a quienes quieren comprar, vender o invertir en una vivienda en el norte de Tenerife: La Orotava, Puerto de la Cruz, Los Realejos, La Laguna, Tacoronte, Icod de los Vinos y alrededores. Para particulares: búsqueda de vivienda, valoración y venta de tu propiedad, visitas, financiación y acompañamiento hasta la firma en notaría. Para promotores: comercialización de obra nueva con estrategia, marketing y seguimiento de cada promoción. Hemos comercializado más de 300 viviendas en 13 promociones del norte de la isla. Trato cercano y un equipo propio de asesoría inmobiliaria, procesos notariales, administración y gestión patrimonial.
 - Categoría principal: Agencia inmobiliaria; secundaria: Consultor inmobiliario. El teléfono público debería ser el de la web (922 08 07 17).
 - Logo cuadrado con margen para la ficha: `urbecan-logo-google.png` (1080×1080), en la carpeta de entrega `Downloads/entrega-web 3/urbecan-web/google-business/`. Se genera a partir de `favicon.svg`.
 
@@ -159,7 +165,7 @@ Fuentes: Manrope (titulares) + DM Sans (texto). Colores: navy #08295d, ink #1422
 - [x] Favicon y apple-touch-icon (`favicon.ico`, `favicon.svg`, `apple-touch-icon.png` en la raíz de urbecan-web; enlazados en cada página)
 - [ ] Imagen para compartir (og:image 1200×630) en todas las páginas
 - [ ] Aviso de cookies ajustado a lo que se use de verdad
-- [ ] Textos legales y datos fiscales definitivos
+- [ ] Textos legales revisados por el asesor del cliente (datos fiscales ya puestos)
 - [x] Sustituir fotos de ejemplo e histórico real de promociones vendidas
 
 ### Entrega
