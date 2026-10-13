@@ -1,4 +1,5 @@
-# Publica la web en Webempresa en cada cambio de main (también los que se guardan desde el panel /admin/).
+# Publica la web en Webempresa en cada cambio de main (también los que se guardan desde el panel /admin/)
+# y una vez al día, para traer las publicaciones nuevas de Instagram (feed de Behold, ver «Instagram» en CLAUDE.md).
 # Genera el HTML con scripts/build.mjs y sube urbecan-web/ por FTP; solo sube lo que ha cambiado.
 # Secretos (GitHub → Settings → Secrets and variables → Actions):
 #   FTP_SERVIDOR, FTP_USUARIO, FTP_CONTRASENA
@@ -10,6 +11,8 @@ name: Publicar en Webempresa
 on:
   push:
     branches: [main]
+  schedule:
+    - cron: '0 6 * * *'
   workflow_dispatch:
 
 # Si se guardan varios cambios seguidos, se publican de uno en uno (de los que esperan, solo el último)
