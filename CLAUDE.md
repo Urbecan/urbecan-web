@@ -90,7 +90,7 @@ Fuentes: Manrope (titulares) + DM Sans (texto). Colores: navy #08295d, ink #1422
 3. Código de verificación de Google Business (llega al móvil del cliente). **Pendiente:** el cliente no reconoce el número al que Google manda el código; hay que aclarárselo. No escribir el número aquí.
 4. Instagram. **Hecho:** feed de Behold conectado (ver «Instagram»). La cuenta es @inmobiliaria_urbecan. El cliente nos pasó por WhatsApp la contraseña de Instagram: no guardarla en ningún sitio y recomendarle cambiarla.
 5. Reseñas en Google de clientes reales. **Pospuesto:** el cliente prefiere ocultar la sección por ahora (ya oculta, ver «Pendiente nuestro»).
-6. Emails de quienes van a usar el panel. **Pendiente:** el cliente propone un único Gmail nuevo de Urbecan, con la contraseña compartida entre las dos personas que editarán la web. Falta que nos pase la dirección.
+6. Emails de quienes van a usar el panel. **Hecho:** uno solo, un Gmail nuevo de Urbecan con la contraseña compartida entre las dos personas que editarán la web. La dirección no se escribe aquí porque el repo es público: la tiene el usuario y, tras invitarla, sale en los usuarios del sitio en DecapBridge.
 7. Fotos de la oficina o del equipo. **Sin fecha:** no hay fachada que fotografiar (Urbecan está dentro de Diverso, con un cartel pequeño) ni foto del equipo junto; el cliente quiere organizar una sesión más adelante.
 8. Los Trazos y Antonia María. **Hecho:** Urbanización Los Trazos (La Orotava, 2016, 6 adosados, vendida) y Residencial Antonia María a 305.000 €.
 
@@ -100,7 +100,7 @@ Fuentes: Manrope (titulares) + DM Sans (texto). Colores: navy #08295d, ink #1422
   - Decidido: 3 reseñas reales de 4–5★, fijas, con la fecha como mes y año, y «Ver todas en Google» con el enlace «Compartir perfil» de la ficha (ahora apunta a una búsqueda genérica de Maps).
   - La ficha aún tiene pocas reseñas: no enlazarla todavía.
   - Descartados: Trustindex (gratis solo con su plugin de WordPress; en webs normales el widget gratis dura 7 días; plan Single 65 $/año) y Places API de Google (pide Google Cloud con facturación; máx. 5 reseñas por consulta; no se pueden guardar).
-- **Panel:** con DecapBridge gratis solo invita el dueño de la cuenta (nosotros), hasta 10 personas por web. El rol de administrador para que invite el cliente es de pago (9 $/mes o 199 $ en pago único). Falta decidir entre: invitar nosotros, pasar la cuenta al cliente en la entrega o plan de pago. Con el Gmail único que propone el cliente (punto 6) basta invitar esa dirección; lo recomendable sería una invitación por persona (gratis hasta 10), así nadie comparte contraseña. El sitio de DecapBridge ya está creado (sitio «Urbecan», auth PKCE, token GitHub sin caducidad solo con Contents de `urbecan-web`).
+- **Panel:** con DecapBridge gratis solo invita el dueño de la cuenta (nosotros), hasta 10 personas por web. El rol de administrador para que invite el cliente es de pago (9 $/mes o 199 $ en pago único). Decidido: invitamos nosotros a un único usuario, el Gmail de Urbecan (punto 6), con el plan gratis. Lo mandamos en el lanzamiento, después de cambiar la «Decap CMS login URL» a urbecan.com, para que la invitación lleve al panel definitivo. El sitio de DecapBridge ya está creado (sitio «Urbecan», auth PKCE, token GitHub sin caducidad solo con Contents de `urbecan-web`).
 - **Cookies:** el aviso dice que hay cookies de terceros (analítica, reseñas, redes) y la web no usa ninguna. Ajustar el aviso y `cookies/` a lo real; decidir con el cliente si quiere analítica.
 - **Otros:** og:image 1200×630 (ahora no hay), redirecciones 301 de las URLs de la web antigua de Inmovilla, guía corta del panel, pruebas en móvil, tablet y escritorio. En `aviso-legal/`, `privacidad/` y `cookies/` sigue la nota «Texto de ejemplo para la maqueta…»: quitarla cuando el asesor del cliente revise los textos.
 - **Formulario PHP (rama `webempresa`):** probado en local solo con Apache (sin PHP en el Mac). Probar en Webempresa un envío en cada idioma.
@@ -139,7 +139,7 @@ Fuentes: Manrope (titulares) + DM Sans (texto). Colores: navy #08295d, ink #1422
 6. Copiar el correo antiguo a los buzones nuevos (IMAP) y cambiar el DNS de urbecan.com a Webempresa: web y correo pasan a la vez. Comprobar envío y recepción de correo.
 7. Certificado SSL (Let's Encrypt) para urbecan.com y www; comprobar que todo redirige a https://www.urbecan.com.
 8. Quitar el noindex (`robots.txt` y la meta robots de todas las páginas, también `en/`), añadir `Sitemap: https://www.urbecan.com/sitemap.xml` a robots.txt y push.
-9. DecapBridge: «Decap CMS login URL» → https://www.urbecan.com/admin/ y probar el login.
+9. DecapBridge: «Decap CMS login URL» → https://www.urbecan.com/admin/ y probar el login. Después, invitar al Gmail de Urbecan (único usuario del panel, ver «Pedido al cliente») y comprobar con el cliente que entra.
 10. Search Console (enviar sitemap), Google Business, borrar el sitio de Netlify. Más adelante: trasladar el registro del dominio a Webempresa (código de autorización del proveedor actual).
 
 ## Checklist de lanzamiento
@@ -147,7 +147,7 @@ Fuentes: Manrope (titulares) + DM Sans (texto). Colores: navy #08295d, ink #1422
 ### Funcionamiento
 - [ ] Formulario de contacto (PHP en Webempresa): avisos a info@urbecan.com y redirección a /gracias/ y /en/thanks/
 - [ ] Publicación automática desde GitHub a Webempresa (Actions en verde tras un cambio desde el panel)
-- [ ] Panel Decap CMS en /admin con login por email (DecapBridge) y usuarios del equipo creados
+- [ ] Panel Decap CMS en /admin con login por email (DecapBridge) y el Gmail de Urbecan invitado
 - [ ] Pruebas en móvil, tablet y escritorio (Safari, Chrome, Firefox)
 
 ### Correo y dominio (no tocar DNS sin confirmación)
