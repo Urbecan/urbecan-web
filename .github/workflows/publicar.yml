@@ -1,0 +1,50 @@
+# Publica la web en Webempresa en cada cambio de main (también los que se guardan desde el panel /admin/)
+# y una vez al día, para traer las publicaciones nuevas de Instagram (feed de Behold, ver «Instagram» en CLAUDE.md).
+# Genera el HTML con scripts/build.mjs y sube urbecan-web/ por FTP; solo sube lo que ha cambiado.
+# Secretos (GitHub → Settings → Secrets and variables → Actions):
+#   FTP_SERVIDOR, FTP_USUARIO, FTP_CONTRASENA
+#   FTP_CARPETA (opcional): carpeta de la web dentro de la cuenta FTP, terminada en «/» (p. ej. public_html/).
+#                           Sin él se sube a la carpeta en la que entra la cuenta FTP.
+# Volver a publicar sin cambios: pestaña Actions → «Publicar en Webempresa» → Run workflow.
+name: Publicar en Webempresa
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+# Si se guardan varios cambios seguidos, se publican de uno en uno (de los que esperan, solo el último)
+concurrency:
+  group: publicar
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      - name: Generar la web
+        run: node scripts/build.mjs
+
+      - name: Subir a Webempresa
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{ secrets.FTP_SERVIDOR }}
+          username: ${{ secrets.FTP_USUARIO }}
+          password: ${{ secrets.FTP_CONTRASENA }}
+          protocol: ftps
+          local-dir: ./urbecan-web/
+          server-dir: ${{ secrets.FTP_CARPETA || './' }}
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.DS_Store
+            LEEME.md

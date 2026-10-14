@@ -1,5 +1,5 @@
 # Panel de edición de Urbecan → /admin/ (Decap CMS + DecapBridge)
-# Al publicar, Decap hace commit en GitHub y Netlify regenera la web (node scripts/build.mjs).
+# Al publicar, Decap hace commit en GitHub y GitHub Actions regenera la web (node scripts/build.mjs) y la sube a Webempresa.
 
 # Acceso con email y contraseña (o Google/Microsoft) vía DecapBridge, sin cuenta de GitHub.
 # Bloque generado por https://decapbridge.com (sitio «Urbecan», auth PKCE).
@@ -39,9 +39,8 @@ i18n:
   locales: [es, en]
   default_locale: es
 
-# Cambiar a https://www.urbecan.com al lanzar
-site_url: https://urbecan.netlify.app
-display_url: https://urbecan.netlify.app
+site_url: https://www.urbecan.com
+display_url: https://www.urbecan.com
 
 logo:
   src: /assets/urbecan-logo-inmobiliaria.png
