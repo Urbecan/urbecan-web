@@ -1,18 +1,20 @@
 {
   "es": {
     "titulo": "Una decisión importante.\n*Bien acompañada.*",
-    "texto": "Comprar, vender o invertir en Tenerife, acompañado de principio a fin. Empezamos por entender qué necesitas.",
+    "texto": "Comprar, vender, invertir o alquilar tu vivienda en Tenerife, acompañado de principio a fin. Empezamos por entender qué necesitas.",
     "comprar": "Queremos entender qué buscas, qué necesitas y qué encaja contigo. Desde la definición de la vivienda hasta la negociación y la firma.",
     "vender": "Analizamos la propiedad y el mercado, cuidamos su presentación y coordinamos la comercialización, los contactos y las visitas.",
     "invertir": "Estudiamos contigo la ubicación, las características y el contexto de mercado de cada oportunidad para decidir con información.",
+    "alquilar": "Nos encargamos de todo para que alquilar no te dé trabajo: elegimos bien a quién alquilas, cobramos, resolvemos incidencias y cuidamos tus intereses, atendiendo al inquilino para que todo vaya bien. Cada vivienda es distinta, así que nos adaptamos a lo que necesitas.",
     "cita": "Tomar una buena decisión empieza por tener buena información."
   },
   "en": {
     "titulo": "An important decision.\n*In good hands.*",
-    "texto": "Buying, selling or investing in Tenerife, with support from start to finish. We begin by understanding what you need.",
+    "texto": "Buying, selling, investing or renting out your home in Tenerife, with support from start to finish. We begin by understanding what you need.",
     "comprar": "We want to understand what you are looking for, what you need and what suits you. From defining the home to negotiation and signing.",
     "vender": "We analyse the property and the market, take care of its presentation and coordinate the marketing, enquiries and viewings.",
     "invertir": "Together we study the location, features and market context of each opportunity so you can decide with the right information.",
+    "alquilar": "We take care of everything so that renting out brings you no work: we choose the right tenant, collect the rent, deal with any issues and protect your interests, looking after the tenant so that everything runs smoothly. Every home is different, so we adapt to what you need.",
     "cita": "A good decision starts with good information."
   }
 }

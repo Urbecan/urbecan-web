@@ -75,18 +75,23 @@ Propiedades: enlaces a https://diverso.casafaricrm.com/ (Casafari). Diverso (cen
 - Menú hamburguesa por debajo de 981px (`@media(max-width:980px)` en los bloques de `.nav`, `.mobile-toggle`, `.nav-close`, `.nav-extra`, `menu-open`): la cabecera en español no cabe con aire por debajo de ese ancho. El resto del diseño móvil sigue en 690px. En el menú las opciones largas parten en dos líneas.
 Fuentes: Manrope (titulares) + DM Sans (texto). Colores: navy #08295d, ink #142235, arena #c4b18a, papel #f5f3ec, fondo #e8e5dc. No cambiar el diseño sin pedirlo.
 
-## Estado y pendiente (actualizado 13/10/2026)
+## Estado y pendiente (actualizado 14/10/2026)
 
 ### Situación
-- **Lanzamiento en urbecan.com el viernes 16/10/2026**, con web, dominio y correo en **Webempresa**.
-- Netlify dejó de publicar el 12/10/2026: el equipo se quedó sin créditos del plan gratuito (300/mes, 15 por publicación, el tráfico también gasta). urbecan.netlify.app sigue mostrando la versión del 9/10 y los despliegues salen como «Skipped». Por eso se cambia a Webempresa.
-- **La migración está en la rama `webempresa`, PR https://github.com/Urbecan/urbecan-web/pull/1** (lo descrito en «Publicación»). No fusionar hasta tener Webempresa contratado, el buzón info@urbecan.com y los secretos de FTP en GitHub: pasos en «Plan de lanzamiento en Webempresa».
-- Los cambios de contenido (fotos, textos) van a `main`. Antes de fusionar, comprobar que el PR sigue sin conflictos.
+- **Lanzamiento en urbecan.com previsto para el viernes 16/10/2026**, con web, dominio y correo en **Webempresa** (panel «WePanel»).
+- **La web ya se publica en Webempresa** (PR #1 fusionado el 14/10/2026). Cada push a `main` la sube por FTPS en 1–2 min. Mientras el dominio no apunte a Webempresa, se ve en la dirección temporal del hosting (sale en WePanel; sigue con noindex).
+  - La carpeta de urbecan.com es `public_html/urbecan.com/` y la cuenta FTP de la publicación entra directamente en ella (no hace falta `FTP_CARPETA`).
+  - La dirección temporal muestra `public_html`, no `public_html/urbecan.com/`. Para que se vea la web, hay un `.htaccess` puesto a mano en `public_html` (fuera del repo) que reescribe ese host a `/urbecan.com/`. **Borrarlo tras el lanzamiento**, junto con `public_html/urbecan.com/prueba.txt`.
+  - WePanel → Seguridad → **Seguridad FTP** solo deja entrar por FTP desde España. La cuenta de la publicación está en su lista blanca porque GitHub Actions entra desde EE. UU. (sin eso, la publicación falla con «530 Login authentication failed»). Si se crea otra cuenta FTP para publicar, añadirla también.
+- Netlify ya no se usa (se quedó sin créditos el 12/10/2026). Se puede borrar el sitio; antes, cambiar en DecapBridge la «Decap CMS login URL», que aún apunta a Netlify (ver «Panel»).
 - Subir cambios: desde la terminal, `git push` da 403 (la cuenta V-Figueroa no tiene permiso en el repo); se sube con «Push origin» en GitHub Desktop.
-- Dominio: ya está el código para trasladar urbecan.com desde Inmovilla. El traslado se pide al contratar Webempresa y puede tardar días; si no ha terminado el viernes, apuntar el DNS desde el proveedor actual.
+- **Dominio:** urbecan.com está registrado en **Dinahosting** (cuenta que gestiona Inmovilla); la web y el correo actuales están en un servidor de Inmovilla. Traslado a Webempresa pedido el 14/10/2026, pero falló porque el dominio sigue con el bloqueo de transferencia: Inmovilla tiene que quitarlo y después se reinicia en Webempresa (Dominios → urbecan.com → «Reiniciar Transferencia», con el AuthCode; no escribirlo aquí). Un traslado de .com tarda 5–7 días. Para no depender de eso, Inmovilla puede cambiar antes los nameservers en Dinahosting a los de Webempresa (los de la zona DNS de WePanel): eso mueve web y correo en horas y el traslado termina después sin cortes (decisión aplazada por el usuario).
+  - **Al terminar el traslado (o al cambiar los nameservers), web y correo pasan a Webempresa a la vez.** Antes tiene que estar: la web publicada (hecho), los buzones creados (hecho), la contraseña actual de cada buzón puesta en el buzón nuevo (así el Outlook de cada uno sigue funcionando sin tocar nada: el servidor `mail.urbecan.com` es el mismo nombre), la copia `.pst` de cada Outlook y la petición a Inmovilla de no borrar los buzones antiguos en una semana.
+  - El correo antiguo no está en el servidor: lo descargan por POP a Outlook. No hay que migrarlo; solo hacer la copia `.pst`. Más adelante, con espacio ilimitado, conviene pasar a IMAP.
+  - Zona DNS en Webempresa revisada: MX, DKIM y DMARC bien; el SPF incluye `include:externo.inmovilla.com` porque Inmovilla envía correo como @urbecan.com.
 
 ### Pedido al cliente (12/10/2026) y respuestas (13/10/2026)
-1. Contratar el hosting en Webempresa y pasarnos el acceso. **Pendiente.**
+1. Contratar el hosting en Webempresa y pasarnos el acceso. **Hecho (14/10/2026):** hosting contratado y buzones creados (los 6 de siempre y 2 nuevos; la lista no se escribe aquí).
 2. Datos legales de URBECAN INVEST S.L.U. **Hecho:** CIF, domicilio y Registro Mercantil ya están en `aviso-legal/` y `privacidad/`.
 3. Código de verificación de Google Business (llega al móvil del cliente). **Pendiente:** el cliente no reconoce el número al que Google manda el código; hay que aclarárselo. No escribir el número aquí.
 4. Instagram. **Hecho:** feed de Behold conectado (ver «Instagram»). La cuenta es @inmobiliaria_urbecan. El cliente nos pasó por WhatsApp la contraseña de Instagram: no guardarla en ningún sitio y recomendarle cambiarla.
@@ -103,9 +108,13 @@ Fuentes: Manrope (titulares) + DM Sans (texto). Colores: navy #08295d, ink #1422
   - Descartados: Trustindex (gratis solo con su plugin de WordPress; en webs normales el widget gratis dura 7 días; plan Single 65 $/año) y Places API de Google (pide Google Cloud con facturación; máx. 5 reseñas por consulta; no se pueden guardar).
 - **Panel:** con DecapBridge gratis solo invita el dueño de la cuenta (nosotros), hasta 10 personas por web. El rol de administrador para que invite el cliente es de pago (9 $/mes o 199 $ en pago único). Decidido: invitamos nosotros a un único usuario, el Gmail de Urbecan (punto 6), con el plan gratis. Lo mandamos en el lanzamiento, después de cambiar la «Decap CMS login URL» a urbecan.com, para que la invitación lleve al panel definitivo (antes no: Netlify está pausado y lo que guardaran no se publicaría). Al aceptar, que creen una contraseña de DecapBridge y no usen «Continuar con Google»: así las dos personas comparten solo esa contraseña y Google no les pide códigos al entrar en el Gmail desde otro ordenador. Después, probar con ellos un cambio pequeño desde urbecan.com/admin. El sitio de DecapBridge ya está creado (sitio «Urbecan», auth PKCE, token GitHub sin caducidad solo con Contents de `urbecan-web`).
 - **Caché del CSS (propuesto, falta que el usuario decida):** `styles.css` y `main.js` se enlazan sin versión y el `.htaccess` de Webempresa solo obliga a revalidar el HTML. Tras un cambio de estilos, quien ya visitó la web puede verla con el HTML nuevo y el CSS viejo (pasó en local el 13/10/2026 con la cuadrícula de Instagram). Propuesta: que el build añada `?v=<hash del archivo>` a esos enlaces en todas las páginas.
-- **Cookies:** el aviso dice que hay cookies de terceros (analítica, reseñas, redes) y la web no usa ninguna. Ajustar el aviso y `cookies/` a lo real; decidir con el cliente si quiere analítica.
-- **Otros:** og:image 1200×630 (ahora no hay), redirecciones 301 de las URLs de la web antigua de Inmovilla, guía corta del panel, pruebas en móvil, tablet y escritorio. En `aviso-legal/`, `privacidad/` y `cookies/` sigue la nota «Texto de ejemplo para la maqueta…»: quitarla cuando el asesor del cliente revise los textos.
-- **Formulario PHP (rama `webempresa`):** probado en local solo con Apache (sin PHP en el Mac). Probar en Webempresa un envío en cada idioma.
+- **Cookies (14/10/2026):** la web no usa cookies. Las fotos de Instagram llegan de behold.pictures y las fuentes de Google Fonts, sin cookies; Search Console tampoco pone. Por eso se quitó el aviso de cookies de todas las páginas (y su código en `main.js`) y `cookies/` explica eso. Los estilos `.cookie` siguen en `styles.css` por si vuelve. **Volver a poner el aviso («Aceptar / Rechazar», sin cargar nada hasta que acepten) y actualizar `cookies/` si se añade algo que ponga cookies:**
+  - Google Analytics (el cliente lo quiere más adelante, ahora no).
+  - Un mapa de Google incrustado o un widget de reseñas (Trustindex, Elfsight…).
+  - Un simple enlace a la ficha de Google Business o a Maps no pone cookies y no cambia nada.
+- **Otros:** og:image 1200×630 (ahora no hay), redirecciones 301 de las URLs de la web antigua de Inmovilla, guía corta del panel, pruebas en móvil, tablet y escritorio.
+- **Formulario PHP:** probado en local solo con Apache (sin PHP en el Mac). Probar en la dirección temporal un envío en cada idioma (el aviso llega al webmail de info@ en Webempresa).
+- **Gestión patrimonial (14/10/2026):** bloque «Alquila tu vivienda» en Particulares (`.rent-block`, `#alquilar` / `#rent` en inglés), con acceso «Alquilar ↓» arriba y opción «Alquilar» en el formulario. Texto pasado por Coré Socas; sin cifra en el adelanto de reparaciones (lo pidió el cliente). El párrafo se edita en el panel (Textos → Particulares); titular y lista van fijos en el HTML.
 - **Tras fusionar el PR #1: borrar un dato privado del historial de GitHub.** El 12/10/2026 se subió a `main` en `CLAUDE.md` (commit `4f9a191`) el móvil del cliente para la verificación de Google Business, y el repo es público. La versión actual ya no lo tiene, pero sigue en el historial. No volver a escribir el número en este archivo.
   - Reescribir el historial de todas las ramas con `git filter-repo --replace-text` y subir con «Force push» desde GitHub Desktop (la terminal no tiene permiso de escritura).
   - Avisar antes: cambian los identificadores de los commits y cualquier otro clon tendrá que volver a clonarse.
@@ -133,10 +142,10 @@ Fuentes: Manrope (titulares) + DM Sans (texto). Colores: navy #08295d, ink #1422
 - Logo cuadrado con margen para la ficha: `urbecan-logo-google.png` (1080×1080), en la carpeta de entrega `Downloads/entrega-web 3/urbecan-web/google-business/`. Se genera a partir de `favicon.svg`.
 
 ## Plan de lanzamiento en Webempresa
-1. Contratar Webempresa con urbecan.com como dominio principal, sin tocar todavía el DNS.
-2. En cPanel: crear los mismos buzones que hay hoy (al menos info@urbecan.com) y una cuenta FTP limitada a la carpeta de la web.
-3. En GitHub, poner los secretos de FTP (ver «Publicación»).
-4. Fusionar la rama `webempresa` en `main` y hacer push. Comprobar en Actions que la publicación termina en verde.
+1. ✅ Contratar Webempresa con urbecan.com como dominio principal, sin tocar todavía el DNS.
+2. ✅ En WePanel: crear los mismos buzones que hay hoy (al menos info@urbecan.com) y una cuenta FTP limitada a la carpeta de la web.
+3. ✅ En GitHub, poner los secretos de FTP (ver «Publicación») y la cuenta FTP en la lista blanca de «Seguridad FTP».
+4. ✅ Fusionar la rama `webempresa` en `main` y hacer push. Comprobar en Actions que la publicación termina en verde.
 5. Probar en la dirección temporal de Webempresa (o con el archivo hosts): páginas y fotos, 404 en los dos idiomas, formulario en los dos idiomas (el aviso llega al buzón de Webempresa) y una edición desde el panel que salga publicada ~1 min después.
 6. Copiar el correo antiguo a los buzones nuevos (IMAP) y cambiar el DNS de urbecan.com a Webempresa: web y correo pasan a la vez. Comprobar envío y recepción de correo.
 7. Certificado SSL (Let's Encrypt) para urbecan.com y www; comprobar que todo redirige a https://www.urbecan.com.
@@ -148,7 +157,7 @@ Fuentes: Manrope (titulares) + DM Sans (texto). Colores: navy #08295d, ink #1422
 
 ### Funcionamiento
 - [ ] Formulario de contacto (PHP en Webempresa): avisos a info@urbecan.com y redirección a /gracias/ y /en/thanks/
-- [ ] Publicación automática desde GitHub a Webempresa (Actions en verde tras un cambio desde el panel)
+- [x] Publicación automática desde GitHub a Webempresa (Actions en verde; falta probar un cambio desde el panel)
 - [ ] Panel Decap CMS en /admin con login por email (DecapBridge) y el Gmail de Urbecan invitado
 - [ ] Pruebas en móvil, tablet y escritorio (Safari, Chrome, Firefox)
 
@@ -162,13 +171,13 @@ Fuentes: Manrope (titulares) + DM Sans (texto). Colores: navy #08295d, ink #1422
 - [ ] Quitar el noindex (robots.txt y meta robots) y añadir `Sitemap:` a robots.txt
 - [ ] Alta en Google Search Console y envío de sitemap.xml
 - [ ] Actualizar la ficha de Google Business con la web nueva
-- [ ] Analítica (decidir con el cliente: GA4 o una alternativa sin cookies)
+- [ ] Analítica: más adelante (decidido el 14/10/2026). Si es GA4, volver a poner el aviso de cookies (ver «Cookies»)
 
 ### Detalles
 - [x] Favicon y apple-touch-icon (`favicon.ico`, `favicon.svg`, `apple-touch-icon.png` en la raíz de urbecan-web; enlazados en cada página)
 - [ ] Imagen para compartir (og:image 1200×630) en todas las páginas
-- [ ] Aviso de cookies ajustado a lo que se use de verdad
-- [ ] Textos legales revisados por el asesor del cliente (datos fiscales ya puestos)
+- [x] Aviso de cookies ajustado a lo que se use de verdad (sin aviso: la web no usa cookies; ver «Cookies»)
+- [x] Textos legales con los datos de URBECAN INVEST S.L.U. y sin la nota de ejemplo
 - [x] Sustituir fotos de ejemplo e histórico real de promociones vendidas
 
 ### Entrega

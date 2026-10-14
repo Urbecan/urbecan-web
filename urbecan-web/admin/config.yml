@@ -173,6 +173,7 @@ collections:
           - { name: comprar, label: Comprar, widget: text, i18n: true }
           - { name: vender, label: Vender, widget: text, i18n: true }
           - { name: invertir, label: Invertir, widget: text, i18n: true }
+          - { name: alquilar, label: Gestión patrimonial (alquilar), widget: text, i18n: true }
           - { name: cita, label: Cita destacada, widget: text, i18n: true }
       - name: profesionales
         label: Profesionales / Promotores
