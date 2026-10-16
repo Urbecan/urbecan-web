@@ -68,7 +68,7 @@ Web estática (HTML + CSS + JS, sin framework) de Urbecan Inmobiliaria (URBECAN 
 - Provisional: oculta a Google (`robots.txt` Disallow + `<meta name="robots" content="noindex,nofollow">` en cada página). Quitar al lanzar en urbecan.com y añadir `Sitemap:` a robots.txt.
 
 ## Contacto real
-WhatsApp 656 61 15 00 · Tel. 922 08 07 17 / 922 32 63 48 · info@urbecan.com · Avda. Mayorazgo de Franchy 11, Local 4, 38300 La Orotava · L–V 9:00–14:00 y 16:30–19:30 · Instagram @inmobiliaria_urbecan
+WhatsApp 656 61 15 00 · Tel. 922 08 07 17 / 922 32 63 48 · info@urbecan.com · Avda. Mayorazgo de Franchy 11, Local 4, 38300 La Orotava · L–V 9:00–14:30 y 15:00–19:00 · Instagram @inmobiliaria_urbecan
 Propiedades: enlaces a https://diverso.casafaricrm.com/ (Casafari). Diverso (centro de negocios): https://diversoempresas.com
 
 ## Diseño
@@ -130,9 +130,9 @@ Fuentes: Manrope (titulares) + DM Sans (texto). Colores: navy #08295d, ink #1422
 - Cabecera de Particulares: el fondo de «Comprar» sube hasta la mitad de la foto, sin franja clara ni línea (CSS al final de `styles.css`).
 - Por sustituir con fotos del norte (formato):
   - Portada del inicio `.hero-photo` (`foto-01`, 16:9).
-  - Cabecera de Nosotros `.lead-photo` (`foto-04`, panorámica).
-  - «Nuestra mirada» grande `.who-big` (`foto-05`, 3:2) y pequeña `.who-small` (`foto-03`, 4:5).
-  - `foto-01` y `foto-05` son casi la misma imagen. «Encontrar» y «Promocionar» del inicio siguen con `foto-02` y `foto-04`.
+  - «Nuestra mirada» grande `.who-big` (`foto-04`, la panorámica que era la cabecera de Nosotros; se recorta a 3:2) y pequeña `.who-small` (`foto-03`, 4:5).
+  - «Encontrar» y «Promocionar» del inicio siguen con `foto-02` y `foto-04` (esta se repite en Nosotros). `foto-05` ya no se usa (era casi igual que `foto-01`).
+- Nosotros (16/10/2026): la cabecera es el equipo y va sin foto: titular «Personas detrás de cada decisión» (`nosotros.equipo_titulo`) y entradilla del equipo (`equipo_intro`), después Diverso, las fichas y los valores. «Más que una inmobiliaria» (`nosotros.titulo` y `texto`) pasa a titular de sección (`.who-head`) encima de las fotos de «Nuestra mirada». El usuario no quiere foto en esa cabecera; si hay foto real del grupo, va en `figure.team-photo` (oculta).
 - No subir a Google Business las fotos decorativas (son imágenes generadas, no fotos reales del negocio).
 
 ### Google Business

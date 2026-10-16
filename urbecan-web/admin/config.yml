@@ -156,13 +156,13 @@ collections:
         file: urbecan-web/data/textos/nosotros.json
         i18n: true
         fields:
-          - { name: titulo, label: Titular, widget: text, hint: "Salto de línea = nueva línea · \\*texto\\* = cursiva", i18n: true }
-          - { name: texto, label: Texto de entrada, widget: text, i18n: true }
+          - { name: titulo, label: Nuestra mirada · titular, widget: text, hint: "Encima de las dos fotos · Salto de línea = nueva línea · \\*texto\\* = segundo color", i18n: true }
+          - { name: texto, label: Nuestra mirada · entrada, widget: text, i18n: true }
           - { name: mirada, label: Nuestra mirada, widget: text, hint: "[texto] = segundo tono (gris)", i18n: true }
           - { name: trayectoria_texto, label: Trayectoria · texto, widget: text, i18n: true }
           - { name: trayectoria_detalle, label: Trayectoria · detalle, widget: text, i18n: true }
-          - { name: equipo_titulo, label: Equipo · titular, widget: string, i18n: true }
-          - { name: equipo_intro, label: Equipo · introducción, widget: text, i18n: true }
+          - { name: equipo_titulo, label: Titular de la página (equipo), widget: text, hint: "Salto de línea = nueva línea · \\*texto\\* = segundo color", i18n: true }
+          - { name: equipo_intro, label: Texto de entrada (equipo), widget: text, i18n: true }
       - name: particulares
         label: Particulares
         file: urbecan-web/data/textos/particulares.json

@@ -709,3 +709,15 @@ body.menu-open .fd-switch{display:none}
 .rent-list li{font-size:15px;line-height:1.4;padding:12px 0;border-bottom:1px solid #1422352e}
 @media(max-width:900px){.rent-block{grid-template-columns:1fr 1fr}.rent-block .label{grid-column:1/-1}}
 @media(max-width:760px){.rent-block{display:block;padding:60px 6% 65px}.rent-block .label{display:block;margin-bottom:26px}.rent-main p{font-size:16px}.rent-list{margin-top:45px}}
+
+/* Nosotros: la cabecera es el equipo (sin foto) y «Más que una inmobiliaria» pasa a titular de «Nuestra mirada» */
+#nosotros .page-lead.team-lead{padding-bottom:40px}
+#nosotros .values-refined{padding-top:40px}
+#nosotros .who{padding-top:110px}
+.who-head{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(270px,.55fr);gap:7%;align-items:end;border-top:1px solid var(--line);padding-top:40px}
+.who-head h2{font:500 clamp(43px,5vw,76px)/1 Manrope,sans-serif;letter-spacing:-.045em;margin:0}
+.who-head h2 em{font-style:normal;color:#a58e67}
+.who-head p{font-size:17px;line-height:1.55;margin:0;max-width:420px}
+@media(max-width:900px){.who-head{grid-template-columns:1fr;gap:28px}}
+@media(max-width:690px){#nosotros .who{padding-top:70px}.who-head{padding-top:30px}.who-head h2{font-size:clamp(42px,10vw,62px)}}
+#nosotros .team-diverso{margin-top:0!important}
