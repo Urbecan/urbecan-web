@@ -22,7 +22,16 @@ ErrorDocument 404 /404.html
   RewriteRule ^ https://www.urbecan.com%{REQUEST_URI} [L,R=301]
 </IfModule>
 
+# Oculta a Google en cualquier dirección que no sea www.urbecan.com (la temporal de Webempresa, pruebas…).
+# El día que el dominio apunte a Webempresa, la web se indexa sola sin tocar nada.
+# Si el servidor no entendiera SetEnvIf, no se oculta nada (nunca se oculta el dominio real por error).
+<IfModule mod_setenvif.c>
+  SetEnvIfNoCase Host "^(?!www\.urbecan\.com(:[0-9]+)?$)" URBECAN_OCULTA
+</IfModule>
+
 <IfModule mod_headers.c>
+  Header set X-Robots-Tag "noindex, nofollow" env=URBECAN_OCULTA
+
   # HTML siempre revalidado: lo que se guarda en el panel se ve en cuanto termina la publicación
   <FilesMatch "\.html$">
     Header set Cache-Control "no-cache"
