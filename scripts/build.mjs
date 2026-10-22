@@ -1,10 +1,12 @@
 // Rellena el HTML con los datos editables de urbecan-web/data/ (panel Decap CMS en /admin/):
 // promociones/<idioma>/*.json y equipo/<idioma>/*.json (una entrada por archivo) y textos/<página>.json ({ es: {…}, en: {…} }).
 // Sustituye el contenido entre <!--cms:tipo:clave--> y <!--/cms--> en cada página, según el idioma de la página
-// (carpeta /en/… → inglés; el resto → español). También genera el selector de idioma, las etiquetas hreflang y sitemap.xml.
+// (carpeta /en/… → inglés; el resto → español). También genera el selector de idioma, las etiquetas hreflang y sitemap.xml,
+// y pone la versión (?v=<hash>) en los enlaces a los CSS y JS de la web y del panel.
 // Es idempotente: se puede ejecutar en local (node scripts/build.mjs) y en GitHub Actions antes de subir la web a Webempresa.
 import { readFileSync, writeFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join, relative } from 'node:path';
+import { createHash } from 'node:crypto';
 
 const SITE = new URL('../urbecan-web/', import.meta.url).pathname;
 const DATA = join(SITE, 'data');
@@ -220,6 +222,12 @@ const escribir = (file, nuevo) => {
   return 1;
 };
 
+// ── Versión en los enlaces a CSS y JS. Webempresa (nginx) los sirve con caché de 1 año sin revalidar:
+// al cambiar un archivo cambia su ?v= y el navegador descarga el nuevo en vez de usar la copia vieja.
+const VERSIONADOS = ['/assets/css/styles.css', '/assets/js/main.js', '/admin/urbecan.css', '/admin/urbecan.js'];
+const version = Object.fromEntries(VERSIONADOS.map((u) => [u, createHash('sha256').update(readFileSync(join(SITE, u))).digest('hex').slice(0, 10)]));
+const conVersion = (html) => html.replace(/((?:href|src)=")([^"?]+)(?:\?v=\w*)?"/g, (m, attr, u) => (version[u] ? `${attr}${u}?v=${version[u]}"` : m));
+
 let cambios = 0;
 for (const file of paginas(SITE)) {
   const url = urlDe(file);
@@ -233,8 +241,12 @@ for (const file of paginas(SITE)) {
     // null = sin datos nuevos (p. ej. el feed de Instagram no respondió): se deja el bloque como estaba
     return v == null ? actual : `<!--cms:${tipo}${clave ? ':' + clave : ''}-->${v}<!--/cms-->`;
   });
-  cambios += escribir(file, nuevo);
+  cambios += escribir(file, conVersion(nuevo));
 }
+
+// El panel (/admin/) no tiene bloques ni idioma: solo la versión de urbecan.css y urbecan.js
+const ADMIN = join(SITE, 'admin', 'index.html');
+cambios += escribir(ADMIN, conVersion(readFileSync(ADMIN, 'utf8')));
 
 // sitemap.xml con todas las versiones y sus alternativas
 const urls = RUTAS.filter((r) => r.sitemap !== false).flatMap((r) => Object.keys(IDIOMAS).filter((c) => r[c]).map((c) =>
