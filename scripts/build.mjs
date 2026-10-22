@@ -106,7 +106,7 @@ const promoActiva = (p, ui, l) => {
     ? `<div class="ps-ctrl"><button type="button" class="ps-prev" aria-label="${ui.fotoAnt}">←</button><span class="ps-count">1 / ${imgs.length}</span><button type="button" class="ps-next" aria-label="${ui.fotoSig}">→</button></div>`
     : '';
   const meta = String(p.precio ?? '').trim() ? `<div class="promo-meta">${precio(p.precio, ui)}</div>` : '';
-  const ext = p.enlace ? `<a class="textlink" href="${esc(p.enlace)}" target="_blank" rel="noopener">${ui.verProyecto} <span class="arr">↗</span></a>` : '';
+  const ext = p.enlace ? `<a class="textlink" href="${esc(p.enlace)}" target="_blank" rel="noopener">${ui.verProyecto} <span class="arr">↗︎</span></a>` : '';
   const msg = ui.meInteresa(`${p.nombre}${p.municipio ? ` (${p.municipio})` : ''}`);
   // data-ask: valor del formulario (siempre en español, así llega a info@urbecan.com)
   return `<article class="promo-card"><div class="promo-slider"><div class="ps-track">${slides}</div><span class="promo-state">${esc(ui.estados[p.estado] ?? p.estado)}</span>${ctrl}</div>`
